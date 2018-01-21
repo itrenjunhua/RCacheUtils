@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/CacheUtils.iml" filepath="$PROJECT_DIR$/CacheUtils.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cachelibrary/cachelibrary.iml" filepath="$PROJECT_DIR$/cachelibrary/cachelibrary.iml" />
     </modules>
   </component>
 </project>
