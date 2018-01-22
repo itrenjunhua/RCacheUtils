@@ -20,6 +20,9 @@ import java.util.concurrent.Executors;
  * ======================================================================
  */
 public interface RCacheConfig {
+    // 根据CPU确定线程池的线程个数
+    int CPU_COUNT = Runtime.getRuntime().availableProcessors();
+    int THREAD_POOL_SIZE = Math.max(2, Math.min(CPU_COUNT - 1, 4));
     /**
      * 指定缓存大小 默认大小12M
      */
@@ -39,7 +42,7 @@ public interface RCacheConfig {
     /**
      * 当需要在子线程中工作时使用的线程池,默认使用 4 个线程
      */
-    ExecutorService EXECUTORSERVICE = Executors.newFixedThreadPool(4);
+    ExecutorService EXECUTORSERVICE = Executors.newFixedThreadPool(THREAD_POOL_SIZE);
     /**
      * 主线程的Handler
      */
