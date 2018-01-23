@@ -4,6 +4,9 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
@@ -93,6 +96,94 @@ public class CacheManageUtils {
             throw new IllegalStateException("没有对 CacheManageUtils 进行初始化，需要先调用 CacheManageUtils.initCacheUtil(Context) " +
                     "或 CacheManageUtils.initCacheUtil(Context，String) 方法。建议在 Application 中调用。");
         return instance;
+    }
+
+    /**
+     * 缓存字符串({@link String})内容，指定缓存时间，<b>注意：缓存时间单位为 秒(S)</b>
+     *
+     * @param key     缓存键名称，同时用于获取缓存
+     * @param value   需要缓存的字符串({@link String})内容
+     * @param outtime 有效时间，<b>注意：缓存时间单位为 秒(S)</b>
+     * @return 保存的文件 {@link File} 对象 <b>注意：可能为 {@code null}</b>
+     * @see #put(String, String)
+     * @see #putOnNewThread(String, String)
+     * @see #putOnNewThread(String, String, long)
+     */
+    public File put(@NonNull String key, @NonNull String value, @NonNull long outtime) {
+        return put(key, RCacheOperatorUtils.addDateInfo(value, outtime * SECOND));
+    }
+
+    /**
+     * 缓存 {@link JSONObject} 对象
+     *
+     * @param key        缓存键名称，同时用于获取缓存
+     * @param jsonObject 需要缓存的 {@link JSONObject} 对象
+     * @return 保存的文件 {@link File} 对象 <b>注意：可能为 {@code null}</b> <b>注意：可能为 {@code null}</b>
+     * @see #put(String, JSONObject, long)
+     * @see #putOnNewThread(String, JSONObject)
+     * @see #putOnNewThread(String, JSONObject, long)
+     */
+    public File put(@NonNull String key, @NonNull JSONObject jsonObject) {
+        return put(key, jsonObject.toString());
+    }
+
+    /**
+     * 缓存 {@link JSONObject} 对象，指定缓存时间，<b>注意：缓存时间单位为 秒(S)</b>
+     *
+     * @param key        缓存键名称，同时用于获取缓存
+     * @param jsonObject 需要缓存的  {@link JSONObject} 对象
+     * @param outtime    有效时间，<b>注意：缓存时间单位为 秒(S)</b>
+     * @return 保存的文件 {@link File} 对象 <b>注意：可能为 {@code null}</b>
+     * @see #put(String, JSONObject)
+     * @see #putOnNewThread(String, JSONObject)
+     * @see #putOnNewThread(String, JSONObject, long)
+     */
+    public File put(@NonNull String key, @NonNull JSONObject jsonObject, @NonNull long outtime) {
+        return put(key, RCacheOperatorUtils.addDateInfo(jsonObject.toString(), outtime * SECOND));
+    }
+
+    /**
+     * 缓存 {@link JSONArray} 对象
+     *
+     * @param key       缓存键名称，同时用于获取缓存
+     * @param jsonArray 需要缓存的  {@link JSONArray} 对象
+     * @return 保存的文件 {@link File} 对象 <b>注意：可能为 {@code null}</b>
+     * @see #put(String, JSONArray, long)
+     * @see #putOnNewThread(String, JSONArray)
+     * @see #putOnNewThread(String, JSONArray, long)
+     */
+    public File put(@NonNull String key, @NonNull JSONArray jsonArray) {
+        return put(key, jsonArray.toString());
+    }
+
+    /**
+     * 缓存 {@link JSONArray} 对象，指定缓存时间，<b>注意：缓存时间单位为 秒(S)</b>
+     *
+     * @param key       缓存键名称，同时用于获取缓存
+     * @param jsonArray 需要缓存的  {@link JSONArray} 对象
+     * @param outtime   有效时间，<b>注意：缓存时间单位为 秒(S)</b>
+     * @return 保存的文件 {@link File} 对象 <b>注意：可能为 {@code null}</b>
+     * @see #put(String, JSONArray)
+     * @see #putOnNewThread(String, JSONArray)
+     * @see #putOnNewThread(String, JSONArray, long)
+     */
+    public File put(@NonNull String key, @NonNull JSONArray jsonArray, @NonNull long outtime) {
+        return put(key, RCacheOperatorUtils.addDateInfo(jsonArray.toString(), outtime * SECOND));
+    }
+
+    /**
+     * 缓存字节数组(byte[])，指定缓存时间，<b>注意：缓存时间单位为 秒(S)</b>
+     *
+     * @param key     缓存键名称，同时用于获取缓存
+     * @param bytes   需要缓存的字节数组(byte[])
+     * @param outtime 有效时间，<b>注意：缓存时间单位为 秒(S)</b>
+     * @return 保存的文件 {@link File} 对象 <b>注意：可能为 {@code null}</b>
+     * @see #put(String, byte[])
+     * @see #putOnNewThread(String, byte[])
+     * @see #putOnNewThread(String, byte[], long)
+     */
+    public File put(@NonNull String key, @NonNull byte[] bytes, @NonNull long outtime) {
+        return put(key, RCacheOperatorUtils.addDateInfo(bytes, outtime * SECOND));
     }
 
     /**
