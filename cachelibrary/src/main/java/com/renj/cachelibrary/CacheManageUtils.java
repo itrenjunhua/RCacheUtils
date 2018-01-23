@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -259,6 +260,38 @@ public class CacheManageUtils {
                     e.printStackTrace();
                 }
             }
+        }
+    }
+
+    /**
+     * 获取缓存的 {@link JSONObject} 对象，没有则返回 {@code null}
+     *
+     * @param key 缓存时的键名称
+     * @return 缓存的 {@link JSONObject} 对象，没有则返回 {@code null}
+     * @see #getAsJsonObjectOnNewThread(String)
+     */
+    public JSONObject getAsJsonObjct(@NonNull String key) {
+        try {
+            return new JSONObject(getAsString(key));
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
+     * 获取缓存的 {@link JSONArray} 对象，没有则返回 {@code null}
+     *
+     * @param key 缓存时的键名称
+     * @return 缓存的 {@link JSONArray} 对象，没有则返回 {@code null}
+     * @see #getAsJSONArrayOnNewThread(String)
+     */
+    public JSONArray getAsJsonArray(@NonNull String key) {
+        try {
+            return new JSONArray(getAsString(key));
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
         }
     }
 
