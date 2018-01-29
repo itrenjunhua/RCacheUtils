@@ -2,6 +2,7 @@ package com.renj.cachelibrary;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
@@ -18,8 +19,6 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
 
 /**
  * ======================================================================
@@ -220,6 +219,35 @@ public class CacheManageUtils {
     }
 
     /**
+     * 缓存 {@link Drawable} 对象
+     *
+     * @param key      缓存键名称，同时用于获取缓存
+     * @param drawable 需要缓存的  {@link Drawable} 对象
+     * @return 保存的文件 {@link File} 对象 <b>注意：可能为 {@code null}</b>
+     * @see #put(String, Drawable, long)
+     * @see #putOnNewThread(String, Drawable)
+     * @see #putOnNewThread(String, Drawable, long)
+     */
+    public File put(@NonNull String key, @NonNull Drawable drawable) {
+        return put(key, RCacheOperatorUtils.drawableToBitmap(drawable));
+    }
+
+    /**
+     * 缓存 {@link Drawable} 对象，指定缓存时间，<b>注意：缓存时间单位为 秒(S)</b>
+     *
+     * @param key      缓存键名称，同时用于获取缓存
+     * @param drawable 需要缓存的 {@link Drawable} 对象
+     * @param outtime  有效时间，<b>注意：缓存时间单位为 秒(S)</b>
+     * @return 保存的文件 {@link File} 对象 <b>注意：可能为 {@code null}</b>
+     * @see #put(String, Drawable)
+     * @see #putOnNewThread(String, Drawable)
+     * @see #putOnNewThread(String, Drawable, long)
+     */
+    public File put(@NonNull String key, @NonNull Drawable drawable, @NonNull long outtime) {
+        return put(key, RCacheOperatorUtils.drawableToBitmap(drawable), outtime);
+    }
+
+    /**
      * 缓存字符串({@link String})内容
      *
      * @param key   缓存键名称，同时用于获取缓存
@@ -337,6 +365,18 @@ public class CacheManageUtils {
     public Bitmap getAsBitmap(@NonNull String key) {
         byte[] bytes = getAsBinary(key);
         return RCacheOperatorUtils.bytesToBitmap(bytes);
+    }
+
+    /**
+     * 获取缓存的 {@link Drawable} 对象，没有则返回 {@code null}
+     *
+     * @param key 缓存时的键名称
+     * @return 缓存的 {@link Drawable} 对象，没有则返回 {@code null}
+     * @see #getAsDrawableOnNewThread(String)
+     */
+    public Drawable getAsDrawable(@NonNull String key) {
+        Bitmap bitmap = getAsBitmap(key);
+        return RCacheOperatorUtils.bitmapToDrawable(bitmap);
     }
 
     /**
