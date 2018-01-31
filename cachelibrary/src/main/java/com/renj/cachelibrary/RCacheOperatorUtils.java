@@ -10,8 +10,6 @@ import android.support.annotation.CheckResult;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileWriter;
@@ -172,7 +170,7 @@ import java.io.UnsupportedEncodingException;
     @NonNull
     @CheckResult(suggest = "返回值没有使用")
     @org.jetbrains.annotations.Contract(value = "null,null -> false", pure = true)
-    static boolean equalsBytes(@NotNull byte[] bytes1, @NonNull byte[] bytes2) {
+    static boolean equalsBytes(@NonNull byte[] bytes1, @NonNull byte[] bytes2) {
         if (bytes1 == bytes2) return true;
         if (bytes1 == null || bytes2 == null) return false;
         if (bytes1.length != bytes2.length) return false;
