@@ -383,6 +383,251 @@ public class CacheManageUtils {
     }
 
     /**
+     * 在新线程中缓存字符串({@link String})内容
+     *
+     * @param key   缓存键名称，同时用于获取缓存
+     * @param value 需要缓存的字符串内容({@link String})
+     * @return {@link CacheThreadResult} 对象，回调函数参数表示缓存的文件 {@link File} 对象，可能为 {@code null}
+     * @see #put(String, String)
+     * @see #put(String, String, long)
+     * @see #putOnNewThread(String, String, long)
+     */
+    public CacheThreadResult<File> putOnNewThread(@NonNull String key, @NonNull String value) {
+        return putOnNewThread(key, value, -1);
+    }
+
+    /**
+     * 在新线程中缓存字符串({@link String})内容，指定缓存时间，<b>注意：缓存时间单位为 秒(S)</b>
+     *
+     * @param key     缓存键名称，同时用于获取缓存
+     * @param value   需要缓存的字符串({@link String})内容
+     * @param outtime 有效时间，<b>注意：缓存时间单位为 秒(S)</b>
+     * @return {@link CacheThreadResult} 对象，回调函数参数表示缓存的文件 {@link File} 对象，可能为 {@code null}
+     * @see #put(String, String)
+     * @see #put(String, String, long)
+     * @see #putOnNewThread(String, String)
+     */
+    public CacheThreadResult<File> putOnNewThread(@NonNull final String key, @NonNull final String value, @NonNull final long outtime) {
+        return CacheThreadResult.<File>create().runOnNewThread(new CacheThreadResult.CacheCallBack<File>() {
+            @Override
+            public File execute() {
+                if (outtime == -1) return put(key, value);
+                else return put(key, RCacheOperatorUtils.addDateInfo(value, outtime));
+            }
+        });
+    }
+
+    /**
+     * 在新线程中缓存 {@link JSONObject} 对象
+     *
+     * @param key        缓存键名称，同时用于获取缓存
+     * @param jsonObject 需要缓存的 {@link JSONObject} 对象
+     * @return {@link CacheThreadResult} 对象，回调函数参数表示缓存的文件 {@link File} 对象，可能为 {@code null}
+     * @see #put(String, JSONObject)
+     * @see #put(String, JSONObject, long)
+     * @see #putOnNewThread(String, JSONObject, long)
+     */
+    public CacheThreadResult<File> putOnNewThread(@NonNull String key, @NonNull JSONObject jsonObject) {
+        return putOnNewThread(key, jsonObject, -1);
+    }
+
+    /**
+     * 在新线程中缓存 {@link JSONObject} 对象，指定缓存时间，<b>注意：缓存时间单位为 秒(S)</b>
+     *
+     * @param key        缓存键名称，同时用于获取缓存
+     * @param jsonObject 需要缓存的 {@link JSONObject} 对象
+     * @param outtime    有效时间，<b>注意：缓存时间单位为 秒(S)</b>
+     * @return {@link CacheThreadResult} 对象，回调函数参数表示缓存的文件 {@link File} 对象，可能为 {@code null}
+     * @see #put(String, JSONObject)
+     * @see #put(String, JSONObject, long)
+     * @see #putOnNewThread(String, JSONObject)
+     */
+    public CacheThreadResult<File> putOnNewThread(@NonNull final String key, @NonNull final JSONObject jsonObject, @NonNull final long outtime) {
+        return CacheThreadResult.<File>create().runOnNewThread(new CacheThreadResult.CacheCallBack<File>() {
+            @Override
+            public File execute() {
+                if (outtime == -1) return put(key, jsonObject);
+                else return put(key, jsonObject, outtime);
+            }
+        });
+    }
+
+    /**
+     * 在新线程中缓存 {@link JSONArray} 对象
+     *
+     * @param key       缓存键名称，同时用于获取缓存
+     * @param jsonArray 需要缓存的 {@link JSONArray} 对象
+     * @return {@link CacheThreadResult} 对象，回调函数参数表示缓存的文件 {@link File} 对象，可能为 {@code null}
+     * @see #put(String, JSONArray)
+     * @see #put(String, JSONArray, long)
+     * @see #putOnNewThread(String, JSONArray, long)
+     */
+    public CacheThreadResult<File> putOnNewThread(@NonNull String key, @NonNull JSONArray jsonArray) {
+        return putOnNewThread(key, jsonArray, -1);
+    }
+
+    /**
+     * 在新线程中缓存 {@link JSONArray} 对象，指定缓存时间，<b>注意：缓存时间单位为 秒(S)</b>
+     *
+     * @param key       缓存键名称，同时用于获取缓存
+     * @param jsonArray 需要缓存的 {@link JSONArray} 对象
+     * @param outtime   有效时间，<b>注意：缓存时间单位为 秒(S)</b>
+     * @return {@link CacheThreadResult} 对象，回调函数参数表示缓存的文件 {@link File} 对象，可能为 {@code null}
+     * @see #put(String, JSONArray)
+     * @see #put(String, JSONArray, long)
+     * @see #putOnNewThread(String, JSONArray)
+     */
+    public CacheThreadResult<File> putOnNewThread(@NonNull final String key, @NonNull final JSONArray jsonArray, @NonNull final long outtime) {
+        return CacheThreadResult.<File>create().runOnNewThread(new CacheThreadResult.CacheCallBack<File>() {
+            @Override
+            public File execute() {
+                if (outtime == -1) return put(key, jsonArray);
+                else return put(key, jsonArray, outtime);
+            }
+        });
+    }
+
+    /**
+     * 在新线程中缓存字节数组(byte[])
+     *
+     * @param key   缓存键名称，同时用于获取缓存
+     * @param bytes 需要缓存的字节数组(byte[])
+     * @return {@link CacheThreadResult} 对象，回调函数参数表示缓存的文件 {@link File} 对象，可能为 {@code null}
+     * @see #put(String, byte[])
+     * @see #put(String, byte[], long)
+     * @see #putOnNewThread(String, byte[], long)
+     */
+    public CacheThreadResult<File> putOnNewThread(@NonNull String key, @NonNull byte[] bytes) {
+        return putOnNewThread(key, bytes, -1);
+    }
+
+    /**
+     * 在新线程中缓存字节数组(byte[])，指定缓存时间，<b>注意：缓存时间单位为 秒(S)</b>
+     *
+     * @param key     缓存键名称，同时用于获取缓存
+     * @param bytes   需要缓存的字节数组(byte[])
+     * @param outtime 有效时间，<b>注意：缓存时间单位为 秒(S)</b>
+     * @return {@link CacheThreadResult} 对象，回调函数参数表示缓存的文件 {@link File} 对象，可能为 {@code null}
+     * @see #put(String, byte[])
+     * @see #put(String, byte[], long)
+     * @see #putOnNewThread(String, byte[])
+     */
+    public CacheThreadResult<File> putOnNewThread(@NonNull final String key, @NonNull final byte[] bytes, @NonNull final long outtime) {
+        return CacheThreadResult.<File>create().runOnNewThread(new CacheThreadResult.CacheCallBack<File>() {
+            @Override
+            public File execute() {
+                if (outtime == -1) return put(key, bytes);
+                else return put(key, bytes, outtime);
+            }
+        });
+    }
+
+    /**
+     * 在新线程中缓存 {@link Bitmap} 对象
+     *
+     * @param key    缓存键名称，同时用于获取缓存
+     * @param bitmap 需要缓存的  {@link Bitmap} 对象
+     * @return {@link CacheThreadResult} 对象，回调函数参数表示缓存的文件 {@link File} 对象，可能为 {@code null}
+     * @see #put(String, Bitmap)
+     * @see #put(String, Bitmap, long)
+     * @see #putOnNewThread(String, Bitmap, long)
+     */
+    public CacheThreadResult<File> putOnNewThread(@NonNull String key, @NonNull Bitmap bitmap) {
+        return putOnNewThread(key, bitmap, -1);
+    }
+
+    /**
+     * 在新线程中缓存 {@link Bitmap} 对象，指定缓存时间，<b>注意：缓存时间单位为 秒(S)</b>
+     *
+     * @param key     缓存键名称，同时用于获取缓存
+     * @param bitmap  需要缓存的 {@link Bitmap} 对象
+     * @param outtime 有效时间，<b>注意：缓存时间单位为 秒(S)</b>
+     * @return {@link CacheThreadResult} 对象，回调函数参数表示缓存的文件 {@link File} 对象，可能为 {@code null}
+     * @see #put(String, Bitmap)
+     * @see #put(String, Bitmap, long)
+     * @see #putOnNewThread(String, Bitmap)
+     */
+    public CacheThreadResult<File> putOnNewThread(@NonNull final String key, @NonNull final Bitmap bitmap, @NonNull final long outtime) {
+        return CacheThreadResult.<File>create().runOnNewThread(new CacheThreadResult.CacheCallBack<File>() {
+            @Override
+            public File execute() {
+                if (outtime == -1) return put(key, bitmap);
+                else return put(key, bitmap, outtime);
+            }
+        });
+    }
+
+    /**
+     * 在新线程中缓存 {@link Drawable} 对象
+     *
+     * @param key      缓存键名称，同时用于获取缓存
+     * @param drawable 需要缓存的  {@link Drawable} 对象
+     * @return {@link CacheThreadResult} 对象，回调函数参数表示缓存的文件 {@link File} 对象，可能为 {@code null}
+     * @see #put(String, Drawable)
+     * @see #put(String, Drawable, long)
+     * @see #putOnNewThread(String, Drawable, long)
+     */
+    public CacheThreadResult<File> putOnNewThread(@NonNull String key, @NonNull Drawable drawable) {
+        return putOnNewThread(key, drawable, -1);
+    }
+
+    /**
+     * 在新线程中缓存 {@link Drawable} 对象，指定缓存时间，<b>注意：缓存时间单位为 秒(S)</b>
+     *
+     * @param key      缓存键名称，同时用于获取缓存
+     * @param drawable 需要缓存的 {@link Drawable} 对象
+     * @param outtime  有效时间，<b>注意：缓存时间单位为 秒(S)</b>
+     * @return {@link CacheThreadResult} 对象，回调函数参数表示缓存的文件 {@link File} 对象，可能为 {@code null}
+     * @see #put(String, Drawable)
+     * @see #put(String, Drawable, long)
+     * @see #putOnNewThread(String, Drawable)
+     */
+    public CacheThreadResult<File> putOnNewThread(@NonNull final String key, @NonNull final Drawable drawable, @NonNull final long outtime) {
+        return CacheThreadResult.<File>create().runOnNewThread(new CacheThreadResult.CacheCallBack<File>() {
+            @Override
+            public File execute() {
+                if (outtime == -1) return put(key, drawable);
+                else return put(key, drawable, outtime);
+            }
+        });
+    }
+
+    /**
+     * 在新线程中缓存 {@link Serializable} 对象
+     *
+     * @param key   缓存键名称，同时用于获取缓存
+     * @param value 需要缓存的  {@link Serializable} 对象
+     * @return {@link CacheThreadResult} 对象，回调函数参数表示缓存的文件 {@link File} 对象，可能为 {@code null}
+     * @see #put(String, Serializable)
+     * @see #put(String, Serializable, long)
+     * @see #putOnNewThread(String, Serializable, long)
+     */
+    public CacheThreadResult<File> putOnNewThread(@NonNull String key, @NonNull Serializable value) {
+        return putOnNewThread(key, value, -1);
+    }
+
+    /**
+     * 在新线程中缓存 {@link Serializable} 对象，指定缓存时间，<b>注意：缓存时间单位为 秒(S)</b>
+     *
+     * @param key     缓存键名称，同时用于获取缓存
+     * @param value   需要缓存的 {@link Serializable} 对象
+     * @param outtime 有效时间，<b>注意：缓存时间单位为 秒(S)</b>
+     * @return {@link CacheThreadResult} 对象，回调函数参数表示缓存的文件 {@link File} 对象，可能为 {@code null}
+     * @see #put(String, Serializable)
+     * @see #put(String, Serializable, long)
+     * @see #putOnNewThread(String, Serializable)
+     */
+    public CacheThreadResult<File> putOnNewThread(@NonNull final String key, @NonNull final Serializable value, @NonNull final long outtime) {
+        return CacheThreadResult.<File>create().runOnNewThread(new CacheThreadResult.CacheCallBack<File>() {
+            @Override
+            public File execute() {
+                if (outtime == -1) return put(key, value);
+                else return put(key, value, outtime);
+            }
+        });
+    }
+
+    /**
      * 获取缓存的 {@link JSONObject} 对象，没有则返回 {@code null}
      *
      * @param key 缓存时的键名称
