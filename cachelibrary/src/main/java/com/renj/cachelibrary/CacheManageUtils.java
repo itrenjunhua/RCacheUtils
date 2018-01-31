@@ -3,7 +3,9 @@ package com.renj.cachelibrary;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.CheckResult;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
 import org.json.JSONArray;
@@ -44,7 +46,7 @@ import java.io.Serializable;
  * <p>
  * ======================================================================
  */
-public class CacheManageUtils {
+public final class CacheManageUtils {
     /**
      * 缓存路径
      */
@@ -105,6 +107,7 @@ public class CacheManageUtils {
      * @throws IllegalStateException 在调用该方法前没有调用 {@link #initCacheUtil(Context)} 方法(使用默认缓存目录名'ACache')
      *                               或者 {@link #initCacheUtil(Context, String)} 方法(可以指定缓存目录名)进行初始化时抛出。
      */
+    @CheckResult(suggest = "返回值没有使用")
     public static CacheManageUtils newInstance() {
         if (instance == null)
             throw new IllegalStateException("没有对 CacheManageUtils 进行初始化，需要先调用 CacheManageUtils.initCacheUtil(Context) " +
@@ -123,6 +126,8 @@ public class CacheManageUtils {
      * @see #putOnNewThread(String, String)
      * @see #putOnNewThread(String, String, long)
      */
+    @Nullable
+    @CheckResult(suggest = "返回值没有使用")
     public File put(@NonNull String key, @NonNull String value, @NonNull long outtime) {
         return put(key, RCacheOperatorUtils.addDateInfo(value, outtime * SECOND));
     }
@@ -137,6 +142,8 @@ public class CacheManageUtils {
      * @see #putOnNewThread(String, JSONObject)
      * @see #putOnNewThread(String, JSONObject, long)
      */
+    @Nullable
+    @CheckResult(suggest = "返回值没有使用")
     public File put(@NonNull String key, @NonNull JSONObject jsonObject) {
         return put(key, jsonObject.toString());
     }
@@ -152,6 +159,8 @@ public class CacheManageUtils {
      * @see #putOnNewThread(String, JSONObject)
      * @see #putOnNewThread(String, JSONObject, long)
      */
+    @Nullable
+    @CheckResult(suggest = "返回值没有使用")
     public File put(@NonNull String key, @NonNull JSONObject jsonObject, @NonNull long outtime) {
         return put(key, RCacheOperatorUtils.addDateInfo(jsonObject.toString(), outtime * SECOND));
     }
@@ -166,6 +175,8 @@ public class CacheManageUtils {
      * @see #putOnNewThread(String, JSONArray)
      * @see #putOnNewThread(String, JSONArray, long)
      */
+    @Nullable
+    @CheckResult(suggest = "返回值没有使用")
     public File put(@NonNull String key, @NonNull JSONArray jsonArray) {
         return put(key, jsonArray.toString());
     }
@@ -181,6 +192,8 @@ public class CacheManageUtils {
      * @see #putOnNewThread(String, JSONArray)
      * @see #putOnNewThread(String, JSONArray, long)
      */
+    @Nullable
+    @CheckResult(suggest = "返回值没有使用")
     public File put(@NonNull String key, @NonNull JSONArray jsonArray, @NonNull long outtime) {
         return put(key, RCacheOperatorUtils.addDateInfo(jsonArray.toString(), outtime * SECOND));
     }
@@ -196,6 +209,8 @@ public class CacheManageUtils {
      * @see #putOnNewThread(String, byte[])
      * @see #putOnNewThread(String, byte[], long)
      */
+    @Nullable
+    @CheckResult(suggest = "返回值没有使用")
     public File put(@NonNull String key, @NonNull byte[] bytes, @NonNull long outtime) {
         return put(key, RCacheOperatorUtils.addDateInfo(bytes, outtime * SECOND));
     }
@@ -210,6 +225,8 @@ public class CacheManageUtils {
      * @see #putOnNewThread(String, Bitmap)
      * @see #putOnNewThread(String, Bitmap, long)
      */
+    @Nullable
+    @CheckResult(suggest = "返回值没有使用")
     public File put(@NonNull String key, @NonNull Bitmap bitmap) {
         return put(key, RCacheOperatorUtils.bitmapToBytes(bitmap));
     }
@@ -225,6 +242,8 @@ public class CacheManageUtils {
      * @see #putOnNewThread(String, Bitmap)
      * @see #putOnNewThread(String, Bitmap, long)
      */
+    @Nullable
+    @CheckResult(suggest = "返回值没有使用")
     public File put(@NonNull String key, @NonNull Bitmap bitmap, @NonNull long outtime) {
         return put(key, RCacheOperatorUtils.addDateInfo(RCacheOperatorUtils.bitmapToBytes(bitmap), outtime * SECOND));
     }
@@ -239,6 +258,8 @@ public class CacheManageUtils {
      * @see #putOnNewThread(String, Drawable)
      * @see #putOnNewThread(String, Drawable, long)
      */
+    @Nullable
+    @CheckResult(suggest = "返回值没有使用")
     public File put(@NonNull String key, @NonNull Drawable drawable) {
         return put(key, RCacheOperatorUtils.drawableToBitmap(drawable));
     }
@@ -254,6 +275,8 @@ public class CacheManageUtils {
      * @see #putOnNewThread(String, Drawable)
      * @see #putOnNewThread(String, Drawable, long)
      */
+    @Nullable
+    @CheckResult(suggest = "返回值没有使用")
     public File put(@NonNull String key, @NonNull Drawable drawable, @NonNull long outtime) {
         return put(key, RCacheOperatorUtils.drawableToBitmap(drawable), outtime);
     }
@@ -268,6 +291,8 @@ public class CacheManageUtils {
      * @see #putOnNewThread(String, Serializable)
      * @see #putOnNewThread(String, Serializable, long)
      */
+    @Nullable
+    @CheckResult(suggest = "返回值没有使用")
     public File put(@NonNull String key, @NonNull Serializable value) {
         return put(key, value, -1);
     }
@@ -283,6 +308,8 @@ public class CacheManageUtils {
      * @see #putOnNewThread(String, Serializable)
      * @see #putOnNewThread(String, Serializable, long)
      */
+    @Nullable
+    @CheckResult(suggest = "返回值没有使用")
     public File put(@NonNull String key, @NonNull Serializable value, @NonNull long outtime) {
         if (value == null) return null;
 
@@ -323,6 +350,8 @@ public class CacheManageUtils {
      * @see #putOnNewThread(String, String)
      * @see #putOnNewThread(String, String, long)
      */
+    @Nullable
+    @CheckResult(suggest = "返回值没有使用")
     public File put(@NonNull String key, @NonNull String value) {
         if (TextUtils.isEmpty(value)) return null;
 
@@ -361,6 +390,8 @@ public class CacheManageUtils {
      * @see #putOnNewThread(String, byte[])
      * @see #putOnNewThread(String, byte[], long)
      */
+    @Nullable
+    @CheckResult(suggest = "返回值没有使用")
     public File put(@NonNull String key, @NonNull byte[] bytes) {
         if (bytes == null || bytes.length == 0) return null;
 
@@ -399,6 +430,8 @@ public class CacheManageUtils {
      * @see #put(String, String, long)
      * @see #putOnNewThread(String, String, long)
      */
+    @NonNull
+    @CheckResult(suggest = "返回值没有使用")
     public CacheThreadResult<File> putOnNewThread(@NonNull String key, @NonNull String value) {
         return putOnNewThread(key, value, -1);
     }
@@ -414,6 +447,8 @@ public class CacheManageUtils {
      * @see #put(String, String, long)
      * @see #putOnNewThread(String, String)
      */
+    @NonNull
+    @CheckResult(suggest = "返回值没有使用")
     public CacheThreadResult<File> putOnNewThread(@NonNull final String key, @NonNull final String value, @NonNull final long outtime) {
         return CacheThreadResult.<File>create().runOnNewThread(new CacheThreadResult.CacheCallBack<File>() {
             @Override
@@ -434,6 +469,8 @@ public class CacheManageUtils {
      * @see #put(String, JSONObject, long)
      * @see #putOnNewThread(String, JSONObject, long)
      */
+    @NonNull
+    @CheckResult(suggest = "返回值没有使用")
     public CacheThreadResult<File> putOnNewThread(@NonNull String key, @NonNull JSONObject jsonObject) {
         return putOnNewThread(key, jsonObject, -1);
     }
@@ -449,6 +486,8 @@ public class CacheManageUtils {
      * @see #put(String, JSONObject, long)
      * @see #putOnNewThread(String, JSONObject)
      */
+    @NonNull
+    @CheckResult(suggest = "返回值没有使用")
     public CacheThreadResult<File> putOnNewThread(@NonNull final String key, @NonNull final JSONObject jsonObject, @NonNull final long outtime) {
         return CacheThreadResult.<File>create().runOnNewThread(new CacheThreadResult.CacheCallBack<File>() {
             @Override
@@ -469,6 +508,8 @@ public class CacheManageUtils {
      * @see #put(String, JSONArray, long)
      * @see #putOnNewThread(String, JSONArray, long)
      */
+    @NonNull
+    @CheckResult(suggest = "返回值没有使用")
     public CacheThreadResult<File> putOnNewThread(@NonNull String key, @NonNull JSONArray jsonArray) {
         return putOnNewThread(key, jsonArray, -1);
     }
@@ -484,6 +525,8 @@ public class CacheManageUtils {
      * @see #put(String, JSONArray, long)
      * @see #putOnNewThread(String, JSONArray)
      */
+    @NonNull
+    @CheckResult(suggest = "返回值没有使用")
     public CacheThreadResult<File> putOnNewThread(@NonNull final String key, @NonNull final JSONArray jsonArray, @NonNull final long outtime) {
         return CacheThreadResult.<File>create().runOnNewThread(new CacheThreadResult.CacheCallBack<File>() {
             @Override
@@ -504,6 +547,8 @@ public class CacheManageUtils {
      * @see #put(String, byte[], long)
      * @see #putOnNewThread(String, byte[], long)
      */
+    @NonNull
+    @CheckResult(suggest = "返回值没有使用")
     public CacheThreadResult<File> putOnNewThread(@NonNull String key, @NonNull byte[] bytes) {
         return putOnNewThread(key, bytes, -1);
     }
@@ -519,6 +564,8 @@ public class CacheManageUtils {
      * @see #put(String, byte[], long)
      * @see #putOnNewThread(String, byte[])
      */
+    @NonNull
+    @CheckResult(suggest = "返回值没有使用")
     public CacheThreadResult<File> putOnNewThread(@NonNull final String key, @NonNull final byte[] bytes, @NonNull final long outtime) {
         return CacheThreadResult.<File>create().runOnNewThread(new CacheThreadResult.CacheCallBack<File>() {
             @Override
@@ -539,6 +586,8 @@ public class CacheManageUtils {
      * @see #put(String, Bitmap, long)
      * @see #putOnNewThread(String, Bitmap, long)
      */
+    @NonNull
+    @CheckResult(suggest = "返回值没有使用")
     public CacheThreadResult<File> putOnNewThread(@NonNull String key, @NonNull Bitmap bitmap) {
         return putOnNewThread(key, bitmap, -1);
     }
@@ -554,6 +603,8 @@ public class CacheManageUtils {
      * @see #put(String, Bitmap, long)
      * @see #putOnNewThread(String, Bitmap)
      */
+    @NonNull
+    @CheckResult(suggest = "返回值没有使用")
     public CacheThreadResult<File> putOnNewThread(@NonNull final String key, @NonNull final Bitmap bitmap, @NonNull final long outtime) {
         return CacheThreadResult.<File>create().runOnNewThread(new CacheThreadResult.CacheCallBack<File>() {
             @Override
@@ -574,6 +625,8 @@ public class CacheManageUtils {
      * @see #put(String, Drawable, long)
      * @see #putOnNewThread(String, Drawable, long)
      */
+    @NonNull
+    @CheckResult(suggest = "返回值没有使用")
     public CacheThreadResult<File> putOnNewThread(@NonNull String key, @NonNull Drawable drawable) {
         return putOnNewThread(key, drawable, -1);
     }
@@ -589,6 +642,8 @@ public class CacheManageUtils {
      * @see #put(String, Drawable, long)
      * @see #putOnNewThread(String, Drawable)
      */
+    @NonNull
+    @CheckResult(suggest = "返回值没有使用")
     public CacheThreadResult<File> putOnNewThread(@NonNull final String key, @NonNull final Drawable drawable, @NonNull final long outtime) {
         return CacheThreadResult.<File>create().runOnNewThread(new CacheThreadResult.CacheCallBack<File>() {
             @Override
@@ -609,6 +664,8 @@ public class CacheManageUtils {
      * @see #put(String, Serializable, long)
      * @see #putOnNewThread(String, Serializable, long)
      */
+    @NonNull
+    @CheckResult(suggest = "返回值没有使用")
     public CacheThreadResult<File> putOnNewThread(@NonNull String key, @NonNull Serializable value) {
         return putOnNewThread(key, value, -1);
     }
@@ -624,6 +681,8 @@ public class CacheManageUtils {
      * @see #put(String, Serializable, long)
      * @see #putOnNewThread(String, Serializable)
      */
+    @NonNull
+    @CheckResult(suggest = "返回值没有使用")
     public CacheThreadResult<File> putOnNewThread(@NonNull final String key, @NonNull final Serializable value, @NonNull final long outtime) {
         return CacheThreadResult.<File>create().runOnNewThread(new CacheThreadResult.CacheCallBack<File>() {
             @Override
@@ -641,6 +700,8 @@ public class CacheManageUtils {
      * @return 缓存的 {@link JSONObject} 对象，没有则返回 {@code null}
      * @see #getAsJsonObjectOnNewThread(String)
      */
+    @Nullable
+    @CheckResult(suggest = "返回值没有使用")
     public JSONObject getAsJsonObjct(@NonNull String key) {
         try {
             return new JSONObject(getAsString(key));
@@ -657,6 +718,8 @@ public class CacheManageUtils {
      * @return 缓存的 {@link JSONArray} 对象，没有则返回 {@code null}
      * @see #getAsJSONArrayOnNewThread(String)
      */
+    @Nullable
+    @CheckResult(suggest = "返回值没有使用")
     public JSONArray getAsJsonArray(@NonNull String key) {
         try {
             return new JSONArray(getAsString(key));
@@ -673,6 +736,8 @@ public class CacheManageUtils {
      * @return 缓存的 {@link Bitmap} 对象，没有则返回 {@code null}
      * @see #getAsBitmapOnNewThread(String)
      */
+    @Nullable
+    @CheckResult(suggest = "返回值没有使用")
     public Bitmap getAsBitmap(@NonNull String key) {
         byte[] bytes = getAsBinary(key);
         return RCacheOperatorUtils.bytesToBitmap(bytes);
@@ -685,6 +750,8 @@ public class CacheManageUtils {
      * @return 缓存的 {@link Drawable} 对象，没有则返回 {@code null}
      * @see #getAsDrawableOnNewThread(String)
      */
+    @Nullable
+    @CheckResult(suggest = "返回值没有使用")
     public Drawable getAsDrawable(@NonNull String key) {
         Bitmap bitmap = getAsBitmap(key);
         return RCacheOperatorUtils.bitmapToDrawable(bitmap);
@@ -697,6 +764,8 @@ public class CacheManageUtils {
      * @return 缓存的 {@link Serializable} 对象，没有则返回 {@code null}
      * @see #getAsObjectOnNewThread(String)
      */
+    @Nullable
+    @CheckResult(suggest = "返回值没有使用")
     public Object getAsObject(@NonNull String key) {
         byte[] bytes = getAsBinary(key);
         if (bytes == null || bytes.length == 0) return null;
@@ -729,6 +798,8 @@ public class CacheManageUtils {
      * @return 缓存的字符串内容 ({@link String})，没有则返回 {@code ""}
      * @see #getAsStringOnNewThread(String)
      */
+    @NonNull
+    @CheckResult(suggest = "返回值没有使用")
     public String getAsString(@NonNull String key) {
         File file = RCacheOperatorUtils.spliceFile(key);
         if (!file.exists()) return "";
@@ -776,6 +847,8 @@ public class CacheManageUtils {
      * @return 缓存的字节数组(byte[])，没有则返回 {@code null}
      * @see #getAsBinaryOnNewThread(String)
      */
+    @Nullable
+    @CheckResult(suggest = "返回值没有使用")
     public byte[] getAsBinary(@NonNull String key) {
         File file = RCacheOperatorUtils.spliceFile(key);
         if (!file.exists()) return null;
@@ -824,6 +897,8 @@ public class CacheManageUtils {
      * @return {@link CacheThreadResult} 对象，内容为 {@link CacheThreadResult#onResult(CacheThreadResult.CacheResultCallBack)} 回调方法参数
      * @see #getAsString(String)
      */
+    @NonNull
+    @CheckResult(suggest = "返回值没有使用")
     public CacheThreadResult<String> getAsStringOnNewThread(@NonNull final String key) {
         return CacheThreadResult.<String>create().runOnNewThread(new CacheThreadResult.CacheCallBack<String>() {
             @Override
@@ -840,6 +915,8 @@ public class CacheManageUtils {
      * @return {@link CacheThreadResult} 对象，内容为 {@link CacheThreadResult#onResult(CacheThreadResult.CacheResultCallBack)} 回调方法参数
      * @see #getAsJsonObjct(String)
      */
+    @NonNull
+    @CheckResult(suggest = "返回值没有使用")
     public CacheThreadResult<JSONObject> getAsJsonObjectOnNewThread(@NonNull final String key) {
         return CacheThreadResult.<JSONObject>create().runOnNewThread(new CacheThreadResult.CacheCallBack<JSONObject>() {
             @Override
@@ -856,6 +933,8 @@ public class CacheManageUtils {
      * @return {@link CacheThreadResult} 对象，内容为 {@link CacheThreadResult#onResult(CacheThreadResult.CacheResultCallBack)} 回调方法参数
      * @see #getAsJsonArray(String)
      */
+    @NonNull
+    @CheckResult(suggest = "返回值没有使用")
     public CacheThreadResult<JSONArray> getAsJSONArrayOnNewThread(@NonNull final String key) {
         return CacheThreadResult.<JSONArray>create().runOnNewThread(new CacheThreadResult.CacheCallBack<JSONArray>() {
             @Override
@@ -872,6 +951,8 @@ public class CacheManageUtils {
      * @return {@link CacheThreadResult} 对象，内容为 {@link CacheThreadResult#onResult(CacheThreadResult.CacheResultCallBack)} 回调方法参数
      * @see #getAsBinary(String)
      */
+    @NonNull
+    @CheckResult(suggest = "返回值没有使用")
     public CacheThreadResult<byte[]> getAsBinaryOnNewThread(@NonNull final String key) {
         return CacheThreadResult.<byte[]>create().runOnNewThread(new CacheThreadResult.CacheCallBack<byte[]>() {
             @Override
@@ -888,6 +969,8 @@ public class CacheManageUtils {
      * @return {@link CacheThreadResult} 对象，内容为 {@link CacheThreadResult#onResult(CacheThreadResult.CacheResultCallBack)} 回调方法参数
      * @see #getAsBitmap(String)
      */
+    @NonNull
+    @CheckResult(suggest = "返回值没有使用")
     public CacheThreadResult<Bitmap> getAsBitmapOnNewThread(@NonNull final String key) {
         return CacheThreadResult.<Bitmap>create().runOnNewThread(new CacheThreadResult.CacheCallBack<Bitmap>() {
             @Override
@@ -904,6 +987,8 @@ public class CacheManageUtils {
      * @return {@link CacheThreadResult} 对象，内容为 {@link CacheThreadResult#onResult(CacheThreadResult.CacheResultCallBack)} 回调方法参数
      * @see #getAsDrawable(String)
      */
+    @NonNull
+    @CheckResult(suggest = "返回值没有使用")
     public CacheThreadResult<Drawable> getAsDrawableOnNewThread(@NonNull final String key) {
         return CacheThreadResult.<Drawable>create().runOnNewThread(new CacheThreadResult.CacheCallBack<Drawable>() {
             @Override
@@ -920,6 +1005,8 @@ public class CacheManageUtils {
      * @return {@link CacheThreadResult} 对象，内容为 {@link CacheThreadResult#onResult(CacheThreadResult.CacheResultCallBack)} 回调方法参数
      * @see #getAsObject(String)
      */
+    @NonNull
+    @CheckResult(suggest = "返回值没有使用")
     public CacheThreadResult<Object> getAsObjectOnNewThread(@NonNull final String key) {
         return CacheThreadResult.<Object>create().runOnNewThread(new CacheThreadResult.CacheCallBack<Object>() {
             @Override

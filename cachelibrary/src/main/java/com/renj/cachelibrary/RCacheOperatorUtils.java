@@ -6,7 +6,11 @@ import android.graphics.Canvas;
 import android.graphics.PixelFormat;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.CheckResult;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -27,7 +31,7 @@ import java.io.UnsupportedEncodingException;
  * <p>
  * ======================================================================
  */
-public class RCacheOperatorUtils {
+/*public*/ class RCacheOperatorUtils {
 
     /**
      * 基于缓存路径 {@link CacheManageUtils#CACHE_PATH} 统一拼接文件扩展名
@@ -36,6 +40,7 @@ public class RCacheOperatorUtils {
      * @return 带扩展名的 File 对象
      */
     @NonNull
+    @CheckResult(suggest = "返回值没有使用")
     static File spliceFile(@NonNull String fileName) {
         File file = new File(CacheManageUtils.CACHE_PATH, fileName.hashCode() + RCacheConfig.EXTEND_NAME);
         return file;
@@ -48,6 +53,8 @@ public class RCacheOperatorUtils {
      * @param outtime 有效时间
      * @return 按照特殊格式增加了有效时间的内容(增加的时间表示最终有效期)
      */
+    @NonNull
+    @CheckResult(suggest = "返回值没有使用")
     static String addDateInfo(@NonNull String value, long outtime) {
         return createDateInfo(outtime) + value;
     }
@@ -58,6 +65,8 @@ public class RCacheOperatorUtils {
      * @param value
      * @return 返回清除过期时间之后的内容
      */
+    @NonNull
+    @CheckResult(suggest = "返回值没有使用")
     static String clearDateInfo(@NonNull String value) {
         if (value != null) {
             String[] strings = value.split(RCacheConfig.SPLIT_CHAR);
@@ -78,6 +87,8 @@ public class RCacheOperatorUtils {
      * @param outtime 有效时间
      * @return 按照特殊格式增加了有效时间的内容(增加的时间表示最终有效期)
      */
+    @Nullable
+    @CheckResult(suggest = "返回值没有使用")
     static byte[] addDateInfo(@NonNull byte[] value, long outtime) {
         if (value == null) return null;
 
@@ -94,6 +105,8 @@ public class RCacheOperatorUtils {
      * @param value
      * @return 返回清除过期时间之后的内容
      */
+    @Nullable
+    @CheckResult(suggest = "返回值没有使用")
     static byte[] clearDateInfo(@NonNull byte[] value) {
         if (value != null) {
             byte[] splitBytes = toBytes(RCacheConfig.SPLIT_CHAR);
@@ -118,6 +131,8 @@ public class RCacheOperatorUtils {
      * @param value
      * @return
      */
+    @NonNull
+    @CheckResult(suggest = "返回值没有使用")
     static boolean isTimeLimit(@NonNull String value) {
         return value.contains(RCacheConfig.SPLIT_CHAR);
     }
@@ -128,6 +143,9 @@ public class RCacheOperatorUtils {
      * @param value
      * @return
      */
+    @NonNull
+    @CheckResult(suggest = "返回值没有使用")
+    @org.jetbrains.annotations.Contract(value = "null -> false", pure = true)
     static boolean isTimeLimit(@NonNull byte[] value) {
         // 判断长度小于14的原因是使用自定义的currentTimeMillis()方法获取到的时间值为13位
         if (value == null || value.length < 14) {
@@ -151,7 +169,10 @@ public class RCacheOperatorUtils {
      * @param bytes2
      * @return
      */
-    static boolean equalsBytes(@NonNull byte[] bytes1, @NonNull byte[] bytes2) {
+    @NonNull
+    @CheckResult(suggest = "返回值没有使用")
+    @org.jetbrains.annotations.Contract(value = "null,null -> false", pure = true)
+    static boolean equalsBytes(@NotNull byte[] bytes1, @NonNull byte[] bytes2) {
         if (bytes1 == bytes2) return true;
         if (bytes1 == null || bytes2 == null) return false;
         if (bytes1.length != bytes2.length) return false;
@@ -171,7 +192,8 @@ public class RCacheOperatorUtils {
      * @return
      */
     @NonNull
-    static String createDateInfo(long outtime) {
+    @CheckResult(suggest = "返回值没有使用")
+    static String createDateInfo(@NonNull long outtime) {
         return (currentTimeMillis() + outtime) + RCacheConfig.SPLIT_CHAR;
     }
 
@@ -180,6 +202,8 @@ public class RCacheOperatorUtils {
      *
      * @return
      */
+    @NonNull
+    @CheckResult(suggest = "返回值没有使用")
     static long currentTimeMillis() {
         String currentTimeMillis = System.currentTimeMillis() + "";
         while (currentTimeMillis.length() < 13) {
@@ -195,7 +219,10 @@ public class RCacheOperatorUtils {
      * @return
      * @throws UnsupportedEncodingException
      */
+    @NonNull
+    @CheckResult(suggest = "返回值没有使用")
     static byte[] toBytes(@NonNull String value) {
+        if (value == null) value = "";
         try {
             return value.getBytes("utf-8");
         } catch (UnsupportedEncodingException e) {
@@ -210,6 +237,8 @@ public class RCacheOperatorUtils {
      * @param listFile
      * @return 文件大小，如果是文件夹返回 0
      */
+    @NonNull
+    @CheckResult(suggest = "返回值没有使用")
     static long calculateFileSize(@NonNull File listFile) {
         if (listFile != null && listFile.exists() && listFile.isFile())
             return listFile.length();
@@ -222,7 +251,10 @@ public class RCacheOperatorUtils {
      * @param deleteFile
      * @return 删除的文件长度
      */
+    @NonNull
+    @CheckResult(suggest = "返回值没有使用")
     static long deleteFile(@NonNull File deleteFile) {
+        if (deleteFile == null || !deleteFile.exists()) return 0;
         long length = deleteFile.length();
         deleteFile.delete();
         return length;
@@ -272,6 +304,9 @@ public class RCacheOperatorUtils {
      * @param drawable
      * @return
      */
+    @Nullable
+    @CheckResult(suggest = "返回值没有使用")
+    @org.jetbrains.annotations.Contract(value = "null -> null", pure = true)
     static Bitmap drawableToBitmap(@NonNull Drawable drawable) {
         if (drawable == null) return null;
 
@@ -292,6 +327,9 @@ public class RCacheOperatorUtils {
      * @param bitmap
      * @return
      */
+    @Nullable
+    @CheckResult(suggest = "返回值没有使用")
+    @org.jetbrains.annotations.Contract(value = "null -> null", pure = true)
     static Drawable bitmapToDrawable(@NonNull Bitmap bitmap) {
         if (bitmap == null) return null;
 
@@ -304,6 +342,9 @@ public class RCacheOperatorUtils {
      * @param bitmap
      * @return
      */
+    @Nullable
+    @CheckResult(suggest = "返回值没有使用")
+    @org.jetbrains.annotations.Contract(value = "null -> null", pure = true)
     static byte[] bitmapToBytes(@NonNull Bitmap bitmap) {
         if (bitmap == null) return null;
 
@@ -318,6 +359,9 @@ public class RCacheOperatorUtils {
      * @param bytes
      * @return
      */
+    @Nullable
+    @CheckResult(suggest = "返回值没有使用")
+    @org.jetbrains.annotations.Contract(value = "null -> null", pure = true)
     static Bitmap bytesToBitmap(@NonNull byte[] bytes) {
         if (bytes == null || bytes.length == 0) return null;
 
