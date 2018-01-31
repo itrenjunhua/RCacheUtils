@@ -143,7 +143,7 @@ import java.io.UnsupportedEncodingException;
      */
     @NonNull
     @CheckResult(suggest = "返回值没有使用")
-    @org.jetbrains.annotations.Contract(value = "null -> false", pure = true)
+    @org.jetbrains.annotations.Contract(value = "null -> false")
     static boolean isTimeLimit(@NonNull byte[] value) {
         // 判断长度小于14的原因是使用自定义的currentTimeMillis()方法获取到的时间值为13位
         if (value == null || value.length < 14) {
@@ -169,7 +169,7 @@ import java.io.UnsupportedEncodingException;
      */
     @NonNull
     @CheckResult(suggest = "返回值没有使用")
-    @org.jetbrains.annotations.Contract(value = "null,null -> false", pure = true)
+    @org.jetbrains.annotations.Contract(value = "null,null -> false")
     static boolean equalsBytes(@NonNull byte[] bytes1, @NonNull byte[] bytes2) {
         if (bytes1 == bytes2) return true;
         if (bytes1 == null || bytes2 == null) return false;
@@ -304,7 +304,7 @@ import java.io.UnsupportedEncodingException;
      */
     @Nullable
     @CheckResult(suggest = "返回值没有使用")
-    @org.jetbrains.annotations.Contract(value = "null -> null", pure = true)
+    @org.jetbrains.annotations.Contract(value = "null -> null")
     static Bitmap drawableToBitmap(@NonNull Drawable drawable) {
         if (drawable == null) return null;
 
@@ -327,7 +327,7 @@ import java.io.UnsupportedEncodingException;
      */
     @Nullable
     @CheckResult(suggest = "返回值没有使用")
-    @org.jetbrains.annotations.Contract(value = "null -> null", pure = true)
+    @org.jetbrains.annotations.Contract(value = "null -> null")
     static Drawable bitmapToDrawable(@NonNull Bitmap bitmap) {
         if (bitmap == null) return null;
 
@@ -342,7 +342,7 @@ import java.io.UnsupportedEncodingException;
      */
     @Nullable
     @CheckResult(suggest = "返回值没有使用")
-    @org.jetbrains.annotations.Contract(value = "null -> null", pure = true)
+    @org.jetbrains.annotations.Contract(value = "null -> null")
     static byte[] bitmapToBytes(@NonNull Bitmap bitmap) {
         if (bitmap == null) return null;
 
@@ -359,7 +359,7 @@ import java.io.UnsupportedEncodingException;
      */
     @Nullable
     @CheckResult(suggest = "返回值没有使用")
-    @org.jetbrains.annotations.Contract(value = "null -> null", pure = true)
+    @org.jetbrains.annotations.Contract(value = "null -> null")
     static Bitmap bytesToBitmap(@NonNull byte[] bytes) {
         if (bytes == null || bytes.length == 0) return null;
 
