@@ -1,13 +1,12 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 26
-
-
+    compileSdkVersion COMPILE_SDK_VERSION
+    buildToolsVersion BUILD_TOOLS_VERSION
 
     defaultConfig {
-        minSdkVersion 16
-        targetSdkVersion 26
+        minSdkVersion MIN_SDK_VERSION
+        targetSdkVersion TARGET_SDK_VERSION
         versionCode 1
         versionName "1.0"
 
@@ -27,10 +26,10 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation 'com.android.support:appcompat-v7:26.1.0'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.1'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    implementation 'com.android.support:appcompat-v7:' + ANDROID_SUPPORT_V7
+    testImplementation 'junit:junit:' + JUNIT_SUPPORT
+    androidTestImplementation 'com.android.support.test:runner:' + TEST_RUNNER
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:' + TEST_ESPRESSO_CORE
     // 注解框架
-    compile 'org.jetbrains:annotations-java5:15.0'
+    compile 'org.jetbrains:annotations-java5:' + JETBRAINS_ANNOTATIONS_VERSION
 }
