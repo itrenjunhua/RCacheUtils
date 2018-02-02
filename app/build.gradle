@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.jakewharton.butterknife'
 
 android {
     compileSdkVersion 26
@@ -19,11 +20,20 @@ android {
 }
 
 dependencies {
+    // lib 文件夹下的jar包
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
+    // Android 支持包和测试包
     implementation 'com.android.support:appcompat-v7:' + ANDROID_SUPPORT_V7
     implementation 'com.android.support.constraint:constraint-layout:' + CONSTRAINT_LAYOUT
     testImplementation 'junit:junit:' + JUNIT_SUPPORT
     androidTestImplementation 'com.android.support.test:runner:' + TEST_RUNNER
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:' + TEST_ESPRESSO_CORE
+
+    // butterknife 注解包
+    compile 'com.jakewharton:butterknife:' + BUTTERKNIFE_VERSION
+    annotationProcessor 'com.jakewharton:butterknife-compiler:' + BUTTERKNIFE_VERSION
+
+    // 缓存依赖库
+    compile project(':cachelibrary')
 }

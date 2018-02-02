@@ -2,8 +2,6 @@ package com.renj.cachelibrary;
 
 import android.support.annotation.NonNull;
 
-import org.jetbrains.annotations.NotNull;
-
 /**
  * ======================================================================
  * <p>
@@ -54,7 +52,7 @@ public final class CacheThreadResult<T> {
     /**
      * 切换回主线程运行，通过回调返回 {@link #runOnNewThread(CacheCallBack)} 方法的结果
      */
-    private void returnMainThread(@NotNull final CacheResultCallBack<T> cacheResultCallBack) {
+    private void returnMainThread(@NonNull final CacheResultCallBack<T> cacheResultCallBack) {
         RCacheConfig.MAIN_HANDLER.post(new Runnable() {
             @Override
             public void run() {
@@ -68,7 +66,7 @@ public final class CacheThreadResult<T> {
      *
      * @param cacheResultCallBack 回调，具体的内容作为回调方法的参数
      */
-    public void onResult(@NotNull CacheResultCallBack<T> cacheResultCallBack) {
+    public void onResult(@NonNull CacheResultCallBack<T> cacheResultCallBack) {
         if (cacheResultCallBack != null)
             returnMainThread(cacheResultCallBack);
     }
