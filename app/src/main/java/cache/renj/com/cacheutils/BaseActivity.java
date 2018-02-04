@@ -54,6 +54,9 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
 
         // 初始化监听
         initListener();
+
+        // 初始化数据
+        initData();
     }
 
     /**
@@ -62,6 +65,11 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
      * @return
      */
     protected abstract int getLayoutId();
+
+    /**
+     * 初始化数据
+     */
+    protected abstract void initData();
 
     /**
      * 初始化监听
