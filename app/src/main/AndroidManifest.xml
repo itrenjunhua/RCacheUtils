@@ -17,6 +17,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".test.CacheDataActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".test.GetDataActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
