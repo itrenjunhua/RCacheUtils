@@ -50,7 +50,8 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
         vsMainContent.inflate();
 
         bind = ButterKnife.bind(this);
-        isShowTitle(false);
+        isShowBack(true);
+        isShowTitle(true);
 
         // 初始化监听
         initListener();
@@ -93,9 +94,22 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
      */
     protected void isShowTitle(boolean showTitle) {
         if (showTitle) {
-            ViewUtils.goneView(rlTitleView);
-        } else {
             ViewUtils.showView(rlTitleView);
+        } else {
+            ViewUtils.goneView(rlTitleView);
+        }
+    }
+
+    /**
+     * 是否显示返回按钮
+     *
+     * @param showBack true：显示 false：不显示
+     */
+    protected void isShowBack(boolean showBack) {
+        if (showBack) {
+            ViewUtils.showView(titleViewBack);
+        } else {
+            ViewUtils.goneView(titleViewBack);
         }
     }
 
@@ -104,10 +118,10 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
      *
      * @param title
      */
-    protected void setTitleContent(@NonNull String title) {
+    protected void setTitle(@NonNull String title) {
         if (rlTitleView.getVisibility() != View.VISIBLE)
             ViewUtils.showView(rlTitleView);
-        titleViewTitle.setText(title + "");
+        titleViewTitle.setText(title);
     }
 
     @org.jetbrains.annotations.Contract(pure = true)
