@@ -1,10 +1,10 @@
 package cache.renj.com.cacheutils.test;
 
 import android.content.Intent;
-import android.os.Bundle;
 
 import cache.renj.com.cacheutils.BaseActivity;
 import cache.renj.com.cacheutils.R;
+import cache.renj.com.cacheutils.utils.ResUtils;
 
 /**
  * ======================================================================
@@ -33,9 +33,40 @@ public class CacheDataActivity extends BaseActivity {
 
     private void initIntent() {
         Intent intent = getIntent();
-        Bundle extras = intent.getExtras();
-        if (extras != null) {
-            setTitle(extras.getString("title"));
+        String dataType = intent.getStringExtra("dataType");
+        if (dataType != null) {
+            initDataByDataType(CacheDataType.valueOf(dataType));
+        }
+    }
+
+    /**
+     * 根据数据类型初始化数据
+     *
+     * @param dataType
+     */
+    private void initDataByDataType(CacheDataType dataType) {
+        switch (dataType) {
+            case STRING:
+                setTitle(ResUtils.getString(R.string.cache_string));
+                break;
+            case JSON_OBJECT:
+                setTitle(ResUtils.getString(R.string.cache_jsonobject));
+                break;
+            case JSON_ARRAY:
+                setTitle(ResUtils.getString(R.string.cache_jsonarray));
+                break;
+            case BYTE:
+                setTitle(ResUtils.getString(R.string.cache_byte));
+                break;
+            case OBJECT:
+                setTitle(ResUtils.getString(R.string.cache_object));
+                break;
+            case BITMAP:
+                setTitle(ResUtils.getString(R.string.cache_bitmap));
+                break;
+            case DRAWABLE:
+                setTitle(ResUtils.getString(R.string.cache_drawable));
+                break;
         }
     }
 }

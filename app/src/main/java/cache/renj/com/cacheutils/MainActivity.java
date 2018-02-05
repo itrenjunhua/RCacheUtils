@@ -1,11 +1,11 @@
 package cache.renj.com.cacheutils;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.widget.Button;
 
 import butterknife.BindView;
 import cache.renj.com.cacheutils.test.CacheDataActivity;
+import cache.renj.com.cacheutils.test.CacheDataType;
 import cache.renj.com.cacheutils.test.GetDataActivity;
 import cache.renj.com.cacheutils.utils.ResUtils;
 
@@ -76,84 +76,66 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void handClick(int vId) {
         Intent intent = null;
-        Bundle extras = null;
         switch (vId) {
             case R.id.bt_cache_string:
                 intent = new Intent(this, CacheDataActivity.class);
-                extras = new Bundle();
-                extras.putString("title",ResUtils.getString(R.string.cache_string));
+                intent.putExtra("dataType", CacheDataType.STRING.value());
                 break;
             case R.id.bt_cache_jsonobject:
                 intent = new Intent(this, CacheDataActivity.class);
-                extras = new Bundle();
-                extras.putString("title",ResUtils.getString(R.string.cache_jsonobject));
+                intent.putExtra("dataType", CacheDataType.JSON_OBJECT.value());
                 break;
             case R.id.bt_cache_jsonarray:
                 intent = new Intent(this, CacheDataActivity.class);
-                extras = new Bundle();
-                extras.putString("title",ResUtils.getString(R.string.cache_jsonarray));
+                intent.putExtra("dataType", CacheDataType.JSON_ARRAY.value());
                 break;
             case R.id.bt_cache_byte:
                 intent = new Intent(this, CacheDataActivity.class);
-                extras = new Bundle();
-                extras.putString("title",ResUtils.getString(R.string.cache_byte));
+                intent.putExtra("dataType", CacheDataType.BYTE.value());
                 break;
             case R.id.bt_cache_object:
                 intent = new Intent(this, CacheDataActivity.class);
-                extras = new Bundle();
-                extras.putString("title",ResUtils.getString(R.string.cache_object));
+                intent.putExtra("dataType", CacheDataType.OBJECT.value());
                 break;
             case R.id.bt_cache_bitmap:
                 intent = new Intent(this, CacheDataActivity.class);
-                extras = new Bundle();
-                extras.putString("title",ResUtils.getString(R.string.cache_bitmap));
+                intent.putExtra("dataType", CacheDataType.BITMAP.value());
                 break;
             case R.id.bt_cache_drawable:
                 intent = new Intent(this, CacheDataActivity.class);
-                extras = new Bundle();
-                extras.putString("title",ResUtils.getString(R.string.cache_drawable));
+                intent.putExtra("dataType", CacheDataType.DRAWABLE.value());
                 break;
             case R.id.bt_get_string:
                 intent = new Intent(this, GetDataActivity.class);
-                extras = new Bundle();
-                extras.putString("title",ResUtils.getString(R.string.get_string));
+                intent.putExtra("dataType", CacheDataType.STRING.value());
                 break;
             case R.id.bt_get_jsonobject:
                 intent = new Intent(this, GetDataActivity.class);
-                extras = new Bundle();
-                extras.putString("title",ResUtils.getString(R.string.get_jsonobject));
+                intent.putExtra("dataType", CacheDataType.JSON_OBJECT.value());
                 break;
             case R.id.bt_get_jsonarray:
                 intent = new Intent(this, GetDataActivity.class);
-                extras = new Bundle();
-                extras.putString("title",ResUtils.getString(R.string.get_jsonarray));
+                intent.putExtra("dataType", CacheDataType.JSON_ARRAY.value());
                 break;
             case R.id.bt_get_byte:
                 intent = new Intent(this, GetDataActivity.class);
-                extras = new Bundle();
-                extras.putString("title",ResUtils.getString(R.string.get_byte));
+                intent.putExtra("dataType", CacheDataType.BITMAP.value());
                 break;
             case R.id.bt_get_object:
                 intent = new Intent(this, GetDataActivity.class);
-                extras = new Bundle();
-                extras.putString("title",ResUtils.getString(R.string.get_object));
+                intent.putExtra("dataType", CacheDataType.OBJECT.value());
                 break;
             case R.id.bt_get_bitmap:
                 intent = new Intent(this, GetDataActivity.class);
-                extras = new Bundle();
-                extras.putString("title",ResUtils.getString(R.string.get_bitmap));
+                intent.putExtra("dataType", CacheDataType.BITMAP.value());
                 break;
             case R.id.bt_get_drawable:
                 intent = new Intent(this, GetDataActivity.class);
-                extras = new Bundle();
-                extras.putString("title",ResUtils.getString(R.string.get_drawable));
+                intent.putExtra("dataType", CacheDataType.DRAWABLE.value());
                 break;
         }
 
         if (intent != null) {
-            if (extras != null)
-                intent.putExtras(extras);
-
             startActivity(intent);
         }
     }
