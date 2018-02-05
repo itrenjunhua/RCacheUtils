@@ -54,7 +54,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
         isShowTitle(true);
 
         // 初始化监听
-        initListener();
+        initBaseListener();
 
         // 初始化数据
         initData();
@@ -75,7 +75,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     /**
      * 初始化监听
      */
-    private void initListener() {
+    private void initBaseListener() {
         // 返回按钮监听
         titleViewBack.setOnClickListener(this);
     }

@@ -1,23 +1,144 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="12dp"
-    tools:context="cache.renj.com.cacheutils.MainActivity">
+    android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/bt_cahe_data"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="缓存数据页面" />
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/bt_get_data"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="获取缓存页面" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-</LinearLayout>
+            <Button
+                android:id="@+id/bt_cache_string"
+                style="@style/cache_bt_style"
+                android:text="@string/cache_string" />
+
+            <Button
+                android:id="@+id/bt_get_string"
+                style="@style/cache_bt_style"
+                android:text="@string/get_string" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/bt_cache_jsonobject"
+                style="@style/cache_bt_style"
+                android:text="@string/cache_jsonobject"
+                android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/bt_get_jsonobject"
+                style="@style/cache_bt_style"
+                android:text="@string/get_jsonobject"
+                android:textAllCaps="false" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+
+            <Button
+                android:id="@+id/bt_cache_jsonarray"
+                style="@style/cache_bt_style"
+                android:text="@string/cache_jsonarray"
+                android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/bt_get_jsonarray"
+                style="@style/cache_bt_style"
+                android:text="@string/get_jsonarray"
+                android:textAllCaps="false" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/bt_cache_byte"
+                style="@style/cache_bt_style"
+                android:text="@string/cache_byte" />
+
+            <Button
+                android:id="@+id/bt_get_byte"
+                style="@style/cache_bt_style"
+                android:text="@string/get_byte" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/bt_cache_object"
+                style="@style/cache_bt_style"
+                android:text="@string/cache_object" />
+
+            <Button
+                android:id="@+id/bt_get_object"
+                style="@style/cache_bt_style"
+                android:text="@string/get_object" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+
+            <Button
+                android:id="@+id/bt_cache_bitmap"
+                style="@style/cache_bt_style"
+                android:text="@string/cache_bitmap"
+                android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/bt_get_bitmap"
+                style="@style/cache_bt_style"
+                android:text="@string/get_bitmap"
+                android:textAllCaps="false" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/bt_cache_drawable"
+                style="@style/cache_bt_style"
+                android:text="@string/cache_drawable"
+                android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/bt_get_drawable"
+                style="@style/cache_bt_style"
+                android:text="@string/get_drawable"
+                android:textAllCaps="false" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</ScrollView>

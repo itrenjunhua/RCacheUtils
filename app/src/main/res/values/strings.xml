@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">缓存测试</string>
+
+    <string name="home_page_title">首页</string>
+
+    <string name="cache_string">缓存字符串数据</string>
+    <string name="get_string">获取字符串数据</string>
+    <string name="cache_jsonobject">缓存JsonObject数据</string>
+    <string name="get_jsonobject">获取JsonObject数据</string>
+    <string name="cache_jsonarray">缓存JsonArray数据</string>
+    <string name="get_jsonarray">获取JsonArray数据</string>
+    <string name="cache_byte">缓存字节数据</string>
+    <string name="get_byte">获取字节数据</string>
+    <string name="cache_object">缓存对象</string>
+    <string name="get_object">获取对象</string>
+    <string name="cache_bitmap">缓存BitMap数据</string>
+    <string name="get_bitmap">获取BitMap数据</string>
+    <string name="cache_drawable">缓存Drawable数据</string>
+    <string name="get_drawable">获取Drawable数据</string>
 </resources>

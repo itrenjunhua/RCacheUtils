@@ -1,5 +1,8 @@
 package cache.renj.com.cacheutils.test;
 
+import android.content.Intent;
+import android.os.Bundle;
+
 import cache.renj.com.cacheutils.BaseActivity;
 import cache.renj.com.cacheutils.R;
 
@@ -24,7 +27,15 @@ public class GetDataActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-        setTitle("获取缓存数据");
+        initIntent();
         isShowBack(true);
+    }
+
+    private void initIntent() {
+        Intent intent = getIntent();
+        Bundle extras = intent.getExtras();
+        if (extras != null) {
+            setTitle(extras.getString("title"));
+        }
     }
 }
