@@ -4,7 +4,6 @@ import android.os.Handler;
 import android.os.Looper;
 import android.widget.Toast;
 
-import cache.renj.com.cacheutils.BaseActivity;
 import cache.renj.com.cacheutils.MyApplication;
 
 /**
@@ -146,12 +145,9 @@ public class UIUtils {
      * @param str
      */
     private static void showToast(String str) {
-        BaseActivity frontActivity = BaseActivity.getForegroundActivity();
-        if (null != frontActivity) {
             if (null == mToast)
-                mToast = Toast.makeText(frontActivity, str, Toast.LENGTH_LONG);
+                mToast = Toast.makeText(UIUtils.getContext(), str, Toast.LENGTH_LONG);
             mToast.setText(str);
             mToast.show();
-        }
     }
 }

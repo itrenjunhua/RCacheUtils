@@ -28,8 +28,6 @@ import cache.renj.com.cacheutils.utils.ViewUtils;
  * ======================================================================
  */
 public abstract class BaseActivity extends AppCompatActivity implements View.OnClickListener {
-    protected static BaseActivity foregroundActivity;
-
     ViewStub vsMainContent;
 
     @BindView(R.id.title_view_back)
@@ -122,11 +120,6 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
         if (rlTitleView.getVisibility() != View.VISIBLE)
             ViewUtils.showView(rlTitleView);
         titleViewTitle.setText(title);
-    }
-
-    @org.jetbrains.annotations.Contract(pure = true)
-    public static BaseActivity getForegroundActivity() {
-        return foregroundActivity;
     }
 
     @Override

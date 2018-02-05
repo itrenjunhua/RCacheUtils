@@ -13,8 +13,13 @@
     <!--缓存按钮样式-->
     <style name="cache_bt_style">
         <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">12dp</item>
+        <item name="android:layout_marginRight">12dp</item>
+        <item name="android:layout_marginTop">12dp</item>
+        <item name="android:layout_height">38dp</item>
         <item name="android:layout_weight">1</item>
+        <item name="android:textColor">@color/color_white</item>
+        <item name="android:background">@drawable/selector_cache_bt_bg</item>
     </style>
 
 </resources>

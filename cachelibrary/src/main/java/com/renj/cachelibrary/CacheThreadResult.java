@@ -18,6 +18,7 @@ import android.support.annotation.NonNull;
 public final class CacheThreadResult<T> {
 
     private T execute;
+    private CacheResultCallBack<T> cacheResultCallBack;
 
     private CacheThreadResult() {
     }
@@ -44,6 +45,8 @@ public final class CacheThreadResult<T> {
             @Override
             public void run() {
                 execute = cacheCallBack.execute();
+                if (cacheResultCallBack != null)
+                    returnMainThread(cacheResultCallBack);
             }
         });
         return this;
@@ -67,8 +70,7 @@ public final class CacheThreadResult<T> {
      * @param cacheResultCallBack 回调，具体的内容作为回调方法的参数
      */
     public void onResult(@NonNull CacheResultCallBack<T> cacheResultCallBack) {
-        if (cacheResultCallBack != null)
-            returnMainThread(cacheResultCallBack);
+        this.cacheResultCallBack = cacheResultCallBack;
     }
 
     /**
