@@ -1,11 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <TextView
+    <EditText
+        android:id="@+id/et_get_content"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:layout_margin="12dp"
+        android:background="@drawable/shape_edittext_bg"
+        android:gravity="start|top"
+        android:hint="获取到的缓存内容"
+        android:padding="8dp"
+        android:textColor="@color/main_text"
+        android:textColorHint="@color/main_hint"
+        android:textSize="14sp" />
+
+    <ImageView
+        android:id="@+id/iv_get_content"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_gravity="center_horizontal"
+        android:src="@mipmap/ic_launcher"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="缓存文件名："
+            android:textColor="@color/main_text"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/et_get_key"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/shape_edittext_bg"
+            android:gravity="start|top"
+            android:hint="缓存时的文件名"
+            android:maxLines="1"
+            android:padding="8dp"
+            android:singleLine="true"
+            android:textColor="@color/main_text"
+            android:textColorHint="@color/main_hint"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <CheckBox
+        android:id="@+id/cb_get_thread"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="获取缓存页面"/>
+        android:layout_marginLeft="12dp"
+        android:text="是否在新线程中获取缓存"
+        android:textColor="@color/main_text" />
+
+    <Button
+        android:id="@+id/bt_get_data"
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:layout_margin="12dp"
+        android:background="@drawable/selector_cache_bt_bg"
+        android:text="缓存数据"
+        android:textColor="@color/color_white" />
 
 </LinearLayout>

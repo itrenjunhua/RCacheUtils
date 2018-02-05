@@ -454,7 +454,7 @@ public final class CacheManageUtils {
             @Override
             public File execute() {
                 if (outtime == -1) return put(key, value);
-                else return put(key, RCacheOperatorUtils.addDateInfo(value, outtime));
+                else return put(key,value,outtime);
             }
         });
     }

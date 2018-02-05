@@ -14,7 +14,8 @@
         android:hint="输入标题类型的缓存数据"
         android:padding="8dp"
         android:textColor="@color/main_text"
-        android:textColorHint="@color/main_hint" />
+        android:textColorHint="@color/main_hint"
+        android:textSize="14sp" />
 
     <ImageView
         android:id="@+id/iv_cache_content"
@@ -34,7 +35,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="缓存时间(S)："
-            android:textColor="@color/main_text" />
+            android:textColor="@color/main_text"
+            android:textSize="14sp" />
 
         <EditText
             android:id="@+id/et_cache_time"
@@ -49,7 +51,8 @@
             android:padding="8dp"
             android:singleLine="true"
             android:textColor="@color/main_text"
-            android:textColorHint="@color/main_hint" />
+            android:textColorHint="@color/main_hint"
+            android:textSize="14sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -62,7 +65,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="缓存文件名："
-            android:textColor="@color/main_text" />
+            android:textColor="@color/main_text"
+            android:textSize="14sp" />
 
         <EditText
             android:id="@+id/et_cache_key"
@@ -76,7 +80,8 @@
             android:padding="8dp"
             android:singleLine="true"
             android:textColor="@color/main_text"
-            android:textColorHint="@color/main_hint" />
+            android:textColorHint="@color/main_hint"
+            android:textSize="14sp" />
     </LinearLayout>
 
     <CheckBox

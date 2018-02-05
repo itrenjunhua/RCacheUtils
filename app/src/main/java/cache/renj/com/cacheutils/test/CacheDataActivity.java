@@ -47,6 +47,7 @@ public class CacheDataActivity extends BaseActivity {
     CheckBox cbCacheThread;
     @BindView(R.id.bt_cache_data)
     Button btCacheData;
+
     private CacheDataType dataType;
 
     @Override
@@ -111,7 +112,7 @@ public class CacheDataActivity extends BaseActivity {
         if (R.id.bt_cache_data == vId) {
             switch (dataType) {
                 case STRING:
-                    if (judgeCacheKey())
+                    if (judgeCacheKeyAndContent())
                         cacheStringData();
                     break;
                 case JSON_OBJECT:
@@ -211,16 +212,21 @@ public class CacheDataActivity extends BaseActivity {
     }
 
     /**
-     * 判断是否输入了缓存文件名
+     * 判断是否输入了缓存文件名和缓存内容
      *
      * @return true：输入了 false：没有输入
      */
     @NonNull
     @CheckResult(suggest = "返回值没有被使用过")
-    private boolean judgeCacheKey() {
+    private boolean judgeCacheKeyAndContent() {
         String key = getEditTextContetnt(etCacheKey);
         if (StringUtils.isEmpty(key)) {
             UIUtils.showToastSafe("请输入缓存文件名");
+            return false;
+        }
+        String contetnt = getEditTextContetnt(etCacheContent);
+        if (StringUtils.isEmpty(contetnt)) {
+            UIUtils.showToastSafe("请输入缓存内容");
             return false;
         }
         return true;
