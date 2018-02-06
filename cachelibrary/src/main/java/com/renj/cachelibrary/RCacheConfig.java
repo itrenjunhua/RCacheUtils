@@ -19,7 +19,7 @@ import java.util.concurrent.Executors;
  * <p>
  * ======================================================================
  */
-public interface RCacheConfig {
+/*public*/ interface RCacheConfig {
     // 根据CPU确定线程池的线程个数
     int CPU_COUNT = Runtime.getRuntime().availableProcessors();
     int THREAD_POOL_SIZE = Math.max(2, Math.min(CPU_COUNT - 1, 4));

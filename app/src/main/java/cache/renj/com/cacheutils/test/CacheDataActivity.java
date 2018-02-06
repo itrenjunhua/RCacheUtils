@@ -216,7 +216,6 @@ public class CacheDataActivity extends BaseActivity {
      *
      * @return true：输入了 false：没有输入
      */
-    @NonNull
     @CheckResult(suggest = "返回值没有被使用过")
     private boolean judgeCacheKeyAndContent() {
         String key = getEditTextContetnt(etCacheKey);
