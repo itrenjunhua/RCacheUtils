@@ -20,7 +20,7 @@ import java.util.concurrent.atomic.AtomicLong;
  * <p>
  * ======================================================================
  */
-/*public*/ class RCacheSizeControl extends Thread {
+/*public*/ class RCacheSizeControl implements Runnable {
     // 用于临时保存所有的缓存文件对象
     private List<File> cacheFiles = Collections.synchronizedList(new LinkedList<File>());
     // 缓存占用的大小

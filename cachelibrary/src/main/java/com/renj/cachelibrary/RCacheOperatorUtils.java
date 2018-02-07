@@ -285,15 +285,10 @@ import java.io.UnsupportedEncodingException;
     }
 
     /**
-     * 检查缓存文件大小
+     * 检查缓存文件大小和删除文件线程
      */
-    static void checkCacheSize() {
-        if (CacheManageUtils.RCACHE_SIZE_CONTROL != null && !CacheManageUtils.RCACHE_SIZE_CONTROL.isAlive()) {
-            synchronized (CacheManageUtils.class) {
-                if (CacheManageUtils.RCACHE_SIZE_CONTROL != null && !CacheManageUtils.RCACHE_SIZE_CONTROL.isAlive())
-                    CacheManageUtils.RCACHE_SIZE_CONTROL.start();
-            }
-        }
+    static synchronized void checkCacheSize() {
+        RCacheConfig.EXECUTORSERVICE.execute(new RCacheSizeControl());
     }
 
     /**
