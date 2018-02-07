@@ -11,11 +11,14 @@ import android.widget.ImageView;
 import com.renj.cachelibrary.CacheManageUtils;
 import com.renj.cachelibrary.CacheThreadResult;
 
+import org.json.JSONObject;
+
 import java.io.File;
 
 import butterknife.BindView;
 import cache.renj.com.cacheutils.BaseActivity;
 import cache.renj.com.cacheutils.R;
+import cache.renj.com.cacheutils.utils.JsonUtils;
 import cache.renj.com.cacheutils.utils.ResUtils;
 import cache.renj.com.cacheutils.utils.StringUtils;
 import cache.renj.com.cacheutils.utils.UIUtils;
@@ -88,6 +91,10 @@ public class CacheDataActivity extends BaseActivity {
                 break;
             case JSON_OBJECT:
                 setTitle(ResUtils.getString(R.string.cache_jsonobject));
+                ViewUtils.showView(etCacheContent);
+                ViewUtils.goneView(ivCacheContent);
+                etCacheContent.setText("{\"name\":\"zhangsan\",\"age\":25,\"sex\":\"man\"}");
+                etCacheKey.setText("cache_jsonobject");
                 break;
             case JSON_ARRAY:
                 setTitle(ResUtils.getString(R.string.cache_jsonarray));
@@ -116,7 +123,8 @@ public class CacheDataActivity extends BaseActivity {
                         cacheStringData();
                     break;
                 case JSON_OBJECT:
-                    setTitle(ResUtils.getString(R.string.cache_jsonobject));
+                    if (judgeCacheKeyAndContent())
+                        cacheJsonObjectData();
                     break;
                 case JSON_ARRAY:
                     setTitle(ResUtils.getString(R.string.cache_jsonarray));
@@ -133,6 +141,50 @@ public class CacheDataActivity extends BaseActivity {
                 case DRAWABLE:
                     setTitle(ResUtils.getString(R.string.cache_drawable));
                     break;
+            }
+        }
+    }
+
+    /**
+     * 根据输入和选择内容缓存JsonObject
+     */
+    private void cacheJsonObjectData() {
+        int cacheTime = getCacheTime();
+        boolean isNewThread = isNewThread();
+        String contetnt = getEditTextContetnt(etCacheContent);
+        JSONObject jsonObject = JsonUtils.string2JsonObject(contetnt);
+        if (cacheTime > 0) {
+            // 有时间限制
+            if (isNewThread) {
+                // 需要在新的线程中
+                CacheManageUtils.newInstance()
+                        .putOnNewThread(getEditTextContetnt(etCacheKey), jsonObject, cacheTime)
+                        .onResult(new CacheThreadResult.CacheResultCallBack<File>() {
+                            @Override
+                            public void onResult(File result) {
+                                UIUtils.showToastSafe("子线程：缓存文件位置 => " + result);
+                            }
+                        });
+            } else {
+                File result = CacheManageUtils.newInstance()
+                        .put(getEditTextContetnt(etCacheKey), jsonObject, cacheTime);
+                UIUtils.showToastSafe("缓存文件位置 => " + result);
+            }
+        } else {
+            if (isNewThread) {
+                // 需要在新的线程中
+                CacheManageUtils.newInstance()
+                        .putOnNewThread(getEditTextContetnt(etCacheKey), jsonObject)
+                        .onResult(new CacheThreadResult.CacheResultCallBack<File>() {
+                            @Override
+                            public void onResult(File result) {
+                                UIUtils.showToastSafe("子线程：缓存文件位置 => " + result);
+                            }
+                        });
+            } else {
+                File result = CacheManageUtils.newInstance()
+                        .put(getEditTextContetnt(etCacheKey), jsonObject);
+                UIUtils.showToastSafe("缓存文件位置 => " + result);
             }
         }
     }
@@ -181,7 +233,6 @@ public class CacheDataActivity extends BaseActivity {
                 UIUtils.showToastSafe("缓存文件位置 => " + result);
             }
         }
-
     }
 
     /**

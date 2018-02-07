@@ -11,9 +11,12 @@ import android.widget.ImageView;
 import com.renj.cachelibrary.CacheManageUtils;
 import com.renj.cachelibrary.CacheThreadResult;
 
+import org.json.JSONObject;
+
 import butterknife.BindView;
 import cache.renj.com.cacheutils.BaseActivity;
 import cache.renj.com.cacheutils.R;
+import cache.renj.com.cacheutils.utils.JsonUtils;
 import cache.renj.com.cacheutils.utils.ResUtils;
 import cache.renj.com.cacheutils.utils.StringUtils;
 import cache.renj.com.cacheutils.utils.UIUtils;
@@ -111,7 +114,8 @@ public class GetDataActivity extends BaseActivity {
                         getStringData();
                     break;
                 case JSON_OBJECT:
-                    setTitle(ResUtils.getString(R.string.cache_jsonobject));
+                    if (judgeCacheKey())
+                        getJsonObjectData();
                     break;
                 case JSON_ARRAY:
                     setTitle(ResUtils.getString(R.string.cache_jsonarray));
@@ -129,6 +133,27 @@ public class GetDataActivity extends BaseActivity {
                     setTitle(ResUtils.getString(R.string.cache_drawable));
                     break;
             }
+        }
+    }
+
+    /**
+     * 根据输入和选择内容缓存 {@link JSONObject}
+     */
+    private void getJsonObjectData() {
+        if (isNewThread()) {
+            // 需要在新的线程中
+            CacheManageUtils.newInstance()
+                    .getAsJsonObjectOnNewThread(getEditTextContetnt(etGetKey))
+                    .onResult(new CacheThreadResult.CacheResultCallBack<JSONObject>() {
+                        @Override
+                        public void onResult(JSONObject result) {
+                            etGetContent.setText(JsonUtils.jsonObject2String(result) + "");
+                        }
+                    });
+        } else {
+            JSONObject result = CacheManageUtils.newInstance()
+                    .getAsJsonObjct(getEditTextContetnt(etGetKey));
+            etGetContent.setText(JsonUtils.jsonObject2String(result) + "");
         }
     }
 
