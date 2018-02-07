@@ -119,7 +119,7 @@ public class MainActivity extends BaseActivity {
                 break;
             case R.id.bt_get_byte:
                 intent = new Intent(this, GetDataActivity.class);
-                intent.putExtra("dataType", CacheDataType.BITMAP.value());
+                intent.putExtra("dataType", CacheDataType.BYTE.value());
                 break;
             case R.id.bt_get_object:
                 intent = new Intent(this, GetDataActivity.class);

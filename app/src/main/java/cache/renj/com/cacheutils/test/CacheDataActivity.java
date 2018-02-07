@@ -87,7 +87,7 @@ public class CacheDataActivity extends BaseActivity {
                 setTitle(ResUtils.getString(R.string.cache_string));
                 ViewUtils.showView(etCacheContent);
                 ViewUtils.goneView(ivCacheContent);
-                etCacheContent.setText("缓存字符串数据的默认具体内容");
+                etCacheContent.setText("缓存字符串数据的默认内容：aaabbbccdddAAABBBCCCDDD");
                 etCacheKey.setText("cache_string");
                 break;
             case JSON_OBJECT:
@@ -101,13 +101,18 @@ public class CacheDataActivity extends BaseActivity {
                 setTitle(ResUtils.getString(R.string.cache_jsonarray));
                 ViewUtils.showView(etCacheContent);
                 ViewUtils.goneView(ivCacheContent);
-                String text = "[{\"name\":\"张三\",\"age\":25,\"sex\":\"男\"}," +
+                String jsonArayString = "[{\"name\":\"张三\",\"age\":25,\"sex\":\"男\"}," +
                         "{\"name\":\"李四\",\"age\":23,\"sex\":\"男\"}]";
-                etCacheContent.setText(text);
+                etCacheContent.setText(jsonArayString);
                 etCacheKey.setText("cache_jsonarray");
                 break;
             case BYTE:
                 setTitle(ResUtils.getString(R.string.cache_byte));
+                ViewUtils.showView(etCacheContent);
+                ViewUtils.goneView(ivCacheContent);
+                String bytesString = "缓存byte数据的默认内容：aaabbbcccddd（将变为byte[]缓存起来）";
+                etCacheContent.setText(bytesString);
+                etCacheKey.setText("cache_bytes");
                 break;
             case OBJECT:
                 setTitle(ResUtils.getString(R.string.cache_object));
@@ -124,22 +129,20 @@ public class CacheDataActivity extends BaseActivity {
     @Override
     protected void handClick(int vId) {
         if (R.id.bt_cache_data == vId) {
+            if (!judgeCacheKeyAndContent())
+                return;
             switch (dataType) {
                 case STRING:
-                    if (judgeCacheKeyAndContent())
-                        cacheStringData();
+                    cacheStringData();
                     break;
                 case JSON_OBJECT:
-                    if (judgeCacheKeyAndContent())
-                        cacheJsonObjectData();
+                    cacheJsonObjectData();
                     break;
                 case JSON_ARRAY:
-                    setTitle(ResUtils.getString(R.string.cache_jsonarray));
-                    if (judgeCacheKeyAndContent())
-                        cacheJsonArrayData();
+                    cacheJsonArrayData();
                     break;
                 case BYTE:
-                    setTitle(ResUtils.getString(R.string.cache_byte));
+                    cacheBytesData();
                     break;
                 case OBJECT:
                     setTitle(ResUtils.getString(R.string.cache_object));
@@ -150,6 +153,50 @@ public class CacheDataActivity extends BaseActivity {
                 case DRAWABLE:
                     setTitle(ResUtils.getString(R.string.cache_drawable));
                     break;
+            }
+        }
+    }
+
+    /**
+     * 根据输入和选择内容缓存 {@link Byte}[] 数据
+     */
+    private void cacheBytesData() {
+        int cacheTime = getCacheTime();
+        boolean isNewThread = isNewThread();
+        String contetnt = getEditTextContetnt(etCacheContent);
+        byte[] bytes = contetnt.getBytes();
+        if (cacheTime > 0) {
+            // 有时间限制
+            if (isNewThread) {
+                // 需要在新的线程中
+                CacheManageUtils.newInstance()
+                        .putOnNewThread(getEditTextContetnt(etCacheKey), bytes, cacheTime)
+                        .onResult(new CacheThreadResult.CacheResultCallBack<File>() {
+                            @Override
+                            public void onResult(File result) {
+                                UIUtils.showToastSafe("子线程：缓存文件位置 => " + result);
+                            }
+                        });
+            } else {
+                File result = CacheManageUtils.newInstance()
+                        .put(getEditTextContetnt(etCacheKey), bytes, cacheTime);
+                UIUtils.showToastSafe("缓存文件位置 => " + result);
+            }
+        } else {
+            if (isNewThread) {
+                // 需要在新的线程中
+                CacheManageUtils.newInstance()
+                        .putOnNewThread(getEditTextContetnt(etCacheKey), bytes)
+                        .onResult(new CacheThreadResult.CacheResultCallBack<File>() {
+                            @Override
+                            public void onResult(File result) {
+                                UIUtils.showToastSafe("子线程：缓存文件位置 => " + result);
+                            }
+                        });
+            } else {
+                File result = CacheManageUtils.newInstance()
+                        .put(getEditTextContetnt(etCacheKey), bytes);
+                UIUtils.showToastSafe("缓存文件位置 => " + result);
             }
         }
     }

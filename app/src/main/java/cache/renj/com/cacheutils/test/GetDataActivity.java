@@ -100,6 +100,9 @@ public class GetDataActivity extends BaseActivity {
                 break;
             case BYTE:
                 setTitle(ResUtils.getString(R.string.get_byte));
+                ViewUtils.showView(tvGetContent);
+                ViewUtils.goneView(ivGetContent);
+                etGetKey.setText("cache_bytes");
                 break;
             case OBJECT:
                 setTitle(ResUtils.getString(R.string.get_object));
@@ -116,21 +119,21 @@ public class GetDataActivity extends BaseActivity {
     @Override
     protected void handClick(int vId) {
         if (R.id.bt_get_data == vId) {
+            if (!judgeCacheKey())
+                return;
+
             switch (dataType) {
                 case STRING:
-                    if (judgeCacheKey())
-                        getStringData();
+                    getStringData();
                     break;
                 case JSON_OBJECT:
-                    if (judgeCacheKey())
-                        getJsonObjectData();
+                    getJsonObjectData();
                     break;
                 case JSON_ARRAY:
-                    if (judgeCacheKey())
-                        getJsonArrayData();
+                    getJsonArrayData();
                     break;
                 case BYTE:
-                    setTitle(ResUtils.getString(R.string.cache_byte));
+                    getBytesData();
                     break;
                 case OBJECT:
                     setTitle(ResUtils.getString(R.string.cache_object));
@@ -142,6 +145,33 @@ public class GetDataActivity extends BaseActivity {
                     setTitle(ResUtils.getString(R.string.cache_drawable));
                     break;
             }
+        }
+    }
+
+    /**
+     * 根据文件名获取缓存的 {@link Byte}[] 数据
+     */
+    private void getBytesData() {
+        if (isNewThread()) {
+            // 需要在新的线程中
+            CacheManageUtils.newInstance()
+                    .getAsBinaryOnNewThread(getEditTextContetnt(etGetKey))
+                    .onResult(new CacheThreadResult.CacheResultCallBack<byte[]>() {
+                        @Override
+                        public void onResult(byte[] result) {
+                            if (result != null)
+                                tvGetContent.setText(new String(result) + "");
+                            else
+                                tvGetContent.setText("");
+                        }
+                    });
+        } else {
+            byte[] result = CacheManageUtils.newInstance()
+                    .getAsBinary(getEditTextContetnt(etGetKey));
+            if (result != null)
+                tvGetContent.setText(new String(result) + "");
+            else
+                tvGetContent.setText("");
         }
     }
 
