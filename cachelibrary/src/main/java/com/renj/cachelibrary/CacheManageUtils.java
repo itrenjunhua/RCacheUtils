@@ -52,6 +52,10 @@ public final class CacheManageUtils {
      */
     static File CACHE_PATH;
     /**
+     * 缓存大小检查和删除文件线程
+     */
+    static volatile RCacheSizeControl RCACHE_SIZE_CONTROL;
+    /**
      * 每秒的毫秒数
      */
     private static final long SECOND = 1000;
@@ -64,6 +68,8 @@ public final class CacheManageUtils {
         CACHE_PATH = new File(context.getCacheDir(), fileName);
         if (!CACHE_PATH.exists() || !CACHE_PATH.isDirectory())
             CACHE_PATH.mkdir();
+
+        RCACHE_SIZE_CONTROL = new RCacheSizeControl();
     }
 
     /**

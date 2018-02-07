@@ -288,7 +288,9 @@ import java.io.UnsupportedEncodingException;
      * 检查缓存文件大小和删除文件线程
      */
     static synchronized void checkCacheSize() {
-        RCacheConfig.EXECUTORSERVICE.execute(new RCacheSizeControl());
+        if (CacheManageUtils.RCACHE_SIZE_CONTROL != null && !CacheManageUtils.RCACHE_SIZE_CONTROL.isExecuteing) {
+            RCacheConfig.EXECUTORSERVICE.execute(CacheManageUtils.RCACHE_SIZE_CONTROL);
+        }
     }
 
     /**
