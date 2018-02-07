@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import com.renj.cachelibrary.CacheManageUtils;
 import com.renj.cachelibrary.CacheThreadResult;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.File;
@@ -93,11 +94,17 @@ public class CacheDataActivity extends BaseActivity {
                 setTitle(ResUtils.getString(R.string.cache_jsonobject));
                 ViewUtils.showView(etCacheContent);
                 ViewUtils.goneView(ivCacheContent);
-                etCacheContent.setText("{\"name\":\"zhangsan\",\"age\":25,\"sex\":\"man\"}");
+                etCacheContent.setText("{\"name\":\"张三\",\"age\":25,\"sex\":\"男\"}");
                 etCacheKey.setText("cache_jsonobject");
                 break;
             case JSON_ARRAY:
                 setTitle(ResUtils.getString(R.string.cache_jsonarray));
+                ViewUtils.showView(etCacheContent);
+                ViewUtils.goneView(ivCacheContent);
+                String text = "[{\"name\":\"张三\",\"age\":25,\"sex\":\"男\"}," +
+                        "{\"name\":\"李四\",\"age\":23,\"sex\":\"男\"}]";
+                etCacheContent.setText(text);
+                etCacheKey.setText("cache_jsonarray");
                 break;
             case BYTE:
                 setTitle(ResUtils.getString(R.string.cache_byte));
@@ -128,6 +135,8 @@ public class CacheDataActivity extends BaseActivity {
                     break;
                 case JSON_ARRAY:
                     setTitle(ResUtils.getString(R.string.cache_jsonarray));
+                    if (judgeCacheKeyAndContent())
+                        cacheJsonArrayData();
                     break;
                 case BYTE:
                     setTitle(ResUtils.getString(R.string.cache_byte));
@@ -146,7 +155,51 @@ public class CacheDataActivity extends BaseActivity {
     }
 
     /**
-     * 根据输入和选择内容缓存JsonObject
+     * 根据输入和选择内容缓存 {@link JSONArray} 数据
+     */
+    private void cacheJsonArrayData() {
+        int cacheTime = getCacheTime();
+        boolean isNewThread = isNewThread();
+        String contetnt = getEditTextContetnt(etCacheContent);
+        JSONArray jsonArray = JsonUtils.string2JsonArray(contetnt);
+        if (cacheTime > 0) {
+            // 有时间限制
+            if (isNewThread) {
+                // 需要在新的线程中
+                CacheManageUtils.newInstance()
+                        .putOnNewThread(getEditTextContetnt(etCacheKey), jsonArray, cacheTime)
+                        .onResult(new CacheThreadResult.CacheResultCallBack<File>() {
+                            @Override
+                            public void onResult(File result) {
+                                UIUtils.showToastSafe("子线程：缓存文件位置 => " + result);
+                            }
+                        });
+            } else {
+                File result = CacheManageUtils.newInstance()
+                        .put(getEditTextContetnt(etCacheKey), jsonArray, cacheTime);
+                UIUtils.showToastSafe("缓存文件位置 => " + result);
+            }
+        } else {
+            if (isNewThread) {
+                // 需要在新的线程中
+                CacheManageUtils.newInstance()
+                        .putOnNewThread(getEditTextContetnt(etCacheKey), jsonArray)
+                        .onResult(new CacheThreadResult.CacheResultCallBack<File>() {
+                            @Override
+                            public void onResult(File result) {
+                                UIUtils.showToastSafe("子线程：缓存文件位置 => " + result);
+                            }
+                        });
+            } else {
+                File result = CacheManageUtils.newInstance()
+                        .put(getEditTextContetnt(etCacheKey), jsonArray);
+                UIUtils.showToastSafe("缓存文件位置 => " + result);
+            }
+        }
+    }
+
+    /**
+     * 根据输入和选择内容缓存 {@link JSONObject} 数据
      */
     private void cacheJsonObjectData() {
         int cacheTime = getCacheTime();
@@ -190,7 +243,7 @@ public class CacheDataActivity extends BaseActivity {
     }
 
     /**
-     * 根据输入和选择内容缓存字符串
+     * 根据输入和选择内容缓存 {@link String} 数据
      */
     private void cacheStringData() {
         int cacheTime = getCacheTime();
@@ -234,6 +287,8 @@ public class CacheDataActivity extends BaseActivity {
             }
         }
     }
+
+    /**********************************************************/
 
     /**
      * 判断是否需要在新的线程中执行

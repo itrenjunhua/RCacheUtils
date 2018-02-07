@@ -4,17 +4,15 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/et_get_content"
+    <TextView
+        android:id="@+id/tv_get_content"
         android:layout_width="match_parent"
         android:layout_height="180dp"
         android:layout_margin="12dp"
         android:background="@drawable/shape_edittext_bg"
         android:gravity="start|top"
-        android:hint="获取到的缓存内容"
         android:padding="8dp"
         android:textColor="@color/main_text"
-        android:textColorHint="@color/main_hint"
         android:textSize="14sp" />
 
     <ImageView

@@ -7,10 +7,12 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.renj.cachelibrary.CacheManageUtils;
 import com.renj.cachelibrary.CacheThreadResult;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import butterknife.BindView;
@@ -36,8 +38,8 @@ import cache.renj.com.cacheutils.utils.ViewUtils;
  * ======================================================================
  */
 public class GetDataActivity extends BaseActivity {
-    @BindView(R.id.et_get_content)
-    EditText etGetContent;
+    @BindView(R.id.tv_get_content)
+    TextView tvGetContent;
     @BindView(R.id.iv_get_content)
     ImageView ivGetContent;
     @BindView(R.id.et_get_key)
@@ -80,15 +82,21 @@ public class GetDataActivity extends BaseActivity {
         switch (dataType) {
             case STRING:
                 setTitle(ResUtils.getString(R.string.get_string));
-                ViewUtils.showView(etGetContent);
+                ViewUtils.showView(tvGetContent);
                 ViewUtils.goneView(ivGetContent);
                 etGetKey.setText("cache_string");
                 break;
             case JSON_OBJECT:
                 setTitle(ResUtils.getString(R.string.get_jsonobject));
+                ViewUtils.showView(tvGetContent);
+                ViewUtils.goneView(ivGetContent);
+                etGetKey.setText("cache_jsonobject");
                 break;
             case JSON_ARRAY:
                 setTitle(ResUtils.getString(R.string.get_jsonarray));
+                ViewUtils.showView(tvGetContent);
+                ViewUtils.goneView(ivGetContent);
+                etGetKey.setText("cache_jsonarray");
                 break;
             case BYTE:
                 setTitle(ResUtils.getString(R.string.get_byte));
@@ -118,7 +126,8 @@ public class GetDataActivity extends BaseActivity {
                         getJsonObjectData();
                     break;
                 case JSON_ARRAY:
-                    setTitle(ResUtils.getString(R.string.cache_jsonarray));
+                    if (judgeCacheKey())
+                        getJsonArrayData();
                     break;
                 case BYTE:
                     setTitle(ResUtils.getString(R.string.cache_byte));
@@ -137,7 +146,28 @@ public class GetDataActivity extends BaseActivity {
     }
 
     /**
-     * 根据输入和选择内容缓存 {@link JSONObject}
+     * 根据文件名获取缓存的 {@link JSONArray} 数据
+     */
+    private void getJsonArrayData() {
+        if (isNewThread()) {
+            // 需要在新的线程中
+            CacheManageUtils.newInstance()
+                    .getAsJSONArrayOnNewThread(getEditTextContetnt(etGetKey))
+                    .onResult(new CacheThreadResult.CacheResultCallBack<JSONArray>() {
+                        @Override
+                        public void onResult(JSONArray result) {
+                            tvGetContent.setText(JsonUtils.jsonArray2String(result) + "");
+                        }
+                    });
+        } else {
+            JSONArray result = CacheManageUtils.newInstance()
+                    .getAsJsonArray(getEditTextContetnt(etGetKey));
+            tvGetContent.setText(JsonUtils.jsonArray2String(result) + "");
+        }
+    }
+
+    /**
+     * 根据文件名获取缓存的 {@link JSONObject} 数据
      */
     private void getJsonObjectData() {
         if (isNewThread()) {
@@ -147,18 +177,18 @@ public class GetDataActivity extends BaseActivity {
                     .onResult(new CacheThreadResult.CacheResultCallBack<JSONObject>() {
                         @Override
                         public void onResult(JSONObject result) {
-                            etGetContent.setText(JsonUtils.jsonObject2String(result) + "");
+                            tvGetContent.setText(JsonUtils.jsonObject2String(result) + "");
                         }
                     });
         } else {
             JSONObject result = CacheManageUtils.newInstance()
                     .getAsJsonObjct(getEditTextContetnt(etGetKey));
-            etGetContent.setText(JsonUtils.jsonObject2String(result) + "");
+            tvGetContent.setText(JsonUtils.jsonObject2String(result) + "");
         }
     }
 
     /**
-     * 根据输入和选择内容缓存字符串
+     * 根据文件名获取缓存的 {@link String} 数据
      */
     private void getStringData() {
         if (isNewThread()) {
@@ -168,13 +198,13 @@ public class GetDataActivity extends BaseActivity {
                     .onResult(new CacheThreadResult.CacheResultCallBack<String>() {
                         @Override
                         public void onResult(String result) {
-                            etGetContent.setText(result);
+                            tvGetContent.setText(result);
                         }
                     });
         } else {
             String result = CacheManageUtils.newInstance()
                     .getAsString(getEditTextContetnt(etGetKey));
-            etGetContent.setText(result);
+            tvGetContent.setText(result);
         }
     }
 
