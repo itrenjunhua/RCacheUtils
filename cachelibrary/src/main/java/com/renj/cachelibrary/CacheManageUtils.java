@@ -455,7 +455,7 @@ public final class CacheManageUtils {
             @Override
             public File execute() {
                 if (outtime == -1) return put(key, value);
-                else return put(key,value,outtime);
+                else return put(key, value, outtime);
             }
         });
     }
@@ -763,21 +763,43 @@ public final class CacheManageUtils {
      *
      * @param key 缓存时的键名称
      * @return 缓存的 {@link Serializable} 对象，没有则返回 {@code null}
+     * @see #getAsObject(String, Class)
      * @see #getAsObjectOnNewThread(String)
+     * @see #getAsObjectOnNewThread(String, Class)
      */
     @Nullable
     @CheckResult(suggest = "返回值没有使用")
     public Object getAsObject(@NonNull String key) {
+        return getAsObject(key, Object.class);
+    }
+
+    /**
+     * 获取缓存的 {@link Serializable} 对象，没有则返回 {@code null}
+     *
+     * @param key   缓存时的键名称
+     * @param clazz 若知道该键名表示的哪个对象的实例，就可以指定
+     * @param <T>   返回结果泛型
+     * @return 缓存的 {@link Serializable} 对象，没有则返回 {@code null}
+     * @see #getAsObject(String)
+     * @see #getAsObjectOnNewThread(String)
+     * @see #getAsObjectOnNewThread(String, Class)
+     */
+    @Nullable
+    @CheckResult(suggest = "返回值没有使用")
+    public <T> T getAsObject(@NonNull String key, @NonNull Class<T> clazz) {
+        if (clazz == null) throw new NullPointerException("参数 clazz 不能为null");
+
         byte[] bytes = getAsBinary(key);
         if (bytes == null || bytes.length == 0) return null;
 
-        ByteArrayInputStream byteArrayInputStream = null;
+        ByteArrayInputStream byteArrayInputStream;
         ObjectInputStream objectInputStream = null;
+        Object readObject;
 
         try {
             byteArrayInputStream = new ByteArrayInputStream(bytes);
             objectInputStream = new ObjectInputStream(byteArrayInputStream);
-            return objectInputStream.readObject();
+            readObject = objectInputStream.readObject();
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -789,6 +811,14 @@ public final class CacheManageUtils {
                     e.printStackTrace();
                 }
             }
+        }
+
+        if (readObject == null) return null;
+
+        if (clazz.isAssignableFrom(readObject.getClass())) {
+            return (T) readObject;
+        } else {
+            throw new ClassCastException("查询结果对象类型 " + readObject.getClass() + " 不能转换成参数指定类型 " + clazz.getName());
         }
     }
 
@@ -1005,14 +1035,33 @@ public final class CacheManageUtils {
      * @param key 缓存时的键名称
      * @return {@link CacheThreadResult} 对象，内容为 {@link CacheThreadResult#onResult(CacheThreadResult.CacheResultCallBack)} 回调方法参数
      * @see #getAsObject(String)
+     * @see #getAsObject(String, Class)
+     * @see #getAsObjectOnNewThread(String, Class)
      */
     @NonNull
     @CheckResult(suggest = "返回值没有使用")
     public CacheThreadResult<Object> getAsObjectOnNewThread(@NonNull final String key) {
-        return CacheThreadResult.<Object>create().runOnNewThread(new CacheThreadResult.CacheCallBack<Object>() {
+        return getAsObjectOnNewThread(key, Object.class);
+    }
+
+    /**
+     * 在新的线程获取缓存的 {@link Serializable} 对象
+     *
+     * @param key   缓存时的键名称
+     * @param clazz 若知道该键名表示的哪个对象的实例，就可以指定
+     * @param <T>   返回结果泛型
+     * @return {@link CacheThreadResult} 对象，内容为 {@link CacheThreadResult#onResult(CacheThreadResult.CacheResultCallBack)} 回调方法参数
+     * @see #getAsObject(String)
+     * @see #getAsObject(String, Class)
+     * @see #getAsObjectOnNewThread(String)
+     */
+    @NonNull
+    @CheckResult(suggest = "返回值没有使用")
+    public <T> CacheThreadResult<T> getAsObjectOnNewThread(@NonNull final String key, @NonNull final Class<T> clazz) {
+        return CacheThreadResult.<T>create().runOnNewThread(new CacheThreadResult.CacheCallBack<T>() {
             @Override
-            public Object execute() {
-                return getAsObject(key);
+            public T execute() {
+                return getAsObject(key, clazz);
             }
         });
     }

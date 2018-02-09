@@ -158,10 +158,10 @@ public class GetDataActivity extends BaseActivity {
         if (isNewThread()) {
             // 需要在新的线程中
             CacheManageUtils.newInstance()
-                    .getAsObjectOnNewThread(getEditTextContetnt(etGetKey))
-                    .onResult(new CacheThreadResult.CacheResultCallBack<Object>() {
+                    .getAsObjectOnNewThread(getEditTextContetnt(etGetKey),Person.class)
+                    .onResult(new CacheThreadResult.CacheResultCallBack<Person>() {
                         @Override
-                        public void onResult(Object result) {
+                        public void onResult(Person result) {
                             if (result != null)
                                 tvGetContent.setText(result + "");
                             else

@@ -120,7 +120,7 @@ public class CacheDataActivity extends BaseActivity {
                 ViewUtils.goneView(ivCacheContent);
                 etCacheContent.setFocusable(false);
                 person = new Person("张三", 25, '男');
-                etCacheContent.setText("Person 对象 =>" + person.toString());
+                etCacheContent.setText("Person 对象 => " + person.toString());
                 etCacheKey.setText("cache_object");
                 break;
             case BITMAP:
