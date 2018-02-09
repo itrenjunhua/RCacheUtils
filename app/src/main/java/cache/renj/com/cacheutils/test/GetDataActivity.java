@@ -106,6 +106,9 @@ public class GetDataActivity extends BaseActivity {
                 break;
             case OBJECT:
                 setTitle(ResUtils.getString(R.string.get_object));
+                ViewUtils.showView(tvGetContent);
+                ViewUtils.goneView(ivGetContent);
+                etGetKey.setText("cache_object");
                 break;
             case BITMAP:
                 setTitle(ResUtils.getString(R.string.get_bitmap));
@@ -136,7 +139,7 @@ public class GetDataActivity extends BaseActivity {
                     getBytesData();
                     break;
                 case OBJECT:
-                    setTitle(ResUtils.getString(R.string.cache_object));
+                    getObjectData();
                     break;
                 case BITMAP:
                     setTitle(ResUtils.getString(R.string.cache_bitmap));
@@ -145,6 +148,33 @@ public class GetDataActivity extends BaseActivity {
                     setTitle(ResUtils.getString(R.string.cache_drawable));
                     break;
             }
+        }
+    }
+
+    /**
+     * 根据文件名获取缓存的 {@link Object} 数据
+     */
+    private void getObjectData() {
+        if (isNewThread()) {
+            // 需要在新的线程中
+            CacheManageUtils.newInstance()
+                    .getAsObjectOnNewThread(getEditTextContetnt(etGetKey))
+                    .onResult(new CacheThreadResult.CacheResultCallBack<Object>() {
+                        @Override
+                        public void onResult(Object result) {
+                            if (result != null)
+                                tvGetContent.setText(result + "");
+                            else
+                                tvGetContent.setText("");
+                        }
+                    });
+        } else {
+            Object result = CacheManageUtils.newInstance()
+                    .getAsObject(getEditTextContetnt(etGetKey));
+            if (result != null)
+                tvGetContent.setText(result + "");
+            else
+                tvGetContent.setText("");
         }
     }
 

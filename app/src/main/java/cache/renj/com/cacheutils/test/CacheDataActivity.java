@@ -53,6 +53,7 @@ public class CacheDataActivity extends BaseActivity {
     Button btCacheData;
 
     private CacheDataType dataType;
+    private Person person;
 
     @Override
     protected int getLayoutId() {
@@ -115,7 +116,12 @@ public class CacheDataActivity extends BaseActivity {
                 etCacheKey.setText("cache_bytes");
                 break;
             case OBJECT:
-                setTitle(ResUtils.getString(R.string.cache_object));
+                ViewUtils.showView(etCacheContent);
+                ViewUtils.goneView(ivCacheContent);
+                etCacheContent.setFocusable(false);
+                person = new Person("张三", 25, '男');
+                etCacheContent.setText("Person 对象 =>" + person.toString());
+                etCacheKey.setText("cache_object");
                 break;
             case BITMAP:
                 setTitle(ResUtils.getString(R.string.cache_bitmap));
@@ -145,7 +151,7 @@ public class CacheDataActivity extends BaseActivity {
                     cacheBytesData();
                     break;
                 case OBJECT:
-                    setTitle(ResUtils.getString(R.string.cache_object));
+                    cacheObjectData();
                     break;
                 case BITMAP:
                     setTitle(ResUtils.getString(R.string.cache_bitmap));
@@ -153,6 +159,48 @@ public class CacheDataActivity extends BaseActivity {
                 case DRAWABLE:
                     setTitle(ResUtils.getString(R.string.cache_drawable));
                     break;
+            }
+        }
+    }
+
+    /**
+     * 缓存 {@link Object} 类型数据
+     */
+    private void cacheObjectData() {
+        int cacheTime = getCacheTime();
+        boolean isNewThread = isNewThread();
+        if (cacheTime > 0) {
+            // 有时间限制
+            if (isNewThread) {
+                // 需要在新的线程中
+                CacheManageUtils.newInstance()
+                        .putOnNewThread(getEditTextContetnt(etCacheKey), person, cacheTime)
+                        .onResult(new CacheThreadResult.CacheResultCallBack<File>() {
+                            @Override
+                            public void onResult(File result) {
+                                UIUtils.showToastSafe("子线程：缓存文件位置 => " + result);
+                            }
+                        });
+            } else {
+                File result = CacheManageUtils.newInstance()
+                        .put(getEditTextContetnt(etCacheKey), person, cacheTime);
+                UIUtils.showToastSafe("缓存文件位置 => " + result);
+            }
+        } else {
+            if (isNewThread) {
+                // 需要在新的线程中
+                CacheManageUtils.newInstance()
+                        .putOnNewThread(getEditTextContetnt(etCacheKey), person)
+                        .onResult(new CacheThreadResult.CacheResultCallBack<File>() {
+                            @Override
+                            public void onResult(File result) {
+                                UIUtils.showToastSafe("子线程：缓存文件位置 => " + result);
+                            }
+                        });
+            } else {
+                File result = CacheManageUtils.newInstance()
+                        .put(getEditTextContetnt(etCacheKey), person);
+                UIUtils.showToastSafe("缓存文件位置 => " + result);
             }
         }
     }
