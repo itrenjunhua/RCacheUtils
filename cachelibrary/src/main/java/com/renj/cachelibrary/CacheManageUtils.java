@@ -818,7 +818,7 @@ public final class CacheManageUtils {
         if (clazz.isAssignableFrom(readObject.getClass())) {
             return (T) readObject;
         } else {
-            throw new ClassCastException("查询结果对象类型 " + readObject.getClass() + " 不能转换成参数指定类型 " + clazz.getName());
+            throw new ClassCastException("查询结果对象类型 " + readObject.getClass().getName() + " 不能转换成参数指定类型 " + clazz.getName());
         }
     }
 
