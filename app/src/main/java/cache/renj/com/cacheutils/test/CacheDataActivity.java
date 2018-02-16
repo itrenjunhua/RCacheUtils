@@ -1,6 +1,7 @@
 package cache.renj.com.cacheutils.test;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.support.annotation.CheckResult;
 import android.support.annotation.NonNull;
 import android.widget.Button;
@@ -54,6 +55,7 @@ public class CacheDataActivity extends BaseActivity {
 
     private CacheDataType dataType;
     private Person person;
+    private Bitmap bitmap;
 
     @Override
     protected int getLayoutId() {
@@ -116,6 +118,7 @@ public class CacheDataActivity extends BaseActivity {
                 etCacheKey.setText("cache_bytes");
                 break;
             case OBJECT:
+                setTitle(ResUtils.getString(R.string.cache_object));
                 ViewUtils.showView(etCacheContent);
                 ViewUtils.goneView(ivCacheContent);
                 etCacheContent.setFocusable(false);
@@ -125,6 +128,12 @@ public class CacheDataActivity extends BaseActivity {
                 break;
             case BITMAP:
                 setTitle(ResUtils.getString(R.string.cache_bitmap));
+                ViewUtils.showView(ivCacheContent);
+                ViewUtils.goneView(etCacheContent);
+                bitmap = ResUtils.getBitmap(R.mipmap.ic_launcher);
+                if (bitmap != null)
+                    ivCacheContent.setImageBitmap(bitmap);
+                etCacheKey.setText("cache_bitmap");
                 break;
             case DRAWABLE:
                 setTitle(ResUtils.getString(R.string.cache_drawable));
@@ -154,11 +163,53 @@ public class CacheDataActivity extends BaseActivity {
                     cacheObjectData();
                     break;
                 case BITMAP:
-                    setTitle(ResUtils.getString(R.string.cache_bitmap));
+                    cacheBitmapData();
                     break;
                 case DRAWABLE:
                     setTitle(ResUtils.getString(R.string.cache_drawable));
                     break;
+            }
+        }
+    }
+
+    /**
+     * 缓存 {@link Bitmap} 类型数据
+     */
+    private void cacheBitmapData() {
+        int cacheTime = getCacheTime();
+        boolean isNewThread = isNewThread();
+        if (cacheTime > 0) {
+            // 有时间限制
+            if (isNewThread) {
+                // 需要在新的线程中
+                CacheManageUtils.newInstance()
+                        .putOnNewThread(getEditTextContetnt(etCacheKey), bitmap, cacheTime)
+                        .onResult(new CacheThreadResult.CacheResultCallBack<File>() {
+                            @Override
+                            public void onResult(File result) {
+                                UIUtils.showToastSafe("子线程：缓存文件位置 => " + result);
+                            }
+                        });
+            } else {
+                File result = CacheManageUtils.newInstance()
+                        .put(getEditTextContetnt(etCacheKey), bitmap, cacheTime);
+                UIUtils.showToastSafe("缓存文件位置 => " + result);
+            }
+        } else {
+            if (isNewThread) {
+                // 需要在新的线程中
+                CacheManageUtils.newInstance()
+                        .putOnNewThread(getEditTextContetnt(etCacheKey), bitmap)
+                        .onResult(new CacheThreadResult.CacheResultCallBack<File>() {
+                            @Override
+                            public void onResult(File result) {
+                                UIUtils.showToastSafe("子线程：缓存文件位置 => " + result);
+                            }
+                        });
+            } else {
+                File result = CacheManageUtils.newInstance()
+                        .put(getEditTextContetnt(etCacheKey), bitmap);
+                UIUtils.showToastSafe("缓存文件位置 => " + result);
             }
         }
     }

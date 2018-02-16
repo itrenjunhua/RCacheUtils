@@ -1,6 +1,7 @@
 package cache.renj.com.cacheutils.test;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.support.annotation.CheckResult;
 import android.support.annotation.NonNull;
 import android.widget.Button;
@@ -112,6 +113,9 @@ public class GetDataActivity extends BaseActivity {
                 break;
             case BITMAP:
                 setTitle(ResUtils.getString(R.string.get_bitmap));
+                ViewUtils.showView(ivGetContent);
+                ViewUtils.goneView(etGetKey);
+                etGetKey.setText("cache_bitmap");
                 break;
             case DRAWABLE:
                 setTitle(ResUtils.getString(R.string.get_drawable));
@@ -142,7 +146,7 @@ public class GetDataActivity extends BaseActivity {
                     getObjectData();
                     break;
                 case BITMAP:
-                    setTitle(ResUtils.getString(R.string.cache_bitmap));
+                    getBitmapData();
                     break;
                 case DRAWABLE:
                     setTitle(ResUtils.getString(R.string.cache_drawable));
@@ -150,6 +154,30 @@ public class GetDataActivity extends BaseActivity {
             }
         }
     }
+
+    /**
+     * 根据文件名获取缓存的 {@link Bitmap} 数据
+     */
+    private void getBitmapData() {
+        if (isNewThread()) {
+            // 需要在新的线程中
+            CacheManageUtils.newInstance()
+                    .getAsBitmapOnNewThread(getEditTextContetnt(etGetKey))
+                    .onResult(new CacheThreadResult.CacheResultCallBack<Bitmap>() {
+                        @Override
+                        public void onResult(Bitmap result) {
+                            if (result != null)
+                                ivGetContent.setImageBitmap(result);
+                        }
+                    });
+        } else {
+            Bitmap result = CacheManageUtils.newInstance()
+                    .getAsBitmap(getEditTextContetnt(etGetKey));
+            if (result != null)
+                ivGetContent.setImageBitmap(result);
+        }
+    }
+
 
     /**
      * 根据文件名获取缓存的 {@link Object} 数据
