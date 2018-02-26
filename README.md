@@ -4,6 +4,67 @@
 ## 功能说明
 缓存和获取 **字符串、JSONObject、JSONArray、字节数组、序列化对象、Bitmap、Drawable** 等数据类型的文件；同时可以指定 **缓存文件总大小、缓存文件保留时间以及是否需要在新的线程中缓存和获取数据**。
 
+## 使用方式
+**这里就只以 ***缓存和获取字符串文件*** 为例，其他的在代码中都有。**  
+
+### 第一步：在使用前需进行初始化，建议放在Application类中。
+	// 初始化缓存库，指定文件夹名称
+    CacheManageUtils.initCacheUtil(this, "CacheTest");
+
+### 第二步：缓存文件
+1. 需要在新的线程中缓存  
+	① 需要指定缓存时间(文件的有效期)
+
+		CacheManageUtils.newInstance()
+                        .putOnNewThread(getEditTextContetnt(etCacheKey),
+                                getEditTextContetnt(etCacheContent), cacheTime)
+                        .onResult(new CacheThreadResult.CacheResultCallBack<File>() {
+                            @Override
+                            public void onResult(File result) {
+                                UIUtils.showToastSafe("新线程：缓存文件位置 => " + result);
+                            }
+                        });
+	② 不需要指定缓存时间(文件没有有效期)
+
+		CacheManageUtils.newInstance()
+                        .putOnNewThread(getEditTextContetnt(etCacheKey),
+                                getEditTextContetnt(etCacheContent))
+                        .onResult(new CacheThreadResult.CacheResultCallBack<File>() {
+                            @Override
+                            public void onResult(File result) {
+                                UIUtils.showToastSafe("新线程：缓存文件位置 => " + result);
+                            }
+                        });
+2. 不需要在新的线程中缓存(当前的调用线程中缓存)  
+	① 需要指定缓存时间(文件的有效期)
+
+		File result = CacheManageUtils.newInstance()
+                        .put(getEditTextContetnt(etCacheKey),
+                                getEditTextContetnt(etCacheContent), cacheTime);
+                UIUtils.showToastSafe("缓存文件位置 => " + result);
+	② 不需要指定缓存时间(文件没有有效期)
+
+			File result = CacheManageUtils.newInstance()
+                        .put(getEditTextContetnt(etCacheKey),
+                                getEditTextContetnt(etCacheContent));
+                UIUtils.showToastSafe("缓存文件位置 => " + result);
+### 第三步：获取缓存的文件
+1. 需要在新的线程中获取缓存
+
+		CacheManageUtils.newInstance()
+                    .getAsStringOnNewThread(getEditTextContetnt(etGetKey))
+                    .onResult(new CacheThreadResult.CacheResultCallBack<String>() {
+                        @Override
+                        public void onResult(String result) {
+                            tvGetContent.setText(result);
+                        }
+                    });  
+2. 不需要在新的线程中获取缓存(当前的调用线程中获取缓存)  
+
+		String result = CacheManageUtils.newInstance()
+                    .getAsString(getEditTextContetnt(etGetKey));
+            tvGetContent.setText(result);
+
 ## 相关方法
 ### 缓存文件相关方法
 1. 缓存字符串

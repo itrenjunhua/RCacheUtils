@@ -195,7 +195,7 @@ public class CacheDataActivity extends BaseActivity {
                         .onResult(new CacheThreadResult.CacheResultCallBack<File>() {
                             @Override
                             public void onResult(File result) {
-                                UIUtils.showToastSafe("子线程：缓存文件位置 => " + result);
+                                UIUtils.showToastSafe("新线程：缓存文件位置 => " + result);
                             }
                         });
             } else {
@@ -211,7 +211,7 @@ public class CacheDataActivity extends BaseActivity {
                         .onResult(new CacheThreadResult.CacheResultCallBack<File>() {
                             @Override
                             public void onResult(File result) {
-                                UIUtils.showToastSafe("子线程：缓存文件位置 => " + result);
+                                UIUtils.showToastSafe("新线程：缓存文件位置 => " + result);
                             }
                         });
             } else {
@@ -237,7 +237,7 @@ public class CacheDataActivity extends BaseActivity {
                         .onResult(new CacheThreadResult.CacheResultCallBack<File>() {
                             @Override
                             public void onResult(File result) {
-                                UIUtils.showToastSafe("子线程：缓存文件位置 => " + result);
+                                UIUtils.showToastSafe("新线程：缓存文件位置 => " + result);
                             }
                         });
             } else {
@@ -253,7 +253,7 @@ public class CacheDataActivity extends BaseActivity {
                         .onResult(new CacheThreadResult.CacheResultCallBack<File>() {
                             @Override
                             public void onResult(File result) {
-                                UIUtils.showToastSafe("子线程：缓存文件位置 => " + result);
+                                UIUtils.showToastSafe("新线程：缓存文件位置 => " + result);
                             }
                         });
             } else {
@@ -279,7 +279,7 @@ public class CacheDataActivity extends BaseActivity {
                         .onResult(new CacheThreadResult.CacheResultCallBack<File>() {
                             @Override
                             public void onResult(File result) {
-                                UIUtils.showToastSafe("子线程：缓存文件位置 => " + result);
+                                UIUtils.showToastSafe("新线程：缓存文件位置 => " + result);
                             }
                         });
             } else {
@@ -295,7 +295,7 @@ public class CacheDataActivity extends BaseActivity {
                         .onResult(new CacheThreadResult.CacheResultCallBack<File>() {
                             @Override
                             public void onResult(File result) {
-                                UIUtils.showToastSafe("子线程：缓存文件位置 => " + result);
+                                UIUtils.showToastSafe("新线程：缓存文件位置 => " + result);
                             }
                         });
             } else {
@@ -323,7 +323,7 @@ public class CacheDataActivity extends BaseActivity {
                         .onResult(new CacheThreadResult.CacheResultCallBack<File>() {
                             @Override
                             public void onResult(File result) {
-                                UIUtils.showToastSafe("子线程：缓存文件位置 => " + result);
+                                UIUtils.showToastSafe("新线程：缓存文件位置 => " + result);
                             }
                         });
             } else {
@@ -339,7 +339,7 @@ public class CacheDataActivity extends BaseActivity {
                         .onResult(new CacheThreadResult.CacheResultCallBack<File>() {
                             @Override
                             public void onResult(File result) {
-                                UIUtils.showToastSafe("子线程：缓存文件位置 => " + result);
+                                UIUtils.showToastSafe("新线程：缓存文件位置 => " + result);
                             }
                         });
             } else {
@@ -367,7 +367,7 @@ public class CacheDataActivity extends BaseActivity {
                         .onResult(new CacheThreadResult.CacheResultCallBack<File>() {
                             @Override
                             public void onResult(File result) {
-                                UIUtils.showToastSafe("子线程：缓存文件位置 => " + result);
+                                UIUtils.showToastSafe("新线程：缓存文件位置 => " + result);
                             }
                         });
             } else {
@@ -383,7 +383,7 @@ public class CacheDataActivity extends BaseActivity {
                         .onResult(new CacheThreadResult.CacheResultCallBack<File>() {
                             @Override
                             public void onResult(File result) {
-                                UIUtils.showToastSafe("子线程：缓存文件位置 => " + result);
+                                UIUtils.showToastSafe("新线程：缓存文件位置 => " + result);
                             }
                         });
             } else {
@@ -411,7 +411,7 @@ public class CacheDataActivity extends BaseActivity {
                         .onResult(new CacheThreadResult.CacheResultCallBack<File>() {
                             @Override
                             public void onResult(File result) {
-                                UIUtils.showToastSafe("子线程：缓存文件位置 => " + result);
+                                UIUtils.showToastSafe("新线程：缓存文件位置 => " + result);
                             }
                         });
             } else {
@@ -427,7 +427,7 @@ public class CacheDataActivity extends BaseActivity {
                         .onResult(new CacheThreadResult.CacheResultCallBack<File>() {
                             @Override
                             public void onResult(File result) {
-                                UIUtils.showToastSafe("子线程：缓存文件位置 => " + result);
+                                UIUtils.showToastSafe("新线程：缓存文件位置 => " + result);
                             }
                         });
             } else {
@@ -454,7 +454,7 @@ public class CacheDataActivity extends BaseActivity {
                         .onResult(new CacheThreadResult.CacheResultCallBack<File>() {
                             @Override
                             public void onResult(File result) {
-                                UIUtils.showToastSafe("子线程：缓存文件位置 => " + result);
+                                UIUtils.showToastSafe("新线程：缓存文件位置 => " + result);
                             }
                         });
             } else {
@@ -472,7 +472,7 @@ public class CacheDataActivity extends BaseActivity {
                         .onResult(new CacheThreadResult.CacheResultCallBack<File>() {
                             @Override
                             public void onResult(File result) {
-                                UIUtils.showToastSafe("子线程：缓存文件位置 => " + result);
+                                UIUtils.showToastSafe("新线程：缓存文件位置 => " + result);
                             }
                         });
             } else {
