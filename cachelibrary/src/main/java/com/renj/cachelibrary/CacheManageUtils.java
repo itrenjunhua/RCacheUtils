@@ -52,6 +52,10 @@ public final class CacheManageUtils {
      */
     static File CACHE_PATH;
     /**
+     * 缓存大小，默认 {@link RCacheConfig#CACHE_SIZE}
+     */
+    static long caheSize = RCacheConfig.CACHE_SIZE;
+    /**
      * 缓存大小检查和删除文件线程
      */
     static volatile RCacheSizeControl RCACHE_SIZE_CONTROL;
@@ -64,12 +68,13 @@ public final class CacheManageUtils {
      */
     private static CacheManageUtils instance;
 
-    private CacheManageUtils(Context context, String fileName) {
+    private CacheManageUtils(Context context, String fileName, long caheSize) {
         CACHE_PATH = new File(context.getCacheDir(), fileName);
         if (!CACHE_PATH.exists() || !CACHE_PATH.isDirectory())
             CACHE_PATH.mkdir();
 
         RCACHE_SIZE_CONTROL = new RCacheSizeControl();
+        CacheManageUtils.caheSize = caheSize;
     }
 
     /**
@@ -91,10 +96,22 @@ public final class CacheManageUtils {
      * @param fileName 缓存目录的名称
      */
     public static void initCacheUtil(@NonNull Context context, @NonNull String fileName) {
+        initCacheUtil(context, fileName, RCacheConfig.CACHE_SIZE);
+    }
+
+    /**
+     * 初始化缓存管理工具类，在使用该缓存管理工具类前必须先调用 {@link #initCacheUtil(Context)} 方法(使用默认缓存目录名'ACache')
+     * 或者 {@link #initCacheUtil(Context, String)} 方法(可以指定缓存目录名)进行初始化，建议在 Application 中调用。
+     *
+     * @param context  上下文
+     * @param fileName 缓存目录的名称
+     * @param caheSize 缓存总大小
+     */
+    public static void initCacheUtil(@NonNull Context context, @NonNull String fileName, long caheSize) {
         if (instance == null) {
             synchronized (CacheManageUtils.class) {
                 if (instance == null) {
-                    instance = new CacheManageUtils(context, fileName);
+                    instance = new CacheManageUtils(context, fileName, caheSize);
                 }
             }
         }
