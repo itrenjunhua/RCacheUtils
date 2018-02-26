@@ -108,6 +108,10 @@ public final class CacheManageUtils {
      * @param caheSize 缓存总大小
      */
     public static void initCacheUtil(@NonNull Context context, @NonNull String fileName, long caheSize) {
+        if (caheSize < 0) {
+            throw new IllegalArgumentException("参数 caheSize 的值必须大于0.");
+        }
+
         if (instance == null) {
             synchronized (CacheManageUtils.class) {
                 if (instance == null) {
