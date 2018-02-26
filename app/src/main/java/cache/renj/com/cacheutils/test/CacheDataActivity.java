@@ -2,6 +2,7 @@ package cache.renj.com.cacheutils.test;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.CheckResult;
 import android.support.annotation.NonNull;
 import android.widget.Button;
@@ -56,6 +57,7 @@ public class CacheDataActivity extends BaseActivity {
     private CacheDataType dataType;
     private Person person;
     private Bitmap bitmap;
+    private Drawable drawable;
 
     @Override
     protected int getLayoutId() {
@@ -137,6 +139,12 @@ public class CacheDataActivity extends BaseActivity {
                 break;
             case DRAWABLE:
                 setTitle(ResUtils.getString(R.string.cache_drawable));
+                ViewUtils.showView(ivCacheContent);
+                ViewUtils.goneView(etCacheContent);
+                drawable = ResUtils.getDrawable(R.mipmap.ic_launcher_round);
+                if (drawable != null)
+                    ivCacheContent.setImageDrawable(drawable);
+                etCacheKey.setText("cache_drawable");
                 break;
         }
     }
@@ -166,8 +174,50 @@ public class CacheDataActivity extends BaseActivity {
                     cacheBitmapData();
                     break;
                 case DRAWABLE:
-                    setTitle(ResUtils.getString(R.string.cache_drawable));
+                    cacheDrawableData();
                     break;
+            }
+        }
+    }
+
+    /**
+     * 缓存 {@link Drawable} 类型数据
+     */
+    private void cacheDrawableData() {
+        int cacheTime = getCacheTime();
+        boolean isNewThread = isNewThread();
+        if (cacheTime > 0) {
+            // 有时间限制
+            if (isNewThread) {
+                // 需要在新的线程中
+                CacheManageUtils.newInstance()
+                        .putOnNewThread(getEditTextContetnt(etCacheKey), drawable, cacheTime)
+                        .onResult(new CacheThreadResult.CacheResultCallBack<File>() {
+                            @Override
+                            public void onResult(File result) {
+                                UIUtils.showToastSafe("子线程：缓存文件位置 => " + result);
+                            }
+                        });
+            } else {
+                File result = CacheManageUtils.newInstance()
+                        .put(getEditTextContetnt(etCacheKey), drawable, cacheTime);
+                UIUtils.showToastSafe("缓存文件位置 => " + result);
+            }
+        } else {
+            if (isNewThread) {
+                // 需要在新的线程中
+                CacheManageUtils.newInstance()
+                        .putOnNewThread(getEditTextContetnt(etCacheKey), drawable)
+                        .onResult(new CacheThreadResult.CacheResultCallBack<File>() {
+                            @Override
+                            public void onResult(File result) {
+                                UIUtils.showToastSafe("子线程：缓存文件位置 => " + result);
+                            }
+                        });
+            } else {
+                File result = CacheManageUtils.newInstance()
+                        .put(getEditTextContetnt(etCacheKey), drawable);
+                UIUtils.showToastSafe("缓存文件位置 => " + result);
             }
         }
     }
@@ -475,10 +525,12 @@ public class CacheDataActivity extends BaseActivity {
             UIUtils.showToastSafe("请输入缓存文件名");
             return false;
         }
-        String contetnt = getEditTextContetnt(etCacheContent);
-        if (StringUtils.isEmpty(contetnt)) {
-            UIUtils.showToastSafe("请输入缓存内容");
-            return false;
+        if (CacheDataType.BITMAP != dataType && CacheDataType.DRAWABLE != dataType) {
+            String contetnt = getEditTextContetnt(etCacheContent);
+            if (StringUtils.isEmpty(contetnt)) {
+                UIUtils.showToastSafe("请输入缓存内容");
+                return false;
+            }
         }
         return true;
     }

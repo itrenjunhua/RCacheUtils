@@ -2,6 +2,7 @@ package cache.renj.com.cacheutils.test;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.CheckResult;
 import android.support.annotation.NonNull;
 import android.widget.Button;
@@ -114,11 +115,14 @@ public class GetDataActivity extends BaseActivity {
             case BITMAP:
                 setTitle(ResUtils.getString(R.string.get_bitmap));
                 ViewUtils.showView(ivGetContent);
-                ViewUtils.goneView(etGetKey);
+                ViewUtils.goneView(tvGetContent);
                 etGetKey.setText("cache_bitmap");
                 break;
             case DRAWABLE:
                 setTitle(ResUtils.getString(R.string.get_drawable));
+                ViewUtils.showView(ivGetContent);
+                ViewUtils.goneView(tvGetContent);
+                etGetKey.setText("cache_drawable");
                 break;
         }
     }
@@ -149,9 +153,30 @@ public class GetDataActivity extends BaseActivity {
                     getBitmapData();
                     break;
                 case DRAWABLE:
-                    setTitle(ResUtils.getString(R.string.cache_drawable));
+                    getDrawableData();
                     break;
             }
+        }
+    }
+
+    /**
+     * 根据文件名获取缓存的 {@link Drawable} 数据
+     */
+    private void getDrawableData() {
+        if (isNewThread()) {
+            // 需要在新的线程中
+            CacheManageUtils.newInstance()
+                    .getAsDrawableOnNewThread(getEditTextContetnt(etGetKey))
+                    .onResult(new CacheThreadResult.CacheResultCallBack<Drawable>() {
+                        @Override
+                        public void onResult(Drawable result) {
+                            ivGetContent.setImageDrawable(result);
+                        }
+                    });
+        } else {
+            Drawable result = CacheManageUtils.newInstance()
+                    .getAsDrawable(getEditTextContetnt(etGetKey));
+            ivGetContent.setImageDrawable(result);
         }
     }
 
@@ -166,15 +191,13 @@ public class GetDataActivity extends BaseActivity {
                     .onResult(new CacheThreadResult.CacheResultCallBack<Bitmap>() {
                         @Override
                         public void onResult(Bitmap result) {
-                            if (result != null)
-                                ivGetContent.setImageBitmap(result);
+                            ivGetContent.setImageBitmap(result);
                         }
                     });
         } else {
             Bitmap result = CacheManageUtils.newInstance()
                     .getAsBitmap(getEditTextContetnt(etGetKey));
-            if (result != null)
-                ivGetContent.setImageBitmap(result);
+            ivGetContent.setImageBitmap(result);
         }
     }
 
@@ -186,7 +209,7 @@ public class GetDataActivity extends BaseActivity {
         if (isNewThread()) {
             // 需要在新的线程中
             CacheManageUtils.newInstance()
-                    .getAsObjectOnNewThread(getEditTextContetnt(etGetKey),Person.class)
+                    .getAsObjectOnNewThread(getEditTextContetnt(etGetKey), Person.class)
                     .onResult(new CacheThreadResult.CacheResultCallBack<Person>() {
                         @Override
                         public void onResult(Person result) {
