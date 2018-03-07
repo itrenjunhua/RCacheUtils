@@ -24,6 +24,10 @@ import java.util.concurrent.Executors;
     int CPU_COUNT = Runtime.getRuntime().availableProcessors();
     int THREAD_POOL_SIZE = Math.max(2, Math.min(CPU_COUNT - 1, 4));
     /**
+     * 指定默认缓存目录名
+     */
+    String CACHE_FILE_NAME = "RCache";
+    /**
      * 指定缓存大小 默认大小12M
      */
     long CACHE_SIZE = 1024 * 1024 * 12;

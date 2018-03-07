@@ -85,7 +85,7 @@ public final class CacheManageUtils {
      */
     @SuppressWarnings("unused")
     public static void initCacheUtil(@NonNull Context context) {
-        initCacheUtil(context, "RCache");
+        initCacheUtil(context, RCacheConfig.CACHE_FILE_NAME);
     }
 
     /**
@@ -97,6 +97,17 @@ public final class CacheManageUtils {
      */
     public static void initCacheUtil(@NonNull Context context, @NonNull String fileName) {
         initCacheUtil(context, fileName, RCacheConfig.CACHE_SIZE);
+    }
+
+    /**
+     * 初始化缓存管理工具类，在使用该缓存管理工具类前必须先调用 {@link #initCacheUtil(Context)} 方法(使用默认缓存目录名'ACache')
+     * 或者 {@link #initCacheUtil(Context, String)} 方法(可以指定缓存目录名)进行初始化，建议在 Application 中调用。
+     *
+     * @param context  上下文
+     * @param caheSize 缓存总大小
+     */
+    public static void initCacheUtil(@NonNull Context context, long caheSize) {
+        initCacheUtil(context, RCacheConfig.CACHE_FILE_NAME, caheSize);
     }
 
     /**
