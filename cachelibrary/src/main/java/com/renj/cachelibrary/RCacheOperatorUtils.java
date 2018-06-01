@@ -362,4 +362,14 @@ import java.io.UnsupportedEncodingException;
 
         return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
     }
+
+    /**
+     * 清除所有缓存
+     */
+    static void clearCache() {
+        if (!RClearCacheThread.isExecuteing) {
+            RClearCacheThread rClearCacheThread = new RClearCacheThread();
+            RCacheConfig.EXECUTORSERVICE.execute(rClearCacheThread);
+        }
+    }
 }

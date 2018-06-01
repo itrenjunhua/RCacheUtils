@@ -103,7 +103,7 @@ public final class CacheManageUtils {
      * 初始化缓存管理工具类，在使用该缓存管理工具类前必须先调用 {@link #initCacheUtil(Context)} 方法(使用默认缓存目录名'ACache')
      * 或者 {@link #initCacheUtil(Context, String)} 方法(可以指定缓存目录名)进行初始化，建议在 Application 中调用。
      *
-     * @param context  上下文
+     * @param context   上下文
      * @param cacheSize 缓存总大小
      */
     public static void initCacheUtil(@NonNull Context context, long cacheSize) {
@@ -114,8 +114,8 @@ public final class CacheManageUtils {
      * 初始化缓存管理工具类，在使用该缓存管理工具类前必须先调用 {@link #initCacheUtil(Context)} 方法(使用默认缓存目录名'ACache')
      * 或者 {@link #initCacheUtil(Context, String)} 方法(可以指定缓存目录名)进行初始化，建议在 Application 中调用。
      *
-     * @param context  上下文
-     * @param fileName 缓存目录的名称
+     * @param context   上下文
+     * @param fileName  缓存目录的名称
      * @param cacheSize 缓存总大小
      */
     public static void initCacheUtil(@NonNull Context context, @NonNull String fileName, long cacheSize) {
@@ -1096,5 +1096,12 @@ public final class CacheManageUtils {
                 return getAsObject(key, clazz);
             }
         });
+    }
+
+    /**
+     * 清除所有缓存数据
+     */
+    public void clearCache() {
+        RCacheOperatorUtils.clearCache();
     }
 }
