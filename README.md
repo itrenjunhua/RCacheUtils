@@ -41,13 +41,13 @@
 		File result = CacheManageUtils.newInstance()
                         .put(getEditTextContetnt(etCacheKey),
                                 getEditTextContetnt(etCacheContent), cacheTime);
-                UIUtils.showToastSafe("缓存文件位置 => " + result);
+        UIUtils.showToastSafe("缓存文件位置 => " + result);
 	② 不需要指定缓存时间(文件没有有效期)
 
-			File result = CacheManageUtils.newInstance()
+		File result = CacheManageUtils.newInstance()
                         .put(getEditTextContetnt(etCacheKey),
                                 getEditTextContetnt(etCacheContent));
-                UIUtils.showToastSafe("缓存文件位置 => " + result);
+        UIUtils.showToastSafe("缓存文件位置 => " + result);
 ### 第三步：获取缓存的文件
 1. 需要在新的线程中获取缓存
 
@@ -63,7 +63,7 @@
 
 		String result = CacheManageUtils.newInstance()
                     .getAsString(getEditTextContetnt(etGetKey));
-            tvGetContent.setText(result);
+        tvGetContent.setText(result);
 
 ## 相关方法
 ### 缓存文件相关方法
@@ -140,4 +140,8 @@
 7. 获取Drawable
 	
 	`public Drawable getAsDrawable(@NonNull String key)`  
-	`public CacheThreadResult<Drawable> getAsDrawableOnNewThread(@NonNull final String key)`  
+	`public CacheThreadResult<Drawable> getAsDrawableOnNewThread(@NonNull final String key)`
+	
+## 清除缓存方法
+    
+    CacheManageUtils.newInstance().clearCache();  
