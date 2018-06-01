@@ -24,15 +24,16 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     // Android 支持包和测试包
-    implementation 'com.android.support:appcompat-v7:' + ANDROID_SUPPORT_V7
-    implementation 'com.android.support.constraint:constraint-layout:' + CONSTRAINT_LAYOUT
-    testImplementation 'junit:junit:' + JUNIT_SUPPORT
-    androidTestImplementation 'com.android.support.test:runner:' + TEST_RUNNER
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:' + TEST_ESPRESSO_CORE
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 
     // butterknife 注解包
-    compile 'com.jakewharton:butterknife:' + BUTTERKNIFE_VERSION
-    annotationProcessor 'com.jakewharton:butterknife-compiler:' + BUTTERKNIFE_VERSION
+    compile 'com.jakewharton:butterknife:8.4.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
+    implementation 'org.jetbrains:annotations-java5:15.0'
 
     // 缓存依赖库
     compile project(':cachelibrary')
