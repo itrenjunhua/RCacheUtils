@@ -54,7 +54,7 @@ public final class CacheManageUtils {
     /**
      * 缓存大小，默认 {@link RCacheConfig#CACHE_SIZE}
      */
-    static long caheSize = RCacheConfig.CACHE_SIZE;
+    static long cacheSize = RCacheConfig.CACHE_SIZE;
     /**
      * 缓存大小检查和删除文件线程
      */
@@ -68,13 +68,13 @@ public final class CacheManageUtils {
      */
     private static CacheManageUtils instance;
 
-    private CacheManageUtils(Context context, String fileName, long caheSize) {
+    private CacheManageUtils(Context context, String fileName, long cacheSize) {
         CACHE_PATH = new File(context.getCacheDir(), fileName);
         if (!CACHE_PATH.exists() || !CACHE_PATH.isDirectory())
             CACHE_PATH.mkdir();
 
         RCACHE_SIZE_CONTROL = new RCacheSizeControl();
-        CacheManageUtils.caheSize = caheSize;
+        CacheManageUtils.cacheSize = cacheSize;
     }
 
     /**
@@ -104,10 +104,10 @@ public final class CacheManageUtils {
      * 或者 {@link #initCacheUtil(Context, String)} 方法(可以指定缓存目录名)进行初始化，建议在 Application 中调用。
      *
      * @param context  上下文
-     * @param caheSize 缓存总大小
+     * @param cacheSize 缓存总大小
      */
-    public static void initCacheUtil(@NonNull Context context, long caheSize) {
-        initCacheUtil(context, RCacheConfig.CACHE_FILE_NAME, caheSize);
+    public static void initCacheUtil(@NonNull Context context, long cacheSize) {
+        initCacheUtil(context, RCacheConfig.CACHE_FILE_NAME, cacheSize);
     }
 
     /**
@@ -116,17 +116,17 @@ public final class CacheManageUtils {
      *
      * @param context  上下文
      * @param fileName 缓存目录的名称
-     * @param caheSize 缓存总大小
+     * @param cacheSize 缓存总大小
      */
-    public static void initCacheUtil(@NonNull Context context, @NonNull String fileName, long caheSize) {
-        if (caheSize < 0) {
-            throw new IllegalArgumentException("参数 caheSize 的值必须大于0.");
+    public static void initCacheUtil(@NonNull Context context, @NonNull String fileName, long cacheSize) {
+        if (cacheSize < 0) {
+            throw new IllegalArgumentException("参数 cacheSize 的值必须大于0.");
         }
 
         if (instance == null) {
             synchronized (CacheManageUtils.class) {
                 if (instance == null) {
-                    instance = new CacheManageUtils(context, fileName, caheSize);
+                    instance = new CacheManageUtils(context, fileName, cacheSize);
                 }
             }
         }
@@ -153,7 +153,7 @@ public final class CacheManageUtils {
      *
      * @param key     缓存键名称，同时用于获取缓存
      * @param value   需要缓存的字符串({@link String})内容
-     * @param outtime 有效时间，<b>注意：缓存时间单位为 秒(S)</b>
+     * @param outTime 有效时间，<b>注意：缓存时间单位为 秒(S)</b>
      * @return 保存的文件 {@link File} 对象 <b>注意：可能为 {@code null}</b>
      * @see #put(String, String)
      * @see #putOnNewThread(String, String)
@@ -161,8 +161,8 @@ public final class CacheManageUtils {
      */
     @Nullable
     @CheckResult(suggest = "返回值没有使用")
-    public File put(@NonNull String key, @NonNull String value, long outtime) {
-        return put(key, RCacheOperatorUtils.addDateInfo(value, outtime * SECOND));
+    public File put(@NonNull String key, @NonNull String value, long outTime) {
+        return put(key, RCacheOperatorUtils.addDateInfo(value, outTime * SECOND));
     }
 
     /**
@@ -186,7 +186,7 @@ public final class CacheManageUtils {
      *
      * @param key        缓存键名称，同时用于获取缓存
      * @param jsonObject 需要缓存的  {@link JSONObject} 对象
-     * @param outtime    有效时间，<b>注意：缓存时间单位为 秒(S)</b>
+     * @param outTime    有效时间，<b>注意：缓存时间单位为 秒(S)</b>
      * @return 保存的文件 {@link File} 对象 <b>注意：可能为 {@code null}</b>
      * @see #put(String, JSONObject)
      * @see #putOnNewThread(String, JSONObject)
@@ -194,8 +194,8 @@ public final class CacheManageUtils {
      */
     @Nullable
     @CheckResult(suggest = "返回值没有使用")
-    public File put(@NonNull String key, @NonNull JSONObject jsonObject, long outtime) {
-        return put(key, RCacheOperatorUtils.addDateInfo(jsonObject.toString(), outtime * SECOND));
+    public File put(@NonNull String key, @NonNull JSONObject jsonObject, long outTime) {
+        return put(key, RCacheOperatorUtils.addDateInfo(jsonObject.toString(), outTime * SECOND));
     }
 
     /**
@@ -219,7 +219,7 @@ public final class CacheManageUtils {
      *
      * @param key       缓存键名称，同时用于获取缓存
      * @param jsonArray 需要缓存的  {@link JSONArray} 对象
-     * @param outtime   有效时间，<b>注意：缓存时间单位为 秒(S)</b>
+     * @param outTime   有效时间，<b>注意：缓存时间单位为 秒(S)</b>
      * @return 保存的文件 {@link File} 对象 <b>注意：可能为 {@code null}</b>
      * @see #put(String, JSONArray)
      * @see #putOnNewThread(String, JSONArray)
@@ -227,8 +227,8 @@ public final class CacheManageUtils {
      */
     @Nullable
     @CheckResult(suggest = "返回值没有使用")
-    public File put(@NonNull String key, @NonNull JSONArray jsonArray, long outtime) {
-        return put(key, RCacheOperatorUtils.addDateInfo(jsonArray.toString(), outtime * SECOND));
+    public File put(@NonNull String key, @NonNull JSONArray jsonArray, long outTime) {
+        return put(key, RCacheOperatorUtils.addDateInfo(jsonArray.toString(), outTime * SECOND));
     }
 
     /**
@@ -236,7 +236,7 @@ public final class CacheManageUtils {
      *
      * @param key     缓存键名称，同时用于获取缓存
      * @param bytes   需要缓存的字节数组(byte[])
-     * @param outtime 有效时间，<b>注意：缓存时间单位为 秒(S)</b>
+     * @param outTime 有效时间，<b>注意：缓存时间单位为 秒(S)</b>
      * @return 保存的文件 {@link File} 对象 <b>注意：可能为 {@code null}</b>
      * @see #put(String, byte[])
      * @see #putOnNewThread(String, byte[])
@@ -244,8 +244,8 @@ public final class CacheManageUtils {
      */
     @Nullable
     @CheckResult(suggest = "返回值没有使用")
-    public File put(@NonNull String key, @NonNull byte[] bytes, long outtime) {
-        return put(key, RCacheOperatorUtils.addDateInfo(bytes, outtime * SECOND));
+    public File put(@NonNull String key, @NonNull byte[] bytes, long outTime) {
+        return put(key, RCacheOperatorUtils.addDateInfo(bytes, outTime * SECOND));
     }
 
     /**
@@ -269,7 +269,7 @@ public final class CacheManageUtils {
      *
      * @param key     缓存键名称，同时用于获取缓存
      * @param bitmap  需要缓存的 {@link Bitmap} 对象
-     * @param outtime 有效时间，<b>注意：缓存时间单位为 秒(S)</b>
+     * @param outTime 有效时间，<b>注意：缓存时间单位为 秒(S)</b>
      * @return 保存的文件 {@link File} 对象 <b>注意：可能为 {@code null}</b>
      * @see #put(String, Bitmap)
      * @see #putOnNewThread(String, Bitmap)
@@ -277,8 +277,8 @@ public final class CacheManageUtils {
      */
     @Nullable
     @CheckResult(suggest = "返回值没有使用")
-    public File put(@NonNull String key, @NonNull Bitmap bitmap, long outtime) {
-        return put(key, RCacheOperatorUtils.addDateInfo(RCacheOperatorUtils.bitmapToBytes(bitmap), outtime * SECOND));
+    public File put(@NonNull String key, @NonNull Bitmap bitmap, long outTime) {
+        return put(key, RCacheOperatorUtils.addDateInfo(RCacheOperatorUtils.bitmapToBytes(bitmap), outTime * SECOND));
     }
 
     /**
@@ -302,7 +302,7 @@ public final class CacheManageUtils {
      *
      * @param key      缓存键名称，同时用于获取缓存
      * @param drawable 需要缓存的 {@link Drawable} 对象
-     * @param outtime  有效时间，<b>注意：缓存时间单位为 秒(S)</b>
+     * @param outTime  有效时间，<b>注意：缓存时间单位为 秒(S)</b>
      * @return 保存的文件 {@link File} 对象 <b>注意：可能为 {@code null}</b>
      * @see #put(String, Drawable)
      * @see #putOnNewThread(String, Drawable)
@@ -310,8 +310,8 @@ public final class CacheManageUtils {
      */
     @Nullable
     @CheckResult(suggest = "返回值没有使用")
-    public File put(@NonNull String key, @NonNull Drawable drawable, long outtime) {
-        return put(key, RCacheOperatorUtils.drawableToBitmap(drawable), outtime);
+    public File put(@NonNull String key, @NonNull Drawable drawable, long outTime) {
+        return put(key, RCacheOperatorUtils.drawableToBitmap(drawable), outTime);
     }
 
     /**
@@ -335,7 +335,7 @@ public final class CacheManageUtils {
      *
      * @param key     缓存键名称，同时用于获取缓存
      * @param value   需要缓存的 {@link Serializable} 对象
-     * @param outtime 有效时间，<b>注意：缓存时间单位为 秒(S)</b>
+     * @param outTime 有效时间，<b>注意：缓存时间单位为 秒(S)</b>
      * @return 保存的文件 {@link File} 对象 <b>注意：可能为 {@code null}</b>
      * @see #put(String, Serializable)
      * @see #putOnNewThread(String, Serializable)
@@ -343,7 +343,7 @@ public final class CacheManageUtils {
      */
     @Nullable
     @CheckResult(suggest = "返回值没有使用")
-    public File put(@NonNull String key, @NonNull Serializable value, long outtime) {
+    public File put(@NonNull String key, @NonNull Serializable value, long outTime) {
         if (value == null) return null;
 
         ByteArrayOutputStream byteArrayOutputStream = null;
@@ -354,10 +354,10 @@ public final class CacheManageUtils {
             objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
             objectOutputStream.writeObject(value);
             byte[] bytes = byteArrayOutputStream.toByteArray();
-            if (outtime == -1) {
+            if (outTime == -1) {
                 return put(key, bytes);
             } else {
-                return put(key, bytes, outtime);
+                return put(key, bytes, outTime);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -474,7 +474,7 @@ public final class CacheManageUtils {
      *
      * @param key     缓存键名称，同时用于获取缓存
      * @param value   需要缓存的字符串({@link String})内容
-     * @param outtime 有效时间，<b>注意：缓存时间单位为 秒(S)</b>
+     * @param outTime 有效时间，<b>注意：缓存时间单位为 秒(S)</b>
      * @return {@link CacheThreadResult} 对象，回调函数参数表示缓存的文件 {@link File} 对象，可能为 {@code null}
      * @see #put(String, String)
      * @see #put(String, String, long)
@@ -482,12 +482,12 @@ public final class CacheManageUtils {
      */
     @NonNull
     @CheckResult(suggest = "返回值没有使用")
-    public CacheThreadResult<File> putOnNewThread(@NonNull final String key, @NonNull final String value, final long outtime) {
+    public CacheThreadResult<File> putOnNewThread(@NonNull final String key, @NonNull final String value, final long outTime) {
         return CacheThreadResult.<File>create().runOnNewThread(new CacheThreadResult.CacheCallBack<File>() {
             @Override
             public File execute() {
-                if (outtime == -1) return put(key, value);
-                else return put(key, value, outtime);
+                if (outTime == -1) return put(key, value);
+                else return put(key, value, outTime);
             }
         });
     }
@@ -513,7 +513,7 @@ public final class CacheManageUtils {
      *
      * @param key        缓存键名称，同时用于获取缓存
      * @param jsonObject 需要缓存的 {@link JSONObject} 对象
-     * @param outtime    有效时间，<b>注意：缓存时间单位为 秒(S)</b>
+     * @param outTime    有效时间，<b>注意：缓存时间单位为 秒(S)</b>
      * @return {@link CacheThreadResult} 对象，回调函数参数表示缓存的文件 {@link File} 对象，可能为 {@code null}
      * @see #put(String, JSONObject)
      * @see #put(String, JSONObject, long)
@@ -521,12 +521,12 @@ public final class CacheManageUtils {
      */
     @NonNull
     @CheckResult(suggest = "返回值没有使用")
-    public CacheThreadResult<File> putOnNewThread(@NonNull final String key, @NonNull final JSONObject jsonObject, final long outtime) {
+    public CacheThreadResult<File> putOnNewThread(@NonNull final String key, @NonNull final JSONObject jsonObject, final long outTime) {
         return CacheThreadResult.<File>create().runOnNewThread(new CacheThreadResult.CacheCallBack<File>() {
             @Override
             public File execute() {
-                if (outtime == -1) return put(key, jsonObject);
-                else return put(key, jsonObject, outtime);
+                if (outTime == -1) return put(key, jsonObject);
+                else return put(key, jsonObject, outTime);
             }
         });
     }
@@ -552,7 +552,7 @@ public final class CacheManageUtils {
      *
      * @param key       缓存键名称，同时用于获取缓存
      * @param jsonArray 需要缓存的 {@link JSONArray} 对象
-     * @param outtime   有效时间，<b>注意：缓存时间单位为 秒(S)</b>
+     * @param outTime   有效时间，<b>注意：缓存时间单位为 秒(S)</b>
      * @return {@link CacheThreadResult} 对象，回调函数参数表示缓存的文件 {@link File} 对象，可能为 {@code null}
      * @see #put(String, JSONArray)
      * @see #put(String, JSONArray, long)
@@ -560,12 +560,12 @@ public final class CacheManageUtils {
      */
     @NonNull
     @CheckResult(suggest = "返回值没有使用")
-    public CacheThreadResult<File> putOnNewThread(@NonNull final String key, @NonNull final JSONArray jsonArray, final long outtime) {
+    public CacheThreadResult<File> putOnNewThread(@NonNull final String key, @NonNull final JSONArray jsonArray, final long outTime) {
         return CacheThreadResult.<File>create().runOnNewThread(new CacheThreadResult.CacheCallBack<File>() {
             @Override
             public File execute() {
-                if (outtime == -1) return put(key, jsonArray);
-                else return put(key, jsonArray, outtime);
+                if (outTime == -1) return put(key, jsonArray);
+                else return put(key, jsonArray, outTime);
             }
         });
     }
@@ -591,7 +591,7 @@ public final class CacheManageUtils {
      *
      * @param key     缓存键名称，同时用于获取缓存
      * @param bytes   需要缓存的字节数组(byte[])
-     * @param outtime 有效时间，<b>注意：缓存时间单位为 秒(S)</b>
+     * @param outTime 有效时间，<b>注意：缓存时间单位为 秒(S)</b>
      * @return {@link CacheThreadResult} 对象，回调函数参数表示缓存的文件 {@link File} 对象，可能为 {@code null}
      * @see #put(String, byte[])
      * @see #put(String, byte[], long)
@@ -599,12 +599,12 @@ public final class CacheManageUtils {
      */
     @NonNull
     @CheckResult(suggest = "返回值没有使用")
-    public CacheThreadResult<File> putOnNewThread(@NonNull final String key, @NonNull final byte[] bytes, final long outtime) {
+    public CacheThreadResult<File> putOnNewThread(@NonNull final String key, @NonNull final byte[] bytes, final long outTime) {
         return CacheThreadResult.<File>create().runOnNewThread(new CacheThreadResult.CacheCallBack<File>() {
             @Override
             public File execute() {
-                if (outtime == -1) return put(key, bytes);
-                else return put(key, bytes, outtime);
+                if (outTime == -1) return put(key, bytes);
+                else return put(key, bytes, outTime);
             }
         });
     }
@@ -630,7 +630,7 @@ public final class CacheManageUtils {
      *
      * @param key     缓存键名称，同时用于获取缓存
      * @param bitmap  需要缓存的 {@link Bitmap} 对象
-     * @param outtime 有效时间，<b>注意：缓存时间单位为 秒(S)</b>
+     * @param outTime 有效时间，<b>注意：缓存时间单位为 秒(S)</b>
      * @return {@link CacheThreadResult} 对象，回调函数参数表示缓存的文件 {@link File} 对象，可能为 {@code null}
      * @see #put(String, Bitmap)
      * @see #put(String, Bitmap, long)
@@ -638,12 +638,12 @@ public final class CacheManageUtils {
      */
     @NonNull
     @CheckResult(suggest = "返回值没有使用")
-    public CacheThreadResult<File> putOnNewThread(@NonNull final String key, @NonNull final Bitmap bitmap, final long outtime) {
+    public CacheThreadResult<File> putOnNewThread(@NonNull final String key, @NonNull final Bitmap bitmap, final long outTime) {
         return CacheThreadResult.<File>create().runOnNewThread(new CacheThreadResult.CacheCallBack<File>() {
             @Override
             public File execute() {
-                if (outtime == -1) return put(key, bitmap);
-                else return put(key, bitmap, outtime);
+                if (outTime == -1) return put(key, bitmap);
+                else return put(key, bitmap, outTime);
             }
         });
     }
@@ -669,7 +669,7 @@ public final class CacheManageUtils {
      *
      * @param key      缓存键名称，同时用于获取缓存
      * @param drawable 需要缓存的 {@link Drawable} 对象
-     * @param outtime  有效时间，<b>注意：缓存时间单位为 秒(S)</b>
+     * @param outTime  有效时间，<b>注意：缓存时间单位为 秒(S)</b>
      * @return {@link CacheThreadResult} 对象，回调函数参数表示缓存的文件 {@link File} 对象，可能为 {@code null}
      * @see #put(String, Drawable)
      * @see #put(String, Drawable, long)
@@ -677,12 +677,12 @@ public final class CacheManageUtils {
      */
     @NonNull
     @CheckResult(suggest = "返回值没有使用")
-    public CacheThreadResult<File> putOnNewThread(@NonNull final String key, @NonNull final Drawable drawable, final long outtime) {
+    public CacheThreadResult<File> putOnNewThread(@NonNull final String key, @NonNull final Drawable drawable, final long outTime) {
         return CacheThreadResult.<File>create().runOnNewThread(new CacheThreadResult.CacheCallBack<File>() {
             @Override
             public File execute() {
-                if (outtime == -1) return put(key, drawable);
-                else return put(key, drawable, outtime);
+                if (outTime == -1) return put(key, drawable);
+                else return put(key, drawable, outTime);
             }
         });
     }
@@ -708,7 +708,7 @@ public final class CacheManageUtils {
      *
      * @param key     缓存键名称，同时用于获取缓存
      * @param value   需要缓存的 {@link Serializable} 对象
-     * @param outtime 有效时间，<b>注意：缓存时间单位为 秒(S)</b>
+     * @param outTime 有效时间，<b>注意：缓存时间单位为 秒(S)</b>
      * @return {@link CacheThreadResult} 对象，回调函数参数表示缓存的文件 {@link File} 对象，可能为 {@code null}
      * @see #put(String, Serializable)
      * @see #put(String, Serializable, long)
@@ -716,12 +716,12 @@ public final class CacheManageUtils {
      */
     @NonNull
     @CheckResult(suggest = "返回值没有使用")
-    public CacheThreadResult<File> putOnNewThread(@NonNull final String key, @NonNull final Serializable value, final long outtime) {
+    public CacheThreadResult<File> putOnNewThread(@NonNull final String key, @NonNull final Serializable value, final long outTime) {
         return CacheThreadResult.<File>create().runOnNewThread(new CacheThreadResult.CacheCallBack<File>() {
             @Override
             public File execute() {
-                if (outtime == -1) return put(key, value);
-                else return put(key, value, outtime);
+                if (outTime == -1) return put(key, value);
+                else return put(key, value, outTime);
             }
         });
     }

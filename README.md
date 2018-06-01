@@ -70,45 +70,45 @@
 1. 缓存字符串
 
 	`public File put(@NonNull String key, @NonNull String value)`  
-	`public File put(@NonNull String key, @NonNull String value, long outtime)`  
+	`public File put(@NonNull String key, @NonNull String value, long outTime)`  
 	`public CacheThreadResult<File> putOnNewThread(@NonNull String key, @NonNull String value)`  
-	`public CacheThreadResult<File> putOnNewThread(@NonNull final String key, @NonNull final String value, final long outtime)`
+	`public CacheThreadResult<File> putOnNewThread(@NonNull final String key, @NonNull final String value, final long outTime)`
 2. 缓存JSONObject
 	
 	`public File put(@NonNull String key, @NonNull JSONObject jsonObject)`  
-	`public File put(@NonNull String key, @NonNull JSONObject jsonObject, long outtime)`  
+	`public File put(@NonNull String key, @NonNull JSONObject jsonObject, long outTime)`  
 	`public CacheThreadResult<File> putOnNewThread(@NonNull String key, @NonNull JSONObject jsonObject)`  
-	`public CacheThreadResult<File> putOnNewThread(@NonNull final String key, @NonNull final JSONObject jsonObject, final long outtime)`
+	`public CacheThreadResult<File> putOnNewThread(@NonNull final String key, @NonNull final JSONObject jsonObject, final long outTime)`
 3. 缓存JSONArray
  	
 	`public File put(@NonNull String key, @NonNull JSONArray jsonArray)`  
-	`public File put(@NonNull String key, @NonNull JSONArray jsonArray, long outtime)`  
+	`public File put(@NonNull String key, @NonNull JSONArray jsonArray, long outTime)`  
 	`public CacheThreadResult<File> putOnNewThread(@NonNull String key, @NonNull JSONArray jsonArray)`  
-	`public CacheThreadResult<File> putOnNewThread(@NonNull final String key, @NonNull final JSONArray jsonArray, final long outtime)`
+	`public CacheThreadResult<File> putOnNewThread(@NonNull final String key, @NonNull final JSONArray jsonArray, final long outTime)`
 4. 缓存字节数组
 
 	`public File put(@NonNull String key, @NonNull byte[] bytes)`  
-	`public File put(@NonNull String key, @NonNull byte[] bytes, long outtime)`  
+	`public File put(@NonNull String key, @NonNull byte[] bytes, long outTime)`  
 	`public CacheThreadResult<File> putOnNewThread(@NonNull String key, @NonNull byte[] bytes)`  
-	`public CacheThreadResult<File> putOnNewThread(@NonNull final String key, @NonNull final byte[] bytes, final long outtime)`
+	`public CacheThreadResult<File> putOnNewThread(@NonNull final String key, @NonNull final byte[] bytes, final long outTime)`
 5. 缓存序列化对象
 
 	`public File put(@NonNull String key, @NonNull Serializable value)`  
-	`public File put(@NonNull String key, @NonNull Serializable value, long outtime)`  
+	`public File put(@NonNull String key, @NonNull Serializable value, long outTime)`  
 	`public CacheThreadResult<File> putOnNewThread(@NonNull String key, @NonNull Serializable value)`  
-	`public CacheThreadResult<File> putOnNewThread(@NonNull final String key, @NonNull final Serializable value, final long outtime)`
+	`public CacheThreadResult<File> putOnNewThread(@NonNull final String key, @NonNull final Serializable value, final long outTime)`
 6. 缓存Bitmap
 
 	`public File put(@NonNull String key, @NonNull Bitmap bitmap)`  
-	`public File put(@NonNull String key, @NonNull Bitmap bitmap, long outtime)`  
+	`public File put(@NonNull String key, @NonNull Bitmap bitmap, long outTime)`  
 	`public CacheThreadResult<File> putOnNewThread(@NonNull String key, @NonNull Bitmap bitmap)`  
-	`public CacheThreadResult<File> putOnNewThread(@NonNull final String key, @NonNull final Bitmap bitmap, final long outtime)`
+	`public CacheThreadResult<File> putOnNewThread(@NonNull final String key, @NonNull final Bitmap bitmap, final long outTime)`
 7. 缓存Drawable
 
 	`public File put(@NonNull String key, @NonNull Drawable drawable)`  
-	`public File put(@NonNull String key, @NonNull Drawable drawable, long outtime)`  
+	`public File put(@NonNull String key, @NonNull Drawable drawable, long outTime)`  
 	`public CacheThreadResult<File> putOnNewThread(@NonNull String key, @NonNull Drawable drawable)`  
-	`public CacheThreadResult<File> putOnNewThread(@NonNull final String key, @NonNull final Drawable drawable, final long outtime)`
+	`public CacheThreadResult<File> putOnNewThread(@NonNull final String key, @NonNull final Drawable drawable, final long outTime)`
 
 ### 获取缓存相关方法
 1. 获取字符串

@@ -48,13 +48,13 @@ import java.io.UnsupportedEncodingException;
      * 给字符串内容增加有效期
      *
      * @param value   保存内容
-     * @param outtime 有效时间
+     * @param outTime 有效时间
      * @return 按照特殊格式增加了有效时间的内容(增加的时间表示最终有效期)
      */
     @NonNull
     @CheckResult(suggest = "返回值没有使用")
-    static String addDateInfo(@NonNull String value, long outtime) {
-        return createDateInfo(outtime) + value;
+    static String addDateInfo(@NonNull String value, long outTime) {
+        return createDateInfo(outTime) + value;
     }
 
     /**
@@ -82,15 +82,15 @@ import java.io.UnsupportedEncodingException;
      * 给字节数组内容增加有效期
      *
      * @param value   保存内容
-     * @param outtime 有效时间
+     * @param outTime 有效时间
      * @return 按照特殊格式增加了有效时间的内容(增加的时间表示最终有效期)
      */
     @Nullable
     @CheckResult(suggest = "返回值没有使用")
-    static byte[] addDateInfo(@NonNull byte[] value, long outtime) {
+    static byte[] addDateInfo(@NonNull byte[] value, long outTime) {
         if (value == null) return null;
 
-        byte[] dateInfoBytes = toBytes(createDateInfo(outtime));
+        byte[] dateInfoBytes = toBytes(createDateInfo(outTime));
         byte[] newBytes = new byte[dateInfoBytes.length + value.length];
         System.arraycopy(dateInfoBytes, 0, newBytes, 0, dateInfoBytes.length);
         System.arraycopy(value, 0, newBytes, dateInfoBytes.length, value.length);
@@ -186,13 +186,13 @@ import java.io.UnsupportedEncodingException;
     /**
      * 创建时间信息字符串，过期时间+分割内容 {@link RCacheConfig#SPLIT_CHAR}
      *
-     * @param outtime
+     * @param outTime
      * @return
      */
     @NonNull
     @CheckResult(suggest = "返回值没有使用")
-    static String createDateInfo(@NonNull long outtime) {
-        return (currentTimeMillis() + outtime) + RCacheConfig.SPLIT_CHAR;
+    static String createDateInfo(@NonNull long outTime) {
+        return (currentTimeMillis() + outTime) + RCacheConfig.SPLIT_CHAR;
     }
 
     /**
