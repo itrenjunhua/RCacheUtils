@@ -190,7 +190,7 @@ public class CacheDataActivity extends BaseActivity {
             // 有时间限制
             if (isNewThread) {
                 // 需要在新的线程中
-                CacheManageUtils.newInstance()
+                CacheManageUtils.getInstance()
                         .putOnNewThread(getEditTextContetnt(etCacheKey), drawable, cacheTime)
                         .onResult(new CacheThreadResult.CacheResultCallBack<File>() {
                             @Override
@@ -199,14 +199,14 @@ public class CacheDataActivity extends BaseActivity {
                             }
                         });
             } else {
-                File result = CacheManageUtils.newInstance()
+                File result = CacheManageUtils.getInstance()
                         .put(getEditTextContetnt(etCacheKey), drawable, cacheTime);
                 UIUtils.showToastSafe("缓存文件位置 => " + result);
             }
         } else {
             if (isNewThread) {
                 // 需要在新的线程中
-                CacheManageUtils.newInstance()
+                CacheManageUtils.getInstance()
                         .putOnNewThread(getEditTextContetnt(etCacheKey), drawable)
                         .onResult(new CacheThreadResult.CacheResultCallBack<File>() {
                             @Override
@@ -215,7 +215,7 @@ public class CacheDataActivity extends BaseActivity {
                             }
                         });
             } else {
-                File result = CacheManageUtils.newInstance()
+                File result = CacheManageUtils.getInstance()
                         .put(getEditTextContetnt(etCacheKey), drawable);
                 UIUtils.showToastSafe("缓存文件位置 => " + result);
             }
@@ -232,7 +232,7 @@ public class CacheDataActivity extends BaseActivity {
             // 有时间限制
             if (isNewThread) {
                 // 需要在新的线程中
-                CacheManageUtils.newInstance()
+                CacheManageUtils.getInstance()
                         .putOnNewThread(getEditTextContetnt(etCacheKey), bitmap, cacheTime)
                         .onResult(new CacheThreadResult.CacheResultCallBack<File>() {
                             @Override
@@ -241,14 +241,14 @@ public class CacheDataActivity extends BaseActivity {
                             }
                         });
             } else {
-                File result = CacheManageUtils.newInstance()
+                File result = CacheManageUtils.getInstance()
                         .put(getEditTextContetnt(etCacheKey), bitmap, cacheTime);
                 UIUtils.showToastSafe("缓存文件位置 => " + result);
             }
         } else {
             if (isNewThread) {
                 // 需要在新的线程中
-                CacheManageUtils.newInstance()
+                CacheManageUtils.getInstance()
                         .putOnNewThread(getEditTextContetnt(etCacheKey), bitmap)
                         .onResult(new CacheThreadResult.CacheResultCallBack<File>() {
                             @Override
@@ -257,7 +257,7 @@ public class CacheDataActivity extends BaseActivity {
                             }
                         });
             } else {
-                File result = CacheManageUtils.newInstance()
+                File result = CacheManageUtils.getInstance()
                         .put(getEditTextContetnt(etCacheKey), bitmap);
                 UIUtils.showToastSafe("缓存文件位置 => " + result);
             }
@@ -274,7 +274,7 @@ public class CacheDataActivity extends BaseActivity {
             // 有时间限制
             if (isNewThread) {
                 // 需要在新的线程中
-                CacheManageUtils.newInstance()
+                CacheManageUtils.getInstance()
                         .putOnNewThread(getEditTextContetnt(etCacheKey), person, cacheTime)
                         .onResult(new CacheThreadResult.CacheResultCallBack<File>() {
                             @Override
@@ -283,14 +283,14 @@ public class CacheDataActivity extends BaseActivity {
                             }
                         });
             } else {
-                File result = CacheManageUtils.newInstance()
+                File result = CacheManageUtils.getInstance()
                         .put(getEditTextContetnt(etCacheKey), person, cacheTime);
                 UIUtils.showToastSafe("缓存文件位置 => " + result);
             }
         } else {
             if (isNewThread) {
                 // 需要在新的线程中
-                CacheManageUtils.newInstance()
+                CacheManageUtils.getInstance()
                         .putOnNewThread(getEditTextContetnt(etCacheKey), person)
                         .onResult(new CacheThreadResult.CacheResultCallBack<File>() {
                             @Override
@@ -299,7 +299,7 @@ public class CacheDataActivity extends BaseActivity {
                             }
                         });
             } else {
-                File result = CacheManageUtils.newInstance()
+                File result = CacheManageUtils.getInstance()
                         .put(getEditTextContetnt(etCacheKey), person);
                 UIUtils.showToastSafe("缓存文件位置 => " + result);
             }
@@ -318,7 +318,7 @@ public class CacheDataActivity extends BaseActivity {
             // 有时间限制
             if (isNewThread) {
                 // 需要在新的线程中
-                CacheManageUtils.newInstance()
+                CacheManageUtils.getInstance()
                         .putOnNewThread(getEditTextContetnt(etCacheKey), bytes, cacheTime)
                         .onResult(new CacheThreadResult.CacheResultCallBack<File>() {
                             @Override
@@ -327,14 +327,14 @@ public class CacheDataActivity extends BaseActivity {
                             }
                         });
             } else {
-                File result = CacheManageUtils.newInstance()
+                File result = CacheManageUtils.getInstance()
                         .put(getEditTextContetnt(etCacheKey), bytes, cacheTime);
                 UIUtils.showToastSafe("缓存文件位置 => " + result);
             }
         } else {
             if (isNewThread) {
                 // 需要在新的线程中
-                CacheManageUtils.newInstance()
+                CacheManageUtils.getInstance()
                         .putOnNewThread(getEditTextContetnt(etCacheKey), bytes)
                         .onResult(new CacheThreadResult.CacheResultCallBack<File>() {
                             @Override
@@ -343,7 +343,7 @@ public class CacheDataActivity extends BaseActivity {
                             }
                         });
             } else {
-                File result = CacheManageUtils.newInstance()
+                File result = CacheManageUtils.getInstance()
                         .put(getEditTextContetnt(etCacheKey), bytes);
                 UIUtils.showToastSafe("缓存文件位置 => " + result);
             }
@@ -362,7 +362,7 @@ public class CacheDataActivity extends BaseActivity {
             // 有时间限制
             if (isNewThread) {
                 // 需要在新的线程中
-                CacheManageUtils.newInstance()
+                CacheManageUtils.getInstance()
                         .putOnNewThread(getEditTextContetnt(etCacheKey), jsonArray, cacheTime)
                         .onResult(new CacheThreadResult.CacheResultCallBack<File>() {
                             @Override
@@ -371,14 +371,14 @@ public class CacheDataActivity extends BaseActivity {
                             }
                         });
             } else {
-                File result = CacheManageUtils.newInstance()
+                File result = CacheManageUtils.getInstance()
                         .put(getEditTextContetnt(etCacheKey), jsonArray, cacheTime);
                 UIUtils.showToastSafe("缓存文件位置 => " + result);
             }
         } else {
             if (isNewThread) {
                 // 需要在新的线程中
-                CacheManageUtils.newInstance()
+                CacheManageUtils.getInstance()
                         .putOnNewThread(getEditTextContetnt(etCacheKey), jsonArray)
                         .onResult(new CacheThreadResult.CacheResultCallBack<File>() {
                             @Override
@@ -387,7 +387,7 @@ public class CacheDataActivity extends BaseActivity {
                             }
                         });
             } else {
-                File result = CacheManageUtils.newInstance()
+                File result = CacheManageUtils.getInstance()
                         .put(getEditTextContetnt(etCacheKey), jsonArray);
                 UIUtils.showToastSafe("缓存文件位置 => " + result);
             }
@@ -406,7 +406,7 @@ public class CacheDataActivity extends BaseActivity {
             // 有时间限制
             if (isNewThread) {
                 // 需要在新的线程中
-                CacheManageUtils.newInstance()
+                CacheManageUtils.getInstance()
                         .putOnNewThread(getEditTextContetnt(etCacheKey), jsonObject, cacheTime)
                         .onResult(new CacheThreadResult.CacheResultCallBack<File>() {
                             @Override
@@ -415,14 +415,14 @@ public class CacheDataActivity extends BaseActivity {
                             }
                         });
             } else {
-                File result = CacheManageUtils.newInstance()
+                File result = CacheManageUtils.getInstance()
                         .put(getEditTextContetnt(etCacheKey), jsonObject, cacheTime);
                 UIUtils.showToastSafe("缓存文件位置 => " + result);
             }
         } else {
             if (isNewThread) {
                 // 需要在新的线程中
-                CacheManageUtils.newInstance()
+                CacheManageUtils.getInstance()
                         .putOnNewThread(getEditTextContetnt(etCacheKey), jsonObject)
                         .onResult(new CacheThreadResult.CacheResultCallBack<File>() {
                             @Override
@@ -431,7 +431,7 @@ public class CacheDataActivity extends BaseActivity {
                             }
                         });
             } else {
-                File result = CacheManageUtils.newInstance()
+                File result = CacheManageUtils.getInstance()
                         .put(getEditTextContetnt(etCacheKey), jsonObject);
                 UIUtils.showToastSafe("缓存文件位置 => " + result);
             }
@@ -448,7 +448,7 @@ public class CacheDataActivity extends BaseActivity {
             // 有时间限制
             if (isNewThread) {
                 // 需要在新的线程中
-                CacheManageUtils.newInstance()
+                CacheManageUtils.getInstance()
                         .putOnNewThread(getEditTextContetnt(etCacheKey),
                                 getEditTextContetnt(etCacheContent), cacheTime)
                         .onResult(new CacheThreadResult.CacheResultCallBack<File>() {
@@ -458,7 +458,7 @@ public class CacheDataActivity extends BaseActivity {
                             }
                         });
             } else {
-                File result = CacheManageUtils.newInstance()
+                File result = CacheManageUtils.getInstance()
                         .put(getEditTextContetnt(etCacheKey),
                                 getEditTextContetnt(etCacheContent), cacheTime);
                 UIUtils.showToastSafe("缓存文件位置 => " + result);
@@ -466,7 +466,7 @@ public class CacheDataActivity extends BaseActivity {
         } else {
             if (isNewThread) {
                 // 需要在新的线程中
-                CacheManageUtils.newInstance()
+                CacheManageUtils.getInstance()
                         .putOnNewThread(getEditTextContetnt(etCacheKey),
                                 getEditTextContetnt(etCacheContent))
                         .onResult(new CacheThreadResult.CacheResultCallBack<File>() {
@@ -476,7 +476,7 @@ public class CacheDataActivity extends BaseActivity {
                             }
                         });
             } else {
-                File result = CacheManageUtils.newInstance()
+                File result = CacheManageUtils.getInstance()
                         .put(getEditTextContetnt(etCacheKey),
                                 getEditTextContetnt(etCacheContent));
                 UIUtils.showToastSafe("缓存文件位置 => " + result);

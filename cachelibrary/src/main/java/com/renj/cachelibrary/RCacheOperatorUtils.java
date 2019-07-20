@@ -288,7 +288,7 @@ import java.io.UnsupportedEncodingException;
      * 检查缓存文件大小和删除文件线程
      */
     static synchronized void checkCacheSize() {
-        if (CacheManageUtils.RCACHE_SIZE_CONTROL != null && !CacheManageUtils.RCACHE_SIZE_CONTROL.isExecuteing) {
+        if (CacheManageUtils.RCACHE_SIZE_CONTROL != null && !CacheManageUtils.RCACHE_SIZE_CONTROL.isExecutingControl) {
             RCacheConfig.EXECUTORSERVICE.execute(CacheManageUtils.RCACHE_SIZE_CONTROL);
         }
     }
@@ -367,7 +367,7 @@ import java.io.UnsupportedEncodingException;
      * 清除所有缓存
      */
     static void clearCache() {
-        if (!RClearCacheThread.isExecuteing) {
+        if (!RClearCacheThread.isExecutingClear) {
             RClearCacheThread rClearCacheThread = new RClearCacheThread();
             RCacheConfig.EXECUTORSERVICE.execute(rClearCacheThread);
         }

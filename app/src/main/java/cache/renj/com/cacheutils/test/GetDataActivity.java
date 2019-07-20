@@ -165,8 +165,8 @@ public class GetDataActivity extends BaseActivity {
     private void getDrawableData() {
         if (isNewThread()) {
             // 需要在新的线程中
-            CacheManageUtils.newInstance()
-                    .getAsDrawableOnNewThread(getEditTextContetnt(etGetKey))
+            CacheManageUtils.getInstance()
+                    .getAsDrawableOnNewThread(getEditTextContent(etGetKey))
                     .onResult(new CacheThreadResult.CacheResultCallBack<Drawable>() {
                         @Override
                         public void onResult(Drawable result) {
@@ -174,8 +174,8 @@ public class GetDataActivity extends BaseActivity {
                         }
                     });
         } else {
-            Drawable result = CacheManageUtils.newInstance()
-                    .getAsDrawable(getEditTextContetnt(etGetKey));
+            Drawable result = CacheManageUtils.getInstance()
+                    .getAsDrawable(getEditTextContent(etGetKey));
             ivGetContent.setImageDrawable(result);
         }
     }
@@ -186,8 +186,8 @@ public class GetDataActivity extends BaseActivity {
     private void getBitmapData() {
         if (isNewThread()) {
             // 需要在新的线程中
-            CacheManageUtils.newInstance()
-                    .getAsBitmapOnNewThread(getEditTextContetnt(etGetKey))
+            CacheManageUtils.getInstance()
+                    .getAsBitmapOnNewThread(getEditTextContent(etGetKey))
                     .onResult(new CacheThreadResult.CacheResultCallBack<Bitmap>() {
                         @Override
                         public void onResult(Bitmap result) {
@@ -195,8 +195,8 @@ public class GetDataActivity extends BaseActivity {
                         }
                     });
         } else {
-            Bitmap result = CacheManageUtils.newInstance()
-                    .getAsBitmap(getEditTextContetnt(etGetKey));
+            Bitmap result = CacheManageUtils.getInstance()
+                    .getAsBitmap(getEditTextContent(etGetKey));
             ivGetContent.setImageBitmap(result);
         }
     }
@@ -208,8 +208,8 @@ public class GetDataActivity extends BaseActivity {
     private void getObjectData() {
         if (isNewThread()) {
             // 需要在新的线程中
-            CacheManageUtils.newInstance()
-                    .getAsObjectOnNewThread(getEditTextContetnt(etGetKey), Person.class)
+            CacheManageUtils.getInstance()
+                    .getAsObjectOnNewThread(getEditTextContent(etGetKey), Person.class)
                     .onResult(new CacheThreadResult.CacheResultCallBack<Person>() {
                         @Override
                         public void onResult(Person result) {
@@ -220,8 +220,8 @@ public class GetDataActivity extends BaseActivity {
                         }
                     });
         } else {
-            Object result = CacheManageUtils.newInstance()
-                    .getAsObject(getEditTextContetnt(etGetKey));
+            Object result = CacheManageUtils.getInstance()
+                    .getAsObject(getEditTextContent(etGetKey));
             if (result != null)
                 tvGetContent.setText(result + "");
             else
@@ -235,8 +235,8 @@ public class GetDataActivity extends BaseActivity {
     private void getBytesData() {
         if (isNewThread()) {
             // 需要在新的线程中
-            CacheManageUtils.newInstance()
-                    .getAsBinaryOnNewThread(getEditTextContetnt(etGetKey))
+            CacheManageUtils.getInstance()
+                    .getAsBinaryOnNewThread(getEditTextContent(etGetKey))
                     .onResult(new CacheThreadResult.CacheResultCallBack<byte[]>() {
                         @Override
                         public void onResult(byte[] result) {
@@ -247,8 +247,8 @@ public class GetDataActivity extends BaseActivity {
                         }
                     });
         } else {
-            byte[] result = CacheManageUtils.newInstance()
-                    .getAsBinary(getEditTextContetnt(etGetKey));
+            byte[] result = CacheManageUtils.getInstance()
+                    .getAsBinary(getEditTextContent(etGetKey));
             if (result != null)
                 tvGetContent.setText(new String(result) + "");
             else
@@ -262,8 +262,8 @@ public class GetDataActivity extends BaseActivity {
     private void getJsonArrayData() {
         if (isNewThread()) {
             // 需要在新的线程中
-            CacheManageUtils.newInstance()
-                    .getAsJSONArrayOnNewThread(getEditTextContetnt(etGetKey))
+            CacheManageUtils.getInstance()
+                    .getAsJSONArrayOnNewThread(getEditTextContent(etGetKey))
                     .onResult(new CacheThreadResult.CacheResultCallBack<JSONArray>() {
                         @Override
                         public void onResult(JSONArray result) {
@@ -271,8 +271,8 @@ public class GetDataActivity extends BaseActivity {
                         }
                     });
         } else {
-            JSONArray result = CacheManageUtils.newInstance()
-                    .getAsJsonArray(getEditTextContetnt(etGetKey));
+            JSONArray result = CacheManageUtils.getInstance()
+                    .getAsJsonArray(getEditTextContent(etGetKey));
             tvGetContent.setText(JsonUtils.jsonArray2String(result) + "");
         }
     }
@@ -283,8 +283,8 @@ public class GetDataActivity extends BaseActivity {
     private void getJsonObjectData() {
         if (isNewThread()) {
             // 需要在新的线程中
-            CacheManageUtils.newInstance()
-                    .getAsJsonObjectOnNewThread(getEditTextContetnt(etGetKey))
+            CacheManageUtils.getInstance()
+                    .getAsJsonObjectOnNewThread(getEditTextContent(etGetKey))
                     .onResult(new CacheThreadResult.CacheResultCallBack<JSONObject>() {
                         @Override
                         public void onResult(JSONObject result) {
@@ -292,8 +292,8 @@ public class GetDataActivity extends BaseActivity {
                         }
                     });
         } else {
-            JSONObject result = CacheManageUtils.newInstance()
-                    .getAsJsonObjct(getEditTextContetnt(etGetKey));
+            JSONObject result = CacheManageUtils.getInstance()
+                    .getAsJsonObject(getEditTextContent(etGetKey));
             tvGetContent.setText(JsonUtils.jsonObject2String(result) + "");
         }
     }
@@ -304,8 +304,8 @@ public class GetDataActivity extends BaseActivity {
     private void getStringData() {
         if (isNewThread()) {
             // 需要在新的线程中
-            CacheManageUtils.newInstance()
-                    .getAsStringOnNewThread(getEditTextContetnt(etGetKey))
+            CacheManageUtils.getInstance()
+                    .getAsStringOnNewThread(getEditTextContent(etGetKey))
                     .onResult(new CacheThreadResult.CacheResultCallBack<String>() {
                         @Override
                         public void onResult(String result) {
@@ -313,8 +313,8 @@ public class GetDataActivity extends BaseActivity {
                         }
                     });
         } else {
-            String result = CacheManageUtils.newInstance()
-                    .getAsString(getEditTextContetnt(etGetKey));
+            String result = CacheManageUtils.getInstance()
+                    .getAsString(getEditTextContent(etGetKey));
             tvGetContent.setText(result);
         }
     }
@@ -337,7 +337,7 @@ public class GetDataActivity extends BaseActivity {
     @NonNull
     @CheckResult(suggest = "返回值没有被使用过")
     private boolean judgeCacheKey() {
-        String key = getEditTextContetnt(etGetKey);
+        String key = getEditTextContent(etGetKey);
         if (StringUtils.isEmpty(key)) {
             UIUtils.showToastSafe("请输入缓存文件名");
             return false;
@@ -352,7 +352,7 @@ public class GetDataActivity extends BaseActivity {
      */
     @NonNull
     @CheckResult(suggest = "返回值没有被使用过")
-    private String getEditTextContetnt(@NonNull EditText editText) {
+    private String getEditTextContent(@NonNull EditText editText) {
         return editText.getText().toString().trim();
     }
 }

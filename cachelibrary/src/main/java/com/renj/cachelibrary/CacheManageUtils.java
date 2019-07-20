@@ -141,7 +141,7 @@ public final class CacheManageUtils {
      *                               或者 {@link #initCacheUtil(Context, String)} 方法(可以指定缓存目录名)进行初始化时抛出。
      */
     @CheckResult(suggest = "返回值没有使用")
-    public static CacheManageUtils newInstance() {
+    public static CacheManageUtils getInstance() {
         if (instance == null)
             throw new IllegalStateException("没有对 CacheManageUtils 进行初始化，需要先调用 CacheManageUtils.initCacheUtil(Context) " +
                     "或 CacheManageUtils.initCacheUtil(Context，String) 方法。建议在 Application 中调用。");
@@ -735,7 +735,7 @@ public final class CacheManageUtils {
      */
     @Nullable
     @CheckResult(suggest = "返回值没有使用")
-    public JSONObject getAsJsonObjct(@NonNull String key) {
+    public JSONObject getAsJsonObject(@NonNull String key) {
         try {
             return new JSONObject(getAsString(key));
         } catch (JSONException e) {
@@ -976,7 +976,7 @@ public final class CacheManageUtils {
      *
      * @param key 缓存时的键名称
      * @return {@link CacheThreadResult} 对象，内容为 {@link CacheThreadResult#onResult(CacheThreadResult.CacheResultCallBack)} 回调方法参数
-     * @see #getAsJsonObjct(String)
+     * @see #getAsJsonObject(String)
      */
     @NonNull
     @CheckResult(suggest = "返回值没有使用")
@@ -984,7 +984,7 @@ public final class CacheManageUtils {
         return CacheThreadResult.<JSONObject>create().runOnNewThread(new CacheThreadResult.CacheCallBack<JSONObject>() {
             @Override
             public JSONObject execute() {
-                return getAsJsonObjct(key);
+                return getAsJsonObject(key);
             }
         });
     }

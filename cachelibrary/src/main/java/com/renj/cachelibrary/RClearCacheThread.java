@@ -18,11 +18,11 @@ import java.io.File;
  */
 public class RClearCacheThread implements Runnable {
     // 标记当前对象是否正在执行(保证删除缓存的线程只有一个执行)
-    static volatile boolean isExecuteing = false;
+    static volatile boolean isExecutingClear = false;
 
     @Override
     public void run() {
-        isExecuteing = true;
+        isExecutingClear = true;
 
         if (CacheManageUtils.CACHE_PATH == null || !CacheManageUtils.CACHE_PATH.exists() || !CacheManageUtils.CACHE_PATH.isDirectory())
             return;
@@ -32,6 +32,6 @@ public class RClearCacheThread implements Runnable {
             listFile.delete();
         }
 
-        isExecuteing = false;
+        isExecutingClear = false;
     }
 }

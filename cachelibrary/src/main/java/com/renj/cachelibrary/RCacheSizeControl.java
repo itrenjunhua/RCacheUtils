@@ -17,9 +17,9 @@ import java.util.concurrent.atomic.AtomicLong;
  * 描述：缓存管理大小控制线程，用于控制缓存大小，当超过指定大小时，就删除老的文件。<br/>
  * <b>注意：</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
  * <b>因为没次做保存数据操作时都会调用检查和删除缓存的线程，所以可能导致多个线程同时执行从而报错；
- * 因此在 {@link RCacheSizeControl} 类中增加 {@link #isExecuteing} 字段作标记</b>(因为使用的线程池，
+ * 因此在 {@link RCacheSizeControl} 类中增加 {@link #isExecutingControl} 字段作标记</b>(因为使用的线程池，
  * 且每次开启时都是将 {@link CacheManageUtils#RCACHE_SIZE_CONTROL} 这个对象传递到线程池中执行，
- * 所以直接将{@link #isExecuteing} 字段放在 {@link RCacheSizeControl} 类中，而不是作为全局变量操作)，
+ * 所以直接将{@link #isExecutingControl} 字段放在 {@link RCacheSizeControl} 类中，而不是作为全局变量操作)，
  * <b>保证检查和删除缓存的线程同一时间只有一个执行。</b>
  * <p>
  * 修订历史：
@@ -32,17 +32,17 @@ import java.util.concurrent.atomic.AtomicLong;
     // 缓存占用的大小
     private AtomicLong cacheSize = new AtomicLong();
     // 标记当前对象是否正在执行(保证检查删除缓存的线程只有一个执行)
-    static volatile boolean isExecuteing = false;
+    static volatile boolean isExecutingControl = false;
 
     @Override
     public void run() {
-        isExecuteing = true;
+        isExecutingControl = true;
 
         cacheFiles.clear();
         cacheSize.set(0);
         handlerCacheSize();
 
-        isExecuteing = false;
+        isExecutingControl = false;
     }
 
     /**
