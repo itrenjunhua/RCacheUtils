@@ -18,7 +18,7 @@ import java.util.concurrent.atomic.AtomicLong;
  * <b>注意：</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
  * <b>因为没次做保存数据操作时都会调用检查和删除缓存的线程，所以可能导致多个线程同时执行从而报错；
  * 因此在 {@link RCacheSizeControl} 类中增加 {@link #isExecutingControl} 字段作标记</b>(因为使用的线程池，
- * 且每次开启时都是将 {@link CacheManageUtils#RCACHE_SIZE_CONTROL} 这个对象传递到线程池中执行，
+ * 且每次开启时都是将 {@link CacheManageUtils#R_CACHE_SIZE_CONTROL} 这个对象传递到线程池中执行，
  * 所以直接将{@link #isExecutingControl} 字段放在 {@link RCacheSizeControl} 类中，而不是作为全局变量操作)，
  * <b>保证检查和删除缓存的线程同一时间只有一个执行。</b>
  * <p>

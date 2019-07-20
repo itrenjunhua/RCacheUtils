@@ -58,7 +58,7 @@ public final class CacheManageUtils {
     /**
      * 缓存大小检查和删除文件线程
      */
-    static volatile RCacheSizeControl RCACHE_SIZE_CONTROL;
+    static volatile RCacheSizeControl R_CACHE_SIZE_CONTROL;
     /**
      * 每秒的毫秒数
      */
@@ -73,7 +73,7 @@ public final class CacheManageUtils {
         if (!CACHE_PATH.exists() || !CACHE_PATH.isDirectory())
             CACHE_PATH.mkdir();
 
-        RCACHE_SIZE_CONTROL = new RCacheSizeControl();
+        R_CACHE_SIZE_CONTROL = new RCacheSizeControl();
         CacheManageUtils.cacheSize = cacheSize;
     }
 
@@ -878,13 +878,13 @@ public final class CacheManageUtils {
             String tResult = stringBuilder.toString();
             // 是否包含有效期
             if (RCacheOperatorUtils.isTimeLimit(tResult)) {
-                String resultVaule = RCacheOperatorUtils.clearDateInfo(tResult);
+                String resultValue = RCacheOperatorUtils.clearDateInfo(tResult);
                 // 判断是否过期，如果已过期就删除该文件
-                if (RCacheConfig.OUT_TIME_FLAG.equals(resultVaule)) {
+                if (RCacheConfig.OUT_TIME_FLAG.equals(resultValue)) {
                     RCacheOperatorUtils.deleteFile(file);
                     return "";
                 } else {
-                    return resultVaule;
+                    return resultValue;
                 }
             }
 

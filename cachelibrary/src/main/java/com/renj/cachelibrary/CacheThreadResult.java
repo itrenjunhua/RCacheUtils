@@ -18,7 +18,7 @@ import android.support.annotation.NonNull;
 public final class CacheThreadResult<T> {
 
     private T execute;
-    private CacheResultCallBack<T> cacheResultCallBack;
+    private CacheResultCallBack<? super T> cacheResultCallBack;
 
     private CacheThreadResult() {
     }
@@ -55,7 +55,7 @@ public final class CacheThreadResult<T> {
     /**
      * 切换回主线程运行，通过回调返回 {@link #runOnNewThread(CacheCallBack)} 方法的结果
      */
-    private void returnMainThread(@NonNull final CacheResultCallBack<T> cacheResultCallBack) {
+    private void returnMainThread(@NonNull final CacheResultCallBack<? super T> cacheResultCallBack) {
         RCacheConfig.MAIN_HANDLER.post(new Runnable() {
             @Override
             public void run() {
@@ -69,7 +69,7 @@ public final class CacheThreadResult<T> {
      *
      * @param cacheResultCallBack 回调，具体的内容作为回调方法的参数
      */
-    public void onResult(@NonNull CacheResultCallBack<T> cacheResultCallBack) {
+    public void onResult(@NonNull CacheResultCallBack<? super T> cacheResultCallBack) {
         this.cacheResultCallBack = cacheResultCallBack;
     }
 
