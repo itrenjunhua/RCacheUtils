@@ -16,7 +16,7 @@ import java.io.File;
  * <p>
  * ======================================================================
  */
-public class RClearCacheThread implements Runnable {
+/*public*/ class RClearCacheThread implements Runnable {
     // 标记当前对象是否正在执行(保证删除缓存的线程只有一个执行)
     static volatile boolean isExecutingClear = false;
 

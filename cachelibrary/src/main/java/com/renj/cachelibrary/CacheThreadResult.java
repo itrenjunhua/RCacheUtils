@@ -81,13 +81,4 @@ public final class CacheThreadResult<T> {
     interface CacheCallBack<T> {
         T execute();
     }
-
-    /**
-     * 结果回调，回调运行在主线程
-     *
-     * @param <T>
-     */
-    public interface CacheResultCallBack<T> {
-        void onResult(T result);
-    }
 }

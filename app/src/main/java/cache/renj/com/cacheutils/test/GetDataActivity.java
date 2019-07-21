@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.renj.cachelibrary.CacheManageUtils;
-import com.renj.cachelibrary.CacheThreadResult;
+import com.renj.cachelibrary.CacheResultCallBack;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -167,7 +167,7 @@ public class GetDataActivity extends BaseActivity {
             // 需要在新的线程中
             CacheManageUtils.getInstance()
                     .getAsDrawableOnNewThread(getEditTextContent(etGetKey))
-                    .onResult(new CacheThreadResult.CacheResultCallBack<Drawable>() {
+                    .onResult(new CacheResultCallBack<Drawable>() {
                         @Override
                         public void onResult(Drawable result) {
                             ivGetContent.setImageDrawable(result);
@@ -188,7 +188,7 @@ public class GetDataActivity extends BaseActivity {
             // 需要在新的线程中
             CacheManageUtils.getInstance()
                     .getAsBitmapOnNewThread(getEditTextContent(etGetKey))
-                    .onResult(new CacheThreadResult.CacheResultCallBack<Bitmap>() {
+                    .onResult(new CacheResultCallBack<Bitmap>() {
                         @Override
                         public void onResult(Bitmap result) {
                             ivGetContent.setImageBitmap(result);
@@ -210,7 +210,7 @@ public class GetDataActivity extends BaseActivity {
             // 需要在新的线程中
             CacheManageUtils.getInstance()
                     .getAsObjectOnNewThread(getEditTextContent(etGetKey), Person.class)
-                    .onResult(new CacheThreadResult.CacheResultCallBack<Person>() {
+                    .onResult(new CacheResultCallBack<Person>() {
                         @Override
                         public void onResult(Person result) {
                             if (result != null)
@@ -237,7 +237,7 @@ public class GetDataActivity extends BaseActivity {
             // 需要在新的线程中
             CacheManageUtils.getInstance()
                     .getAsBinaryOnNewThread(getEditTextContent(etGetKey))
-                    .onResult(new CacheThreadResult.CacheResultCallBack<byte[]>() {
+                    .onResult(new CacheResultCallBack<byte[]>() {
                         @Override
                         public void onResult(byte[] result) {
                             if (result != null)
@@ -264,7 +264,7 @@ public class GetDataActivity extends BaseActivity {
             // 需要在新的线程中
             CacheManageUtils.getInstance()
                     .getAsJSONArrayOnNewThread(getEditTextContent(etGetKey))
-                    .onResult(new CacheThreadResult.CacheResultCallBack<JSONArray>() {
+                    .onResult(new CacheResultCallBack<JSONArray>() {
                         @Override
                         public void onResult(JSONArray result) {
                             tvGetContent.setText(JsonUtils.jsonArray2String(result) + "");
@@ -285,7 +285,7 @@ public class GetDataActivity extends BaseActivity {
             // 需要在新的线程中
             CacheManageUtils.getInstance()
                     .getAsJsonObjectOnNewThread(getEditTextContent(etGetKey))
-                    .onResult(new CacheThreadResult.CacheResultCallBack<JSONObject>() {
+                    .onResult(new CacheResultCallBack<JSONObject>() {
                         @Override
                         public void onResult(JSONObject result) {
                             tvGetContent.setText(JsonUtils.jsonObject2String(result) + "");
@@ -306,7 +306,7 @@ public class GetDataActivity extends BaseActivity {
             // 需要在新的线程中
             CacheManageUtils.getInstance()
                     .getAsStringOnNewThread(getEditTextContent(etGetKey))
-                    .onResult(new CacheThreadResult.CacheResultCallBack<String>() {
+                    .onResult(new CacheResultCallBack<String>() {
                         @Override
                         public void onResult(String result) {
                             tvGetContent.setText(result);
