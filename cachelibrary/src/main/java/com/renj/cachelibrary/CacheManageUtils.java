@@ -957,7 +957,7 @@ public final class CacheManageUtils {
      * 在新的线程获取缓存的字符串内容({@link String})
      *
      * @param key 缓存时的键名称
-     * @return {@link CacheThreadResult} 对象，内容为 {@link CacheThreadResult#onResult(CacheThreadResult.CacheResultCallBack)} 回调方法参数
+     * @return {@link CacheThreadResult} 对象，内容为 {@link CacheThreadResult#onResult(CacheResultCallBack)} 回调方法参数
      * @see #getAsString(String)
      */
     @NonNull
@@ -975,7 +975,7 @@ public final class CacheManageUtils {
      * 在新的线程获取缓存的 {@link JSONObject} 对象
      *
      * @param key 缓存时的键名称
-     * @return {@link CacheThreadResult} 对象，内容为 {@link CacheThreadResult#onResult(CacheThreadResult.CacheResultCallBack)} 回调方法参数
+     * @return {@link CacheThreadResult} 对象，内容为 {@link CacheThreadResult#onResult(CacheResultCallBack)} 回调方法参数
      * @see #getAsJsonObject(String)
      */
     @NonNull
@@ -993,7 +993,7 @@ public final class CacheManageUtils {
      * 在新的线程获取缓存的 {@link JSONArray} 对象
      *
      * @param key 缓存时的键名称
-     * @return {@link CacheThreadResult} 对象，内容为 {@link CacheThreadResult#onResult(CacheThreadResult.CacheResultCallBack)} 回调方法参数
+     * @return {@link CacheThreadResult} 对象，内容为 {@link CacheThreadResult#onResult(CacheResultCallBack)} 回调方法参数
      * @see #getAsJsonArray(String)
      */
     @NonNull
@@ -1011,7 +1011,7 @@ public final class CacheManageUtils {
      * 在新的线程获取缓存的字节数组(byte[])
      *
      * @param key 缓存时的键名称
-     * @return {@link CacheThreadResult} 对象，内容为 {@link CacheThreadResult#onResult(CacheThreadResult.CacheResultCallBack)} 回调方法参数
+     * @return {@link CacheThreadResult} 对象，内容为 {@link CacheThreadResult#onResult(CacheResultCallBack)} 回调方法参数
      * @see #getAsBinary(String)
      */
     @NonNull
@@ -1029,7 +1029,7 @@ public final class CacheManageUtils {
      * 在新的线程获取缓存的 {@link Bitmap} 对象
      *
      * @param key 缓存时的键名称
-     * @return {@link CacheThreadResult} 对象，内容为 {@link CacheThreadResult#onResult(CacheThreadResult.CacheResultCallBack)} 回调方法参数
+     * @return {@link CacheThreadResult} 对象，内容为 {@link CacheThreadResult#onResult(CacheResultCallBack)} 回调方法参数
      * @see #getAsBitmap(String)
      */
     @NonNull
@@ -1047,7 +1047,7 @@ public final class CacheManageUtils {
      * 在新的线程获取缓存的 {@link Drawable} 对象
      *
      * @param key 缓存时的键名称
-     * @return {@link CacheThreadResult} 对象，内容为 {@link CacheThreadResult#onResult(CacheThreadResult.CacheResultCallBack)} 回调方法参数
+     * @return {@link CacheThreadResult} 对象，内容为 {@link CacheThreadResult#onResult(CacheResultCallBack)} 回调方法参数
      * @see #getAsDrawable(String)
      */
     @NonNull
@@ -1065,7 +1065,7 @@ public final class CacheManageUtils {
      * 在新的线程获取缓存的 {@link Serializable} 对象
      *
      * @param key 缓存时的键名称
-     * @return {@link CacheThreadResult} 对象，内容为 {@link CacheThreadResult#onResult(CacheThreadResult.CacheResultCallBack)} 回调方法参数
+     * @return {@link CacheThreadResult} 对象，内容为 {@link CacheThreadResult#onResult(CacheResultCallBack)} 回调方法参数
      * @see #getAsObject(String)
      * @see #getAsObject(String, Class)
      * @see #getAsObjectOnNewThread(String, Class)
@@ -1082,7 +1082,7 @@ public final class CacheManageUtils {
      * @param key   缓存时的键名称
      * @param clazz 若知道该键名表示的哪个对象的实例，就可以指定
      * @param <T>   返回结果泛型
-     * @return {@link CacheThreadResult} 对象，内容为 {@link CacheThreadResult#onResult(CacheThreadResult.CacheResultCallBack)} 回调方法参数
+     * @return {@link CacheThreadResult} 对象，内容为 {@link CacheThreadResult#onResult(CacheResultCallBack)} 回调方法参数
      * @see #getAsObject(String)
      * @see #getAsObject(String, Class)
      * @see #getAsObjectOnNewThread(String)
