@@ -274,13 +274,7 @@ import java.io.UnsupportedEncodingException;
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            if (fileWriter != null) {
-                try {
-                    fileWriter.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+            IOUtils.close(fileWriter);
         }
     }
 

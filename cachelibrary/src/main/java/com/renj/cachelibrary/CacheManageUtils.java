@@ -119,9 +119,11 @@ public final class CacheManageUtils {
      * @param cacheSize 缓存总大小
      */
     public static void initCacheUtil(@NonNull Context context, @NonNull String fileName, long cacheSize) {
-        if (cacheSize < 0) {
+        if (context == null)
+            throw new IllegalArgumentException("参数 context 不能为 null.");
+
+        if (cacheSize < 0)
             throw new IllegalArgumentException("参数 cacheSize 的值必须大于0.");
-        }
 
         if (instance == null) {
             synchronized (CacheManageUtils.class) {
@@ -363,13 +365,7 @@ public final class CacheManageUtils {
             e.printStackTrace();
             return null;
         } finally {
-            if (objectOutputStream != null) {
-                try {
-                    objectOutputStream.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+            IOUtils.close(objectOutputStream);
         }
     }
 
@@ -403,13 +399,7 @@ public final class CacheManageUtils {
             e.printStackTrace();
             return null;
         } finally {
-            if (bufferedWriter != null) {
-                try {
-                    bufferedWriter.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+            IOUtils.close(bufferedWriter);
         }
     }
 
@@ -443,13 +433,7 @@ public final class CacheManageUtils {
             e.printStackTrace();
             return null;
         } finally {
-            if (fileOutputStream != null) {
-                try {
-                    fileOutputStream.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+            IOUtils.close(fileOutputStream);
         }
     }
 
@@ -836,13 +820,7 @@ public final class CacheManageUtils {
             e.printStackTrace();
             return null;
         } finally {
-            if (objectInputStream != null) {
-                try {
-                    objectInputStream.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+            IOUtils.close(objectInputStream);
         }
 
         if (readObject == null) return null;
@@ -893,13 +871,7 @@ public final class CacheManageUtils {
             e.printStackTrace();
             return "";
         } finally {
-            if (bufferedReader != null) {
-                try {
-                    bufferedReader.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+            IOUtils.close(bufferedReader);
         }
     }
 
@@ -943,13 +915,7 @@ public final class CacheManageUtils {
             e.printStackTrace();
             return null;
         } finally {
-            if (fileInputStream != null) {
-                try {
-                    fileInputStream.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+            IOUtils.close(fileInputStream);
         }
     }
 

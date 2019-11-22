@@ -66,6 +66,13 @@
         tvGetContent.setText(result);
 
 ## 相关方法
+### 初始化方法
+
+    `initCacheUtil(@NonNull Context context)`
+    `initCacheUtil(@NonNull Context context, long cacheSize)`
+    `initCacheUtil(@NonNull Context context, @NonNull String fileName)`
+    `initCacheUtil(@NonNull Context context, @NonNull String fileName, long cacheSize)`
+
 ### 缓存文件相关方法
 1. 缓存字符串
 
