@@ -1099,6 +1099,17 @@ public final class CacheManageUtils {
     }
 
     /**
+     * 删除指定缓存
+     *
+     * @param key 缓存时的键名称
+     */
+    public void clear(@NonNull String key) {
+        File file = RCacheOperatorUtils.spliceFile(key);
+        if (file.exists())
+            RCacheOperatorUtils.deleteFile(file);
+    }
+
+    /**
      * 清除所有缓存数据
      */
     public void clearCache() {

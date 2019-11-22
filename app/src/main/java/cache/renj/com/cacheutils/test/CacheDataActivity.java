@@ -11,7 +11,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.renj.cachelibrary.CacheManageUtils;
-import com.renj.cachelibrary.CacheThreadResult;
+import com.renj.cachelibrary.CacheResultCallBack;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -192,7 +192,7 @@ public class CacheDataActivity extends BaseActivity {
                 // 需要在新的线程中
                 CacheManageUtils.getInstance()
                         .putOnNewThread(getEditTextContetnt(etCacheKey), drawable, cacheTime)
-                        .onResult(new CacheThreadResult.CacheResultCallBack<File>() {
+                        .onResult(new CacheResultCallBack<File>() {
                             @Override
                             public void onResult(File result) {
                                 UIUtils.showToastSafe("新线程：缓存文件位置 => " + result);
@@ -208,7 +208,7 @@ public class CacheDataActivity extends BaseActivity {
                 // 需要在新的线程中
                 CacheManageUtils.getInstance()
                         .putOnNewThread(getEditTextContetnt(etCacheKey), drawable)
-                        .onResult(new CacheThreadResult.CacheResultCallBack<File>() {
+                        .onResult(new CacheResultCallBack<File>() {
                             @Override
                             public void onResult(File result) {
                                 UIUtils.showToastSafe("新线程：缓存文件位置 => " + result);
@@ -234,7 +234,7 @@ public class CacheDataActivity extends BaseActivity {
                 // 需要在新的线程中
                 CacheManageUtils.getInstance()
                         .putOnNewThread(getEditTextContetnt(etCacheKey), bitmap, cacheTime)
-                        .onResult(new CacheThreadResult.CacheResultCallBack<File>() {
+                        .onResult(new CacheResultCallBack<File>() {
                             @Override
                             public void onResult(File result) {
                                 UIUtils.showToastSafe("新线程：缓存文件位置 => " + result);
@@ -250,7 +250,7 @@ public class CacheDataActivity extends BaseActivity {
                 // 需要在新的线程中
                 CacheManageUtils.getInstance()
                         .putOnNewThread(getEditTextContetnt(etCacheKey), bitmap)
-                        .onResult(new CacheThreadResult.CacheResultCallBack<File>() {
+                        .onResult(new CacheResultCallBack<File>() {
                             @Override
                             public void onResult(File result) {
                                 UIUtils.showToastSafe("新线程：缓存文件位置 => " + result);
@@ -276,7 +276,7 @@ public class CacheDataActivity extends BaseActivity {
                 // 需要在新的线程中
                 CacheManageUtils.getInstance()
                         .putOnNewThread(getEditTextContetnt(etCacheKey), person, cacheTime)
-                        .onResult(new CacheThreadResult.CacheResultCallBack<File>() {
+                        .onResult(new CacheResultCallBack<File>() {
                             @Override
                             public void onResult(File result) {
                                 UIUtils.showToastSafe("新线程：缓存文件位置 => " + result);
@@ -292,7 +292,7 @@ public class CacheDataActivity extends BaseActivity {
                 // 需要在新的线程中
                 CacheManageUtils.getInstance()
                         .putOnNewThread(getEditTextContetnt(etCacheKey), person)
-                        .onResult(new CacheThreadResult.CacheResultCallBack<File>() {
+                        .onResult(new CacheResultCallBack<File>() {
                             @Override
                             public void onResult(File result) {
                                 UIUtils.showToastSafe("新线程：缓存文件位置 => " + result);
@@ -320,7 +320,7 @@ public class CacheDataActivity extends BaseActivity {
                 // 需要在新的线程中
                 CacheManageUtils.getInstance()
                         .putOnNewThread(getEditTextContetnt(etCacheKey), bytes, cacheTime)
-                        .onResult(new CacheThreadResult.CacheResultCallBack<File>() {
+                        .onResult(new CacheResultCallBack<File>() {
                             @Override
                             public void onResult(File result) {
                                 UIUtils.showToastSafe("新线程：缓存文件位置 => " + result);
@@ -336,7 +336,7 @@ public class CacheDataActivity extends BaseActivity {
                 // 需要在新的线程中
                 CacheManageUtils.getInstance()
                         .putOnNewThread(getEditTextContetnt(etCacheKey), bytes)
-                        .onResult(new CacheThreadResult.CacheResultCallBack<File>() {
+                        .onResult(new CacheResultCallBack<File>() {
                             @Override
                             public void onResult(File result) {
                                 UIUtils.showToastSafe("新线程：缓存文件位置 => " + result);
@@ -364,7 +364,7 @@ public class CacheDataActivity extends BaseActivity {
                 // 需要在新的线程中
                 CacheManageUtils.getInstance()
                         .putOnNewThread(getEditTextContetnt(etCacheKey), jsonArray, cacheTime)
-                        .onResult(new CacheThreadResult.CacheResultCallBack<File>() {
+                        .onResult(new CacheResultCallBack<File>() {
                             @Override
                             public void onResult(File result) {
                                 UIUtils.showToastSafe("新线程：缓存文件位置 => " + result);
@@ -380,7 +380,7 @@ public class CacheDataActivity extends BaseActivity {
                 // 需要在新的线程中
                 CacheManageUtils.getInstance()
                         .putOnNewThread(getEditTextContetnt(etCacheKey), jsonArray)
-                        .onResult(new CacheThreadResult.CacheResultCallBack<File>() {
+                        .onResult(new CacheResultCallBack<File>() {
                             @Override
                             public void onResult(File result) {
                                 UIUtils.showToastSafe("新线程：缓存文件位置 => " + result);
@@ -408,7 +408,7 @@ public class CacheDataActivity extends BaseActivity {
                 // 需要在新的线程中
                 CacheManageUtils.getInstance()
                         .putOnNewThread(getEditTextContetnt(etCacheKey), jsonObject, cacheTime)
-                        .onResult(new CacheThreadResult.CacheResultCallBack<File>() {
+                        .onResult(new CacheResultCallBack<File>() {
                             @Override
                             public void onResult(File result) {
                                 UIUtils.showToastSafe("新线程：缓存文件位置 => " + result);
@@ -424,7 +424,7 @@ public class CacheDataActivity extends BaseActivity {
                 // 需要在新的线程中
                 CacheManageUtils.getInstance()
                         .putOnNewThread(getEditTextContetnt(etCacheKey), jsonObject)
-                        .onResult(new CacheThreadResult.CacheResultCallBack<File>() {
+                        .onResult(new CacheResultCallBack<File>() {
                             @Override
                             public void onResult(File result) {
                                 UIUtils.showToastSafe("新线程：缓存文件位置 => " + result);
@@ -451,7 +451,7 @@ public class CacheDataActivity extends BaseActivity {
                 CacheManageUtils.getInstance()
                         .putOnNewThread(getEditTextContetnt(etCacheKey),
                                 getEditTextContetnt(etCacheContent), cacheTime)
-                        .onResult(new CacheThreadResult.CacheResultCallBack<File>() {
+                        .onResult(new CacheResultCallBack<File>() {
                             @Override
                             public void onResult(File result) {
                                 UIUtils.showToastSafe("新线程：缓存文件位置 => " + result);
@@ -469,7 +469,7 @@ public class CacheDataActivity extends BaseActivity {
                 CacheManageUtils.getInstance()
                         .putOnNewThread(getEditTextContetnt(etCacheKey),
                                 getEditTextContetnt(etCacheContent))
-                        .onResult(new CacheThreadResult.CacheResultCallBack<File>() {
+                        .onResult(new CacheResultCallBack<File>() {
                             @Override
                             public void onResult(File result) {
                                 UIUtils.showToastSafe("新线程：缓存文件位置 => " + result);

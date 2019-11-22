@@ -15,10 +15,10 @@
 1. 需要在新的线程中缓存  
 	① 需要指定缓存时间(文件的有效期)
 
-		CacheManageUtils.newInstance()
+		CacheManageUtils.getInstance()
                         .putOnNewThread(getEditTextContetnt(etCacheKey),
                                 getEditTextContetnt(etCacheContent), cacheTime)
-                        .onResult(new CacheThreadResult.CacheResultCallBack<File>() {
+                        .onResult(new CacheResultCallBack<File>() {
                             @Override
                             public void onResult(File result) {
                                 UIUtils.showToastSafe("新线程：缓存文件位置 => " + result);
@@ -26,10 +26,10 @@
                         });
 	② 不需要指定缓存时间(文件没有有效期)
 
-		CacheManageUtils.newInstance()
+		CacheManageUtils.getInstance()
                         .putOnNewThread(getEditTextContetnt(etCacheKey),
                                 getEditTextContetnt(etCacheContent))
-                        .onResult(new CacheThreadResult.CacheResultCallBack<File>() {
+                        .onResult(new CacheResultCallBack<File>() {
                             @Override
                             public void onResult(File result) {
                                 UIUtils.showToastSafe("新线程：缓存文件位置 => " + result);
@@ -38,22 +38,22 @@
 2. 不需要在新的线程中缓存(当前的调用线程中缓存)  
 	① 需要指定缓存时间(文件的有效期)
 
-		File result = CacheManageUtils.newInstance()
+		File result = CacheManageUtils.getInstance()
                         .put(getEditTextContetnt(etCacheKey),
                                 getEditTextContetnt(etCacheContent), cacheTime);
         UIUtils.showToastSafe("缓存文件位置 => " + result);
 	② 不需要指定缓存时间(文件没有有效期)
 
-		File result = CacheManageUtils.newInstance()
+		File result = CacheManageUtils.getInstance()
                         .put(getEditTextContetnt(etCacheKey),
                                 getEditTextContetnt(etCacheContent));
         UIUtils.showToastSafe("缓存文件位置 => " + result);
 ### 第三步：获取缓存的文件
 1. 需要在新的线程中获取缓存
 
-		CacheManageUtils.newInstance()
+		CacheManageUtils.getInstance()
                     .getAsStringOnNewThread(getEditTextContetnt(etGetKey))
-                    .onResult(new CacheThreadResult.CacheResultCallBack<String>() {
+                    .onResult(new CacheResultCallBack<String>() {
                         @Override
                         public void onResult(String result) {
                             tvGetContent.setText(result);
@@ -61,7 +61,7 @@
                     });  
 2. 不需要在新的线程中获取缓存(当前的调用线程中获取缓存)  
 
-		String result = CacheManageUtils.newInstance()
+		String result = CacheManageUtils.getInstance()
                     .getAsString(getEditTextContetnt(etGetKey));
         tvGetContent.setText(result);
 
@@ -144,4 +144,5 @@
 	
 ## 清除缓存方法
     
-    CacheManageUtils.newInstance().clearCache();  
+    CacheManageUtils.getInstance().clear(@NonNull String key); // 清除指定缓存
+    CacheManageUtils.getInstance().clearCache();   // 清除所有缓存
