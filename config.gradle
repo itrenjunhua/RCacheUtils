@@ -2,7 +2,7 @@
 ext {
     android = [
             compileSdk   : 27,
-            applicationId: "cache.renj.com.cacheutils",
+            applicationId: "com.renj.test",
             minSdk       : 19,
             targetSdk    : 27,
             versionCode  : 1,
