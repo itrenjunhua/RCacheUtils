@@ -1,4 +1,4 @@
-# CacheUtils：Android文件缓存工具类
+# RCacheUtils：Android文件缓存工具类
 一个用于 Android 文件缓存的代码库。
 
 ## 功能说明
