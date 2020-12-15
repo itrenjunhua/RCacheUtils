@@ -71,7 +71,7 @@ public final class RCacheManageUtils {
     private RCacheManageUtils(Context context, String fileName, long cacheSize) {
         CACHE_PATH = new File(context.getCacheDir(), fileName);
         if (!CACHE_PATH.exists() || !CACHE_PATH.isDirectory())
-            CACHE_PATH.mkdir();
+            CACHE_PATH.mkdirs();
 
         R_CACHE_SIZE_CONTROL = new RCacheSizeControl();
         RCacheManageUtils.cacheSize = cacheSize;
@@ -1065,9 +1065,10 @@ public final class RCacheManageUtils {
     }
 
     /**
-     * 删除指定缓存
+     * 删除指定缓存，注意： 在主线程删除
      *
      * @param key 缓存时的键名称
+     * @see #clearOnNewThread(String)
      */
     public void clear(@NonNull String key) {
         File file = RCacheOperatorUtils.spliceFile(key);
@@ -1076,7 +1077,25 @@ public final class RCacheManageUtils {
     }
 
     /**
-     * 清除所有缓存数据
+     * 删除指定缓存 子线程操作，不会阻塞线程
+     *
+     * @param key 缓存时的键名称
+     * @see #clear(String)
+     */
+    public void clearOnNewThread(@NonNull final String key) {
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                File file = RCacheOperatorUtils.spliceFile(key);
+                if (file.exists())
+                    RCacheOperatorUtils.deleteFile(file);
+            }
+        };
+        RCacheConfig.EXECUTORSERVICE.execute(runnable);
+    }
+
+    /**
+     * 清除所有缓存数据 子线程操作，不会阻塞线程
      */
     public void clearCache() {
         RCacheOperatorUtils.clearCache();
